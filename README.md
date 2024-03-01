@@ -1,4 +1,4 @@
-# xord
+# xodr
 This small package provide functions to converts road descriptions in the OpenDRIVE format to sequence of xy coordinates.
 
 ## Links
