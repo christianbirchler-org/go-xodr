@@ -1,6 +1,8 @@
 package xodr
 
-import "encoding/xml"
+import (
+	"encoding/xml"
+)
 
 type OpenDrive struct {
 	XMLName xml.Name `xml:"OpenDRIVE"`
@@ -48,4 +50,20 @@ type ParamPoly3 struct {
 	BV     float64 `xml:"bV"`
 	CV     float64 `xml:"cV"`
 	DV     float64 `xml:"dV"`
+}
+
+type RoadPoint struct {
+	X float64
+	Y float64
+	Z float64
+}
+
+func (o *OpenDrive) ToPoints() ([]RoadPoint, error) {
+	numberRoadPoints := len(o.Road.PlanView.Geometries)
+	roadPoints := make([]RoadPoint, numberRoadPoints)
+	for i, geo := range o.Road.PlanView.Geometries {
+		roadPoints[i].X = geo.X
+		roadPoints[i].Y = geo.Y
+	}
+	return roadPoints, nil
 }
