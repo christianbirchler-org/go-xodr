@@ -1,5 +1,5 @@
-# xord2pts
-This small programs converts road descriptions in the OpenDRIVE format to sequence of xy coordinates.
+# xord
+This small package provide functions to converts road descriptions in the OpenDRIVE format to sequence of xy coordinates.
 
 ## Links
 - [Overview of OpenDRIVE XML elements](https://publications.pages.asam.net/standards/ASAM_OpenDRIVE/ASAM_OpenDRIVE_Specification/latest/specification/06_general_architecture/06_05_overview_elements.html)
