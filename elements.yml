@@ -1,0 +1,12 @@
+---
+elements:
+  - OpenDRIVE:
+      - header
+      - road
+      - controller
+      - junction type="crossing"
+      - junction type="default"
+      - junction type="direct"
+      - junction type="virtual"
+      - junctionGroup
+      - station
