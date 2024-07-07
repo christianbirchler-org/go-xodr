@@ -1,219 +1,218 @@
----
-version: 1.8.0
+version: "1.8.0"
 description: "Static Road Network Description, 2023-11-22"
 elements:
-  OpenDRIVE:
-  - header:
-    - geoReference
-    - offset
-    - license
-    - defaultRegulations:
-      - roadRegulations
-      - signalRegulations
-  - road:
-    - link:
-      - predecessor
-      - successor
-    - type:
-      - speed
-    - planView:
-      - geometry:
-        - line
-        - spiral
-        - arc
-        - poly3
-        - paramPoly3
-    - elevationProfile:
-      - elevation
-    - lateralProfile:
-      - superelevation
-      - shape
-      - crossSectionSurface:
-        - tOffset:
-          - coefficients
-        - surfaceStrips:
-          - strip:
-            - width:
-              - coefficients
-            - constant:
-              - coefficients
-            - linear
-            - quadratic:
-              - coefficients
-            - cubic:
-              - coefficients
-    - lanes:
-      - laneOffset
-      - laneSection:
-        - left:
-          - lane:
-            - width
-            - border
-            - link:
-              - predecessor
-              - successor
-            - roadMark:
-              - sway
-              - type:
-                - line
-              - explicit:
-                - line
-            - material
-            - speed
-            - access:
-              - restriction
-            - height
-            - rule
-        - center:
-          - lane:
-            - link:
-              - predecessor
-              - successor
-            - roadMark:
-              - sway
-              - type:
-                - line
-              - explicit:
-                - line
-        - right:
-          - lane:
-            - width
-            - border
-            - link:
-              - predecessor
-              - successor
-            - roadMark:
-              - sway
-              - type:
-                - line
-              - explicit:
-                - line
-            - material
-            - speed
-            - access:
-              - restriction
-            - height
-            - rule
-    - objects:
-      - object:
-        - repeat
-        - outline:
-          - cornerRoad
-          - cornerLocal
-        - outlines:
-          - outline:
-            - cornerRoad
-            - cornerLocal
-        - material
-        - validity
-        - parkingSpace
-        - markings:
-          - marking:
-            - cornerReference
-        - borders:
-          - border:
-            - cornerReference
-        - surface
-        - skeleton:
-          - polyline:
-            - vertexRoad
-            - vertexLocal
-      - objectReference:
-        - validity
-      - tunnel:
-        - validity
-      - bridge:
-        - validity
-    - signals:
-      - signal:
-        - positionInertial
-        - positionRoad
-        - validity
-        - dependency
-        - reference
-      - signalReference:
-        - validity
-    - surface:
-      - CRG
-    - railroad:
-      - switch:
-        - mainTrack
-        - sideTrack
-        - partner
-  - controller:
-    - control
-  - junction type="crossing":
-    - roadSection
-    - priority
-    - controller
-    - surface:
-      - CRG
-    - planView:
-      - geometry:
-        - line
-        - spiral
-        - arc
-        - poly3
-        - paramPoly3
-  - junction type="default":
-    - connection:
-      - laneLink
-    - crossPath:
-      - startLaneLink
-      - endLaneLink
-    - priority
-    - controller
-    - surface:
-      - CRG
-    - planView:
-      - geometry:
-        - line
-        - spiral
-        - arc
-        - poly3
-        - paramPoly3
-    - boundary:
-      - segment type="joint"
-      - segment type="lane"
-    - elevationGrid:
-      - elevation
-  - junction type="direct":
-    - connection:
-      - laneLink
-    - priority
-    - controller
-    - surface:
-      - CRG
-    - planView:
-      - geometry:
-        - line
-        - spiral
-        - arc
-        - poly3
-        - paramPoly3
-  - junction type="virtual":
-    - connection type="default":
-      - laneLink
-    - connection type="virtual":
-      - predecessor
-      - successor
-      - laneLink
-    - crossPath:
-      - startLaneLink
-      - endLaneLink
-    - priority
-    - controller
-    - surface:
-      - CRG
-    - planView:
-      - geometry:
-        - line
-        - spiral
-        - arc
-        - poly3
-        - paramPoly3
-  - junctionGroup:
-    - junctionReference
-  - station:
-    - platform:
-      - segment
+  - name: "OpenDRIVE"
+  - name: "header"
+  - name: "geoReference"
+  - name: "offset"
+  - name: "license"
+  - name: "defaultRegulations"
+  - name: "roadRegulations"
+  - name: "signalRegulations"
+  - name: "road"
+  - name: "link"
+  - name: "predecessor"
+  - name: "successor"
+  - name: "type"
+  - name: "speed"
+  - name: "planView"
+  - name: "geometry"
+  - name: "line"
+  - name: "spiral"
+  - name: "arc"
+  - name: "poly3"
+  - name: "paramPoly3"
+  - name: "elevationProfile"
+  - name: "elevation"
+  - name: "lateralProfile"
+  - name: "superelevation"
+  - name: "shape"
+  - name: "crossSectionSurface"
+  - name: "tOffset"
+  - name: "coefficients"
+  - name: "surfaceStrips"
+  - name: "strip"
+  - name: "width"
+  - name: "coefficients"
+  - name: "constant"
+  - name: "coefficients"
+  - name: "linear"
+  - name: "quadratic"
+  - name: "coefficients"
+  - name: "cubic"
+  - name: "coefficients"
+  - name: "lanes"
+  - name: "laneOffset"
+  - name: "laneSection"
+  - name: "left"
+  - name: "lane"
+  - name: "width"
+  - name: "border"
+  - name: "link"
+  - name: "predecessor"
+  - name: "successor"
+  - name: "roadMark"
+  - name: "sway"
+  - name: "type"
+  - name: "line"
+  - name: "explicit"
+  - name: "line"
+  - name: "material"
+  - name: "speed"
+  - name: "access"
+  - name: "restriction"
+  - name: "height"
+  - name: "rule"
+  - name: "center"
+  - name: "lane"
+  - name: "link"
+  - name: "predecessor"
+  - name: "successor"
+  - name: "roadMark"
+  - name: "sway"
+  - name: "type"
+  - name: "line"
+  - name: "explicit"
+  - name: "line"
+  - name: "right"
+  - name: "lane"
+  - name: "width"
+  - name: "border"
+  - name: "link"
+  - name: "predecessor"
+  - name: "successor"
+  - name: "roadMark"
+  - name: "sway"
+  - name: "type"
+  - name: "line"
+  - name: "explicit"
+  - name: "line"
+  - name: "material"
+  - name: "speed"
+  - name: "access"
+  - name: "restriction"
+  - name: "height"
+  - name: "rule"
+  - name: "objects"
+  - name: "object"
+  - name: "repeat"
+  - name: "outline"
+  - name: "cornerRoad"
+  - name: "cornerLocal"
+  - name: "outlines"
+  - name: "outline"
+  - name: "cornerRoad"
+  - name: "cornerLocal"
+  - name: "material"
+  - name: "validity"
+  - name: "parkingSpace"
+  - name: "markings"
+  - name: "marking"
+  - name: "cornerReference"
+  - name: "borders"
+  - name: "border"
+  - name: "cornerReference"
+  - name: "surface"
+  - name: "skeleton"
+  - name: "polyline"
+  - name: "vertexRoad"
+  - name: "vertexLocal"
+  - name: "objectReference"
+  - name: "validity"
+  - name: "tunnel"
+  - name: "validity"
+  - name: "bridge"
+  - name: "validity"
+  - name: "signals"
+  - name: "signal"
+  - name: "positionInertial"
+  - name: "positionRoad"
+  - name: "validity"
+  - name: "dependency"
+  - name: "reference"
+  - name: "signalReference"
+  - name: "validity"
+  - name: "surface"
+  - name: "CRG"
+  - name: "railroad"
+  - name: "switch"
+  - name: "mainTrack"
+  - name: "sideTrack"
+  - name: "partner"
+  - name: "controller"
+  - name: "control"
+  - name: "junction type='crossing'"
+  - name: "roadSection"
+  - name: "priority"
+  - name: "controller"
+  - name: "surface"
+  - name: "CRG"
+  - name: "planView"
+  - name: "geometry"
+  - name: "line"
+  - name: "spiral"
+  - name: "arc"
+  - name: "poly3"
+  - name: "paramPoly3"
+  - name: "junction type='default'"
+  - name: "connection"
+  - name: "laneLink"
+  - name: "crossPath"
+  - name: "startLaneLink"
+  - name: "endLaneLink"
+  - name: "priority"
+  - name: "controller"
+  - name: "surface"
+  - name: "CRG"
+  - name: "planView"
+  - name: "geometry"
+  - name: "line"
+  - name: "spiral"
+  - name: "arc"
+  - name: "poly3"
+  - name: "paramPoly3"
+  - name: "boundary"
+  - name: "segment type='joint'"
+  - name: "segment type='lane'"
+  - name: "elevationGrid"
+  - name: "elevation"
+  - name: "junction type='direct'"
+  - name: "connection"
+  - name: "laneLink"
+  - name: "priority"
+  - name: "controller"
+  - name: "surface"
+  - name: "CRG"
+  - name: "planView"
+  - name: "geometry"
+  - name: "line"
+  - name: "spiral"
+  - name: "arc"
+  - name: "poly3"
+  - name: "paramPoly3"
+  - name: "junction type='virtual'"
+  - name: "connection type='default'"
+  - name: "laneLink"
+  - name: "connection type='virtual'"
+  - name: "predecessor"
+  - name: "successor"
+  - name: "laneLink"
+  - name: "crossPath"
+  - name: "startLaneLink"
+  - name: "endLaneLink"
+  - name: "priority"
+  - name: "controller"
+  - name: "surface"
+  - name: "CRG"
+  - name: "planView"
+  - name: "geometry"
+  - name: "line"
+  - name: "spiral"
+  - name: "arc"
+  - name: "poly3"
+  - name: "paramPoly3"
+  - name: "junctionGroup"
+  - name: "junctionReference"
+  - name: "station"
+  - name: "platform"
+  - name: "segment"
