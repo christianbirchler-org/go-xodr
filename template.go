@@ -1,10 +1,10 @@
 package main
 
 import (
-	"fmt"
 	"gopkg.in/yaml.v3"
 	"log"
 	"os"
+	"text/template"
 )
 
 type Element struct {
@@ -30,5 +30,19 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(openDriveElements)
+
+	tmpl, err := template.New("elements").Parse(`
+{{range .Elements}}
+type {{ .Name }} struct {
+}
+{{end}}
+`)
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = tmpl.Execute(os.Stdout, openDriveElements)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 }
