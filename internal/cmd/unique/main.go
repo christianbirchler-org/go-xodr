@@ -51,7 +51,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	err = os.WriteFile("unique-elements.yml", out, 0644)
+	err = os.WriteFile("elements.yml", out, 0644)
 	if err != nil {
 		log.Fatal(err)
 	}

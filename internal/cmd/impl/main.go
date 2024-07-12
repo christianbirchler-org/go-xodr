@@ -1,6 +1,8 @@
 package main
 
 import (
+	"bytes"
+	"flag"
 	"gopkg.in/yaml.v3"
 	"log"
 	"os"
@@ -20,7 +22,11 @@ type OpenDriveElements struct {
 }
 
 func main() {
-	file, err := os.ReadFile("unique-elements.yml")
+	in := flag.String("in", "", "input file")
+	out := flag.String("out", "", "output file")
+	flag.Parse()
+
+	file, err := os.ReadFile(*in)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -41,7 +47,14 @@ type {{ .Name }} struct {
 	if err != nil {
 		log.Fatal(err)
 	}
-	err = tmpl.Execute(os.Stdout, openDriveElements)
+
+	buf := new(bytes.Buffer)
+	err = tmpl.Execute(buf, openDriveElements)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = os.WriteFile(*out, buf.Bytes(), 0644)
 	if err != nil {
 		log.Fatal(err)
 	}

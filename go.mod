@@ -1,4 +1,4 @@
-module github.com/christianbirchler-org/xodr
+module github.com/christianbirchler-org/go-xodr
 
 go 1.22
 
