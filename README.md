@@ -17,4 +17,4 @@ go generate
 - Define attributes
 
 ## License
-MIT
+[MIT License](./LICENSE)
