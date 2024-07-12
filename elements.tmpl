@@ -2,7 +2,20 @@
 
 package xodr
 
+type Element interface {
+    Parent() Element
+    Children() []Element
+}
+
 {{range .Elements}}
 type {{ .Name }} struct {
+}
+
+func (e *{{.Name}}) Parent() []Element {
+    return nil
+}
+
+func (e *{{.Name}}) Children() []Element {
+    return nil
 }
 {{end}}
