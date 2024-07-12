@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"flag"
+	"go/format"
 	"gopkg.in/yaml.v3"
 	"log"
 	"os"
@@ -22,28 +23,30 @@ type OpenDriveElements struct {
 }
 
 func main() {
-	in := flag.String("in", "", "input file")
-	out := flag.String("out", "", "output file")
+	in := flag.String("in", "", "YAML file to parse")
+	templateInput := flag.String("tmpl", "", "template file")
+	out := flag.String("out", "", "generated Go file")
 	flag.Parse()
 
-	file, err := os.ReadFile(*in)
+	yamlFile, err := os.ReadFile(*in)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	tmplFile, err := os.ReadFile(*templateInput)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	var openDriveElements OpenDriveElements
-	err = yaml.Unmarshal(file, &openDriveElements)
+	err = yaml.Unmarshal(yamlFile, &openDriveElements)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	elNamesToGoNames(&openDriveElements)
 
-	tmpl, err := template.New("elements").Parse(
-		`{{range .Elements}}
-type {{ .Name }} struct {
-}
-{{end}}`)
+	tmpl, err := template.New("OpenDRIVE Elements").Parse(string(tmplFile))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -54,7 +57,12 @@ type {{ .Name }} struct {
 		log.Fatal(err)
 	}
 
-	err = os.WriteFile(*out, buf.Bytes(), 0644)
+	fmtSrc, err := format.Source(buf.Bytes())
+	if err != nil {
+		return
+	}
+
+	err = os.WriteFile(*out, fmtSrc, 0644)
 	if err != nil {
 		log.Fatal(err)
 	}
