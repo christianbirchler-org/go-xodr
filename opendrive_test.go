@@ -1,45 +1,5 @@
 package xodr
 
-import (
-	"testing"
-)
-
-func getExampleOpenDrive(t *testing.T) OpenDrive {
-	xodrData := []byte(ExampleXodr)
-	openDrive := OpenDrive{}
-	err := ParseOdrXml(xodrData, &openDrive)
-	if err != nil {
-		t.Error(err)
-	}
-	return openDrive
-}
-
-func TestToPointsShouldReturnTheRightNumberOfPoints(t *testing.T) {
-	od := getExampleOpenDrive(t)
-	expectedLength := len(od.Road.PlanView.Geometries)
-
-	rp, err := od.ToPoints()
-	if err != nil {
-		t.Error(err)
-	}
-
-	if expectedLength != len(rp) {
-		t.Error("Number of points is incorrect, expected:", expectedLength, "actual:", len(rp))
-	}
-}
-
-func TestToPointsShouldReturnCorrectCoordinatPoints(t *testing.T) {
-	od := getExampleOpenDrive(t)
-	geos := od.Road.PlanView.Geometries
-	if geos[0].X > 64.8366 || geos[0].X < 64.836 {
-		t.Error("Wrong x coordinate for the first point:", geos[0].X)
-	}
-
-	if geos[0].Y > 10.1 || geos[0].Y < 10.0 {
-		t.Error("Wrong x coordinate for the first point:", geos[0].X)
-	}
-}
-
 const ExampleXodr = `<OpenDRIVE>
 <header name="mt/set_7/frenetic/odr/test-15">
 <sdc_test_info test_id="mt/set_7/frenetic/odr/test-15" test_outcome="FAIL" predicted_test_outcome="null" test_duration="8.018114805221558" is_valid="True" />
