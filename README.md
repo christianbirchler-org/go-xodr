@@ -1,4 +1,6 @@
 # xodr - Work in Progress
+[![Go Reference](https://pkg.go.dev/badge/github.com/christianbirchler-org/go-xodr.svg)](https://pkg.go.dev/github.com/christianbirchler-org/go-xodr)
+
 This small package provide functions to converts road descriptions in the OpenDRIVE format to sequence of xy coordinates.
 
 ## Links
