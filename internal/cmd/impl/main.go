@@ -59,7 +59,7 @@ func main() {
 
 	fmtSrc, err := format.Source(buf.Bytes())
 	if err != nil {
-		return
+		log.Fatal(err)
 	}
 
 	err = os.WriteFile(*out, fmtSrc, 0644)

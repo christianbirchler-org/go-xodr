@@ -3,19 +3,27 @@
 package xodr
 
 type Element interface {
-    Parent() Element
+    Attributes() []byte
     Children() []Element
+    Parent() Element
 }
+
+type Leaf interface {
+    AddParent(Element)
+}
+
 
 {{range .Elements}}
 type {{ .Name }} struct {
+    parent Element
+    children []Element
 }
 
-func (e *{{.Name}}) Parent() []Element {
-    return nil
+func (e *{{.Name}}) Parent() Element {
+    return e.parent
 }
 
 func (e *{{.Name}}) Children() []Element {
-    return nil
+    return e.children
 }
 {{end}}
