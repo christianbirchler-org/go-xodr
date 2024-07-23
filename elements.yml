@@ -2,6 +2,7 @@ version: 1.8.0
 description: Static Road Network Description, 2023-11-22
 elements:
     - name: OpenDRIVE
+      isRoot: true
     - name: header
       parent: OpenDRIVE
     - name: geoReference

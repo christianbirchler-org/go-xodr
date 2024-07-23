@@ -12,7 +12,9 @@ import (
 )
 
 type Element struct {
-	Name string `yaml:"name"`
+	Name   string `yaml:"name"`
+	Parent string `yaml:"parent"`
+	IsRoot bool   `yaml:"isRoot"`
 	//Attributes []Element `yaml:"attributes"`
 }
 
