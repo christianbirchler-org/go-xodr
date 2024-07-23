@@ -3,329 +3,220 @@ description: Static Road Network Description, 2023-11-22
 elements:
     - name: OpenDRIVE
     - name: header
-      parents:
-          - name: OpenDRIVE
+      parent: OpenDRIVE
     - name: geoReference
-      parents:
-          - name: header
+      parent: header
     - name: offset
-      parents:
-          - name: header
+      parent: header
     - name: license
-      parents:
-          - name: header
+      parent: header
     - name: defaultRegulations
-      parents:
-          - name: header
+      parent: header
     - name: roadRegulations
-      parents:
-          - name: defaultRegulations
+      parent: defaultRegulations
     - name: signalRegulations
-      parents:
-          - name: defaultRegulations
+      parent: defaultRegulations
     - name: road
-      parents:
-          - name: OpenDRIVE
+      parent: OpenDRIVE
     - name: link
-      parents:
-          - name: road
+      parent: road
     - name: predecessor
-      parents:
-          - name: link
+      parent: link
     - name: successor
-      parents:
-          - name: link
+      parent: link
     - name: type
-      parents:
-          - name: road
+      parent: road
     - name: speed
-      parents:
-          - name: type
+      parent: type
     - name: planView
-      parents:
-          - name: road
+      parent: road
     - name: geometry
-      parents:
-          - name: planView
+      parent: planView
     - name: line
-      parents:
-          - name: geometry
+      parent: geometry
     - name: spiral
-      parents:
-          - name: geometry
+      parent: geometry
     - name: arc
-      parents:
-          - name: geometry
+      parent: geometry
     - name: poly3
-      parents:
-          - name: geometry
+      parent: geometry
     - name: paramPoly3
-      parents:
-          - name: geometry
+      parent: geometry
     - name: elevationProfile
-      parents:
-          - name: road
+      parent: road
     - name: elevation
-      parents:
-          - name: elevationProfile
+      parent: elevationProfile
     - name: lateralProfile
-      parents:
-          - name: road
+      parent: road
     - name: superelevation
-      parents:
-          - name: lateralProfile
+      parent: lateralProfile
     - name: shape
-      parents:
-          - name: lateralProfile
+      parent: lateralProfile
     - name: crossSectionSurface
-      parents:
-          - name: lateralProfile
+      parent: lateralProfile
     - name: tOffset
-      parents:
-          - name: crossSectionSurface
+      parent: crossSectionSurface
     - name: coefficients
-      parents:
-          - name: tOffset
+      parent: tOffset
     - name: surfaceStrips
-      parents:
-          - name: crossSectionSurface
+      parent: crossSectionSurface
     - name: strip
-      parents:
-          - name: surfaceStrips
+      parent: surfaceStrips
     - name: width
-      parents:
-          - name: strip
+      parent: strip
     - name: constant
-      parents:
-          - name:
+      parent:
     - name: linear
-      parents:
-          - name:
+      parent:
     - name: quadratic
-      parents:
-          - name:
+      parent:
     - name: cubic
-      parents:
-          - name:
+      parent:
     - name: lanes
-      parents:
-          - name:
+      parent:
     - name: laneOffset
-      parents:
-          - name:
+      parent:
     - name: laneSection
-      parents:
-          - name:
+      parent:
     - name: left
-      parents:
-          - name:
+      parent:
     - name: lane
-      parents:
-          - name:
+      parent:
     - name: border
-      parents:
-          - name:
+      parent:
     - name: roadMark
-      parents:
-          - name:
+      parent:
     - name: sway
-      parents:
-          - name:
+      parent:
     - name: explicit
-      parents:
-          - name:
+      parent:
     - name: material
-      parents:
-          - name:
+      parent:
     - name: access
-      parents:
-          - name:
+      parent:
     - name: restriction
-      parents:
-          - name:
+      parent:
     - name: height
-      parents:
-          - name:
+      parent:
     - name: rule
-      parents:
-          - name:
+      parent:
     - name: center
-      parents:
-          - name:
+      parent:
     - name: right
-      parents:
-          - name:
+      parent:
     - name: objects
-      parents:
-          - name:
+      parent:
     - name: object
-      parents:
-          - name:
+      parent:
     - name: repeat
-      parents:
-          - name:
+      parent:
     - name: outline
-      parents:
-          - name:
+      parent:
     - name: cornerRoad
-      parents:
-          - name:
+      parent:
     - name: cornerLocal
-      parents:
-          - name:
+      parent:
     - name: outlines
-      parents:
-          - name:
+      parent:
     - name: validity
-      parents:
-          - name:
+      parent:
     - name: parkingSpace
-      parents:
-          - name:
+      parent:
     - name: markings
-      parents:
-          - name:
+      parent:
     - name: marking
-      parents:
-          - name:
+      parent:
     - name: cornerReference
-      parents:
-          - name:
+      parent:
     - name: borders
-      parents:
-          - name:
+      parent:
     - name: surface
-      parents:
-          - name:
+      parent:
     - name: skeleton
-      parents:
-          - name:
+      parent:
     - name: polyline
-      parents:
-          - name:
+      parent:
     - name: vertexRoad
-      parents:
-          - name:
+      parent:
     - name: vertexLocal
-      parents:
-          - name:
+      parent:
     - name: objectReference
-      parents:
-          - name:
+      parent:
     - name: tunnel
-      parents:
-          - name:
+      parent:
     - name: bridge
-      parents:
-          - name:
+      parent:
     - name: signals
-      parents:
-          - name:
+      parent:
     - name: signal
-      parents:
-          - name:
+      parent:
     - name: positionInertial
-      parents:
-          - name:
+      parent:
     - name: positionRoad
-      parents:
-          - name:
+      parent:
     - name: dependency
-      parents:
-          - name:
+      parent:
     - name: reference
-      parents:
-          - name:
+      parent:
     - name: signalReference
-      parents:
-          - name:
+      parent:
     - name: CRG
-      parents:
-          - name:
+      parent:
     - name: railroad
-      parents:
-          - name:
+      parent:
     - name: switch
-      parents:
-          - name:
+      parent:
     - name: mainTrack
-      parents:
-          - name:
+      parent:
     - name: sideTrack
-      parents:
-          - name:
+      parent:
     - name: partner
-      parents:
-          - name:
+      parent:
     - name: controller
-      parents:
-          - name:
+      parent:
     - name: control
-      parents:
-          - name:
+      parent:
     - name: junction type='crossing'
-      parents:
-          - name:
+      parent:
     - name: roadSection
-      parents:
-          - name:
+      parent:
     - name: priority
-      parents:
-          - name:
+      parent:
     - name: junction type='default'
-      parents:
-          - name:
+      parent:
     - name: connection
-      parents:
-          - name:
+      parent:
     - name: laneLink
-      parents:
-          - name:
+      parent:
     - name: crossPath
-      parents:
-          - name:
+      parent:
     - name: startLaneLink
-      parents:
-          - name:
+      parent:
     - name: endLaneLink
-      parents:
-          - name:
+      parent:
     - name: boundary
-      parents:
-          - name:
+      parent:
     - name: segment type='joint'
-      parents:
-          - name:
+      parent:
     - name: segment type='lane'
-      parents:
-          - name:
+      parent:
     - name: elevationGrid
-      parents:
-          - name:
+      parent:
     - name: junction type='direct'
-      parents:
-          - name:
+      parent:
     - name: junction type='virtual'
-      parents:
-          - name:
+      parent:
     - name: connection type='default'
-      parents:
-          - name:
+      parent:
     - name: connection type='virtual'
-      parents:
-          - name:
+      parent:
     - name: junctionGroup
-      parents:
-          - name:
+      parent:
     - name: junctionReference
-      parents:
-          - name:
+      parent:
     - name: station
-      parents:
-          - name:
+      parent:
     - name: platform
-      parents:
-          - name:
+      parent:
     - name: segment
-      parents:
-          - name:
+      parent:
