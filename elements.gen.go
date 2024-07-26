@@ -13,12 +13,7 @@ type Leaf interface {
 }
 
 type OpenDRIVE struct {
-	parent   any
 	children []Element
-}
-
-func (e *OpenDRIVE) Parent() Element {
-	return e.parent
 }
 
 func (e *OpenDRIVE) Children() []Element {
@@ -26,12 +21,7 @@ func (e *OpenDRIVE) Children() []Element {
 }
 
 type Header struct {
-	parent   any
 	children []Element
-}
-
-func (e *Header) Parent() Element {
-	return e.parent
 }
 
 func (e *Header) Children() []Element {
@@ -39,12 +29,7 @@ func (e *Header) Children() []Element {
 }
 
 type GeoReference struct {
-	parent   any
 	children []Element
-}
-
-func (e *GeoReference) Parent() Element {
-	return e.parent
 }
 
 func (e *GeoReference) Children() []Element {
@@ -52,12 +37,7 @@ func (e *GeoReference) Children() []Element {
 }
 
 type Offset struct {
-	parent   any
 	children []Element
-}
-
-func (e *Offset) Parent() Element {
-	return e.parent
 }
 
 func (e *Offset) Children() []Element {
@@ -65,12 +45,7 @@ func (e *Offset) Children() []Element {
 }
 
 type License struct {
-	parent   any
 	children []Element
-}
-
-func (e *License) Parent() Element {
-	return e.parent
 }
 
 func (e *License) Children() []Element {
@@ -78,12 +53,7 @@ func (e *License) Children() []Element {
 }
 
 type DefaultRegulations struct {
-	parent   any
 	children []Element
-}
-
-func (e *DefaultRegulations) Parent() Element {
-	return e.parent
 }
 
 func (e *DefaultRegulations) Children() []Element {
@@ -91,12 +61,7 @@ func (e *DefaultRegulations) Children() []Element {
 }
 
 type RoadRegulations struct {
-	parent   any
 	children []Element
-}
-
-func (e *RoadRegulations) Parent() Element {
-	return e.parent
 }
 
 func (e *RoadRegulations) Children() []Element {
@@ -104,12 +69,7 @@ func (e *RoadRegulations) Children() []Element {
 }
 
 type SignalRegulations struct {
-	parent   any
 	children []Element
-}
-
-func (e *SignalRegulations) Parent() Element {
-	return e.parent
 }
 
 func (e *SignalRegulations) Children() []Element {
@@ -117,12 +77,7 @@ func (e *SignalRegulations) Children() []Element {
 }
 
 type Road struct {
-	parent   any
 	children []Element
-}
-
-func (e *Road) Parent() Element {
-	return e.parent
 }
 
 func (e *Road) Children() []Element {
@@ -130,12 +85,7 @@ func (e *Road) Children() []Element {
 }
 
 type Link struct {
-	parent   any
 	children []Element
-}
-
-func (e *Link) Parent() Element {
-	return e.parent
 }
 
 func (e *Link) Children() []Element {
@@ -143,12 +93,7 @@ func (e *Link) Children() []Element {
 }
 
 type Predecessor struct {
-	parent   any
 	children []Element
-}
-
-func (e *Predecessor) Parent() Element {
-	return e.parent
 }
 
 func (e *Predecessor) Children() []Element {
@@ -156,12 +101,7 @@ func (e *Predecessor) Children() []Element {
 }
 
 type Successor struct {
-	parent   any
 	children []Element
-}
-
-func (e *Successor) Parent() Element {
-	return e.parent
 }
 
 func (e *Successor) Children() []Element {
@@ -169,12 +109,7 @@ func (e *Successor) Children() []Element {
 }
 
 type Type struct {
-	parent   any
 	children []Element
-}
-
-func (e *Type) Parent() Element {
-	return e.parent
 }
 
 func (e *Type) Children() []Element {
@@ -182,12 +117,7 @@ func (e *Type) Children() []Element {
 }
 
 type Speed struct {
-	parent   any
 	children []Element
-}
-
-func (e *Speed) Parent() Element {
-	return e.parent
 }
 
 func (e *Speed) Children() []Element {
@@ -195,12 +125,7 @@ func (e *Speed) Children() []Element {
 }
 
 type PlanView struct {
-	parent   any
 	children []Element
-}
-
-func (e *PlanView) Parent() Element {
-	return e.parent
 }
 
 func (e *PlanView) Children() []Element {
@@ -208,12 +133,7 @@ func (e *PlanView) Children() []Element {
 }
 
 type Geometry struct {
-	parent   any
 	children []Element
-}
-
-func (e *Geometry) Parent() Element {
-	return e.parent
 }
 
 func (e *Geometry) Children() []Element {
@@ -221,12 +141,7 @@ func (e *Geometry) Children() []Element {
 }
 
 type Line struct {
-	parent   any
 	children []Element
-}
-
-func (e *Line) Parent() Element {
-	return e.parent
 }
 
 func (e *Line) Children() []Element {
@@ -234,12 +149,7 @@ func (e *Line) Children() []Element {
 }
 
 type Spiral struct {
-	parent   any
 	children []Element
-}
-
-func (e *Spiral) Parent() Element {
-	return e.parent
 }
 
 func (e *Spiral) Children() []Element {
@@ -247,12 +157,7 @@ func (e *Spiral) Children() []Element {
 }
 
 type Arc struct {
-	parent   any
 	children []Element
-}
-
-func (e *Arc) Parent() Element {
-	return e.parent
 }
 
 func (e *Arc) Children() []Element {
@@ -260,12 +165,7 @@ func (e *Arc) Children() []Element {
 }
 
 type Poly3 struct {
-	parent   any
 	children []Element
-}
-
-func (e *Poly3) Parent() Element {
-	return e.parent
 }
 
 func (e *Poly3) Children() []Element {
@@ -273,12 +173,7 @@ func (e *Poly3) Children() []Element {
 }
 
 type ParamPoly3 struct {
-	parent   any
 	children []Element
-}
-
-func (e *ParamPoly3) Parent() Element {
-	return e.parent
 }
 
 func (e *ParamPoly3) Children() []Element {
@@ -286,12 +181,7 @@ func (e *ParamPoly3) Children() []Element {
 }
 
 type ElevationProfile struct {
-	parent   any
 	children []Element
-}
-
-func (e *ElevationProfile) Parent() Element {
-	return e.parent
 }
 
 func (e *ElevationProfile) Children() []Element {
@@ -299,12 +189,7 @@ func (e *ElevationProfile) Children() []Element {
 }
 
 type Elevation struct {
-	parent   any
 	children []Element
-}
-
-func (e *Elevation) Parent() Element {
-	return e.parent
 }
 
 func (e *Elevation) Children() []Element {
@@ -312,12 +197,7 @@ func (e *Elevation) Children() []Element {
 }
 
 type LateralProfile struct {
-	parent   any
 	children []Element
-}
-
-func (e *LateralProfile) Parent() Element {
-	return e.parent
 }
 
 func (e *LateralProfile) Children() []Element {
@@ -325,12 +205,7 @@ func (e *LateralProfile) Children() []Element {
 }
 
 type Superelevation struct {
-	parent   any
 	children []Element
-}
-
-func (e *Superelevation) Parent() Element {
-	return e.parent
 }
 
 func (e *Superelevation) Children() []Element {
@@ -338,12 +213,7 @@ func (e *Superelevation) Children() []Element {
 }
 
 type Shape struct {
-	parent   any
 	children []Element
-}
-
-func (e *Shape) Parent() Element {
-	return e.parent
 }
 
 func (e *Shape) Children() []Element {
@@ -351,12 +221,7 @@ func (e *Shape) Children() []Element {
 }
 
 type CrossSectionSurface struct {
-	parent   any
 	children []Element
-}
-
-func (e *CrossSectionSurface) Parent() Element {
-	return e.parent
 }
 
 func (e *CrossSectionSurface) Children() []Element {
@@ -364,12 +229,7 @@ func (e *CrossSectionSurface) Children() []Element {
 }
 
 type TOffset struct {
-	parent   any
 	children []Element
-}
-
-func (e *TOffset) Parent() Element {
-	return e.parent
 }
 
 func (e *TOffset) Children() []Element {
@@ -377,12 +237,7 @@ func (e *TOffset) Children() []Element {
 }
 
 type Coefficients struct {
-	parent   any
 	children []Element
-}
-
-func (e *Coefficients) Parent() Element {
-	return e.parent
 }
 
 func (e *Coefficients) Children() []Element {
@@ -390,12 +245,7 @@ func (e *Coefficients) Children() []Element {
 }
 
 type SurfaceStrips struct {
-	parent   any
 	children []Element
-}
-
-func (e *SurfaceStrips) Parent() Element {
-	return e.parent
 }
 
 func (e *SurfaceStrips) Children() []Element {
@@ -403,12 +253,7 @@ func (e *SurfaceStrips) Children() []Element {
 }
 
 type Strip struct {
-	parent   any
 	children []Element
-}
-
-func (e *Strip) Parent() Element {
-	return e.parent
 }
 
 func (e *Strip) Children() []Element {
@@ -416,12 +261,7 @@ func (e *Strip) Children() []Element {
 }
 
 type Width struct {
-	parent   any
 	children []Element
-}
-
-func (e *Width) Parent() Element {
-	return e.parent
 }
 
 func (e *Width) Children() []Element {
@@ -429,12 +269,7 @@ func (e *Width) Children() []Element {
 }
 
 type Constant struct {
-	parent   any
 	children []Element
-}
-
-func (e *Constant) Parent() Element {
-	return e.parent
 }
 
 func (e *Constant) Children() []Element {
@@ -442,12 +277,7 @@ func (e *Constant) Children() []Element {
 }
 
 type Linear struct {
-	parent   any
 	children []Element
-}
-
-func (e *Linear) Parent() Element {
-	return e.parent
 }
 
 func (e *Linear) Children() []Element {
@@ -455,12 +285,7 @@ func (e *Linear) Children() []Element {
 }
 
 type Quadratic struct {
-	parent   any
 	children []Element
-}
-
-func (e *Quadratic) Parent() Element {
-	return e.parent
 }
 
 func (e *Quadratic) Children() []Element {
@@ -468,12 +293,7 @@ func (e *Quadratic) Children() []Element {
 }
 
 type Cubic struct {
-	parent   any
 	children []Element
-}
-
-func (e *Cubic) Parent() Element {
-	return e.parent
 }
 
 func (e *Cubic) Children() []Element {
@@ -481,12 +301,7 @@ func (e *Cubic) Children() []Element {
 }
 
 type Lanes struct {
-	parent   any
 	children []Element
-}
-
-func (e *Lanes) Parent() Element {
-	return e.parent
 }
 
 func (e *Lanes) Children() []Element {
@@ -494,12 +309,7 @@ func (e *Lanes) Children() []Element {
 }
 
 type LaneOffset struct {
-	parent   any
 	children []Element
-}
-
-func (e *LaneOffset) Parent() Element {
-	return e.parent
 }
 
 func (e *LaneOffset) Children() []Element {
@@ -507,12 +317,7 @@ func (e *LaneOffset) Children() []Element {
 }
 
 type LaneSection struct {
-	parent   any
 	children []Element
-}
-
-func (e *LaneSection) Parent() Element {
-	return e.parent
 }
 
 func (e *LaneSection) Children() []Element {
@@ -520,12 +325,7 @@ func (e *LaneSection) Children() []Element {
 }
 
 type Left struct {
-	parent   any
 	children []Element
-}
-
-func (e *Left) Parent() Element {
-	return e.parent
 }
 
 func (e *Left) Children() []Element {
@@ -533,12 +333,7 @@ func (e *Left) Children() []Element {
 }
 
 type Lane struct {
-	parent   any
 	children []Element
-}
-
-func (e *Lane) Parent() Element {
-	return e.parent
 }
 
 func (e *Lane) Children() []Element {
@@ -546,12 +341,7 @@ func (e *Lane) Children() []Element {
 }
 
 type Border struct {
-	parent   any
 	children []Element
-}
-
-func (e *Border) Parent() Element {
-	return e.parent
 }
 
 func (e *Border) Children() []Element {
@@ -559,12 +349,7 @@ func (e *Border) Children() []Element {
 }
 
 type RoadMark struct {
-	parent   any
 	children []Element
-}
-
-func (e *RoadMark) Parent() Element {
-	return e.parent
 }
 
 func (e *RoadMark) Children() []Element {
@@ -572,12 +357,7 @@ func (e *RoadMark) Children() []Element {
 }
 
 type Sway struct {
-	parent   any
 	children []Element
-}
-
-func (e *Sway) Parent() Element {
-	return e.parent
 }
 
 func (e *Sway) Children() []Element {
@@ -585,12 +365,7 @@ func (e *Sway) Children() []Element {
 }
 
 type Explicit struct {
-	parent   any
 	children []Element
-}
-
-func (e *Explicit) Parent() Element {
-	return e.parent
 }
 
 func (e *Explicit) Children() []Element {
@@ -598,12 +373,7 @@ func (e *Explicit) Children() []Element {
 }
 
 type Material struct {
-	parent   any
 	children []Element
-}
-
-func (e *Material) Parent() Element {
-	return e.parent
 }
 
 func (e *Material) Children() []Element {
@@ -611,12 +381,7 @@ func (e *Material) Children() []Element {
 }
 
 type Access struct {
-	parent   any
 	children []Element
-}
-
-func (e *Access) Parent() Element {
-	return e.parent
 }
 
 func (e *Access) Children() []Element {
@@ -624,12 +389,7 @@ func (e *Access) Children() []Element {
 }
 
 type Restriction struct {
-	parent   any
 	children []Element
-}
-
-func (e *Restriction) Parent() Element {
-	return e.parent
 }
 
 func (e *Restriction) Children() []Element {
@@ -637,12 +397,7 @@ func (e *Restriction) Children() []Element {
 }
 
 type Height struct {
-	parent   any
 	children []Element
-}
-
-func (e *Height) Parent() Element {
-	return e.parent
 }
 
 func (e *Height) Children() []Element {
@@ -650,12 +405,7 @@ func (e *Height) Children() []Element {
 }
 
 type Rule struct {
-	parent   any
 	children []Element
-}
-
-func (e *Rule) Parent() Element {
-	return e.parent
 }
 
 func (e *Rule) Children() []Element {
@@ -663,12 +413,7 @@ func (e *Rule) Children() []Element {
 }
 
 type Center struct {
-	parent   any
 	children []Element
-}
-
-func (e *Center) Parent() Element {
-	return e.parent
 }
 
 func (e *Center) Children() []Element {
@@ -676,12 +421,7 @@ func (e *Center) Children() []Element {
 }
 
 type Right struct {
-	parent   any
 	children []Element
-}
-
-func (e *Right) Parent() Element {
-	return e.parent
 }
 
 func (e *Right) Children() []Element {
@@ -689,12 +429,7 @@ func (e *Right) Children() []Element {
 }
 
 type Objects struct {
-	parent   any
 	children []Element
-}
-
-func (e *Objects) Parent() Element {
-	return e.parent
 }
 
 func (e *Objects) Children() []Element {
@@ -702,12 +437,7 @@ func (e *Objects) Children() []Element {
 }
 
 type Object struct {
-	parent   any
 	children []Element
-}
-
-func (e *Object) Parent() Element {
-	return e.parent
 }
 
 func (e *Object) Children() []Element {
@@ -715,12 +445,7 @@ func (e *Object) Children() []Element {
 }
 
 type Repeat struct {
-	parent   any
 	children []Element
-}
-
-func (e *Repeat) Parent() Element {
-	return e.parent
 }
 
 func (e *Repeat) Children() []Element {
@@ -728,12 +453,7 @@ func (e *Repeat) Children() []Element {
 }
 
 type Outline struct {
-	parent   any
 	children []Element
-}
-
-func (e *Outline) Parent() Element {
-	return e.parent
 }
 
 func (e *Outline) Children() []Element {
@@ -741,12 +461,7 @@ func (e *Outline) Children() []Element {
 }
 
 type CornerRoad struct {
-	parent   any
 	children []Element
-}
-
-func (e *CornerRoad) Parent() Element {
-	return e.parent
 }
 
 func (e *CornerRoad) Children() []Element {
@@ -754,12 +469,7 @@ func (e *CornerRoad) Children() []Element {
 }
 
 type CornerLocal struct {
-	parent   any
 	children []Element
-}
-
-func (e *CornerLocal) Parent() Element {
-	return e.parent
 }
 
 func (e *CornerLocal) Children() []Element {
@@ -767,12 +477,7 @@ func (e *CornerLocal) Children() []Element {
 }
 
 type Outlines struct {
-	parent   any
 	children []Element
-}
-
-func (e *Outlines) Parent() Element {
-	return e.parent
 }
 
 func (e *Outlines) Children() []Element {
@@ -780,12 +485,7 @@ func (e *Outlines) Children() []Element {
 }
 
 type Validity struct {
-	parent   any
 	children []Element
-}
-
-func (e *Validity) Parent() Element {
-	return e.parent
 }
 
 func (e *Validity) Children() []Element {
@@ -793,12 +493,7 @@ func (e *Validity) Children() []Element {
 }
 
 type ParkingSpace struct {
-	parent   any
 	children []Element
-}
-
-func (e *ParkingSpace) Parent() Element {
-	return e.parent
 }
 
 func (e *ParkingSpace) Children() []Element {
@@ -806,12 +501,7 @@ func (e *ParkingSpace) Children() []Element {
 }
 
 type Markings struct {
-	parent   any
 	children []Element
-}
-
-func (e *Markings) Parent() Element {
-	return e.parent
 }
 
 func (e *Markings) Children() []Element {
@@ -819,12 +509,7 @@ func (e *Markings) Children() []Element {
 }
 
 type Marking struct {
-	parent   any
 	children []Element
-}
-
-func (e *Marking) Parent() Element {
-	return e.parent
 }
 
 func (e *Marking) Children() []Element {
@@ -832,12 +517,7 @@ func (e *Marking) Children() []Element {
 }
 
 type CornerReference struct {
-	parent   any
 	children []Element
-}
-
-func (e *CornerReference) Parent() Element {
-	return e.parent
 }
 
 func (e *CornerReference) Children() []Element {
@@ -845,12 +525,7 @@ func (e *CornerReference) Children() []Element {
 }
 
 type Borders struct {
-	parent   any
 	children []Element
-}
-
-func (e *Borders) Parent() Element {
-	return e.parent
 }
 
 func (e *Borders) Children() []Element {
@@ -858,12 +533,7 @@ func (e *Borders) Children() []Element {
 }
 
 type Surface struct {
-	parent   any
 	children []Element
-}
-
-func (e *Surface) Parent() Element {
-	return e.parent
 }
 
 func (e *Surface) Children() []Element {
@@ -871,12 +541,7 @@ func (e *Surface) Children() []Element {
 }
 
 type Skeleton struct {
-	parent   any
 	children []Element
-}
-
-func (e *Skeleton) Parent() Element {
-	return e.parent
 }
 
 func (e *Skeleton) Children() []Element {
@@ -884,12 +549,7 @@ func (e *Skeleton) Children() []Element {
 }
 
 type Polyline struct {
-	parent   any
 	children []Element
-}
-
-func (e *Polyline) Parent() Element {
-	return e.parent
 }
 
 func (e *Polyline) Children() []Element {
@@ -897,12 +557,7 @@ func (e *Polyline) Children() []Element {
 }
 
 type VertexRoad struct {
-	parent   any
 	children []Element
-}
-
-func (e *VertexRoad) Parent() Element {
-	return e.parent
 }
 
 func (e *VertexRoad) Children() []Element {
@@ -910,12 +565,7 @@ func (e *VertexRoad) Children() []Element {
 }
 
 type VertexLocal struct {
-	parent   any
 	children []Element
-}
-
-func (e *VertexLocal) Parent() Element {
-	return e.parent
 }
 
 func (e *VertexLocal) Children() []Element {
@@ -923,12 +573,7 @@ func (e *VertexLocal) Children() []Element {
 }
 
 type ObjectReference struct {
-	parent   any
 	children []Element
-}
-
-func (e *ObjectReference) Parent() Element {
-	return e.parent
 }
 
 func (e *ObjectReference) Children() []Element {
@@ -936,12 +581,7 @@ func (e *ObjectReference) Children() []Element {
 }
 
 type Tunnel struct {
-	parent   any
 	children []Element
-}
-
-func (e *Tunnel) Parent() Element {
-	return e.parent
 }
 
 func (e *Tunnel) Children() []Element {
@@ -949,12 +589,7 @@ func (e *Tunnel) Children() []Element {
 }
 
 type Bridge struct {
-	parent   any
 	children []Element
-}
-
-func (e *Bridge) Parent() Element {
-	return e.parent
 }
 
 func (e *Bridge) Children() []Element {
@@ -962,12 +597,7 @@ func (e *Bridge) Children() []Element {
 }
 
 type Signals struct {
-	parent   any
 	children []Element
-}
-
-func (e *Signals) Parent() Element {
-	return e.parent
 }
 
 func (e *Signals) Children() []Element {
@@ -975,12 +605,7 @@ func (e *Signals) Children() []Element {
 }
 
 type Signal struct {
-	parent   any
 	children []Element
-}
-
-func (e *Signal) Parent() Element {
-	return e.parent
 }
 
 func (e *Signal) Children() []Element {
@@ -988,12 +613,7 @@ func (e *Signal) Children() []Element {
 }
 
 type PositionInertial struct {
-	parent   any
 	children []Element
-}
-
-func (e *PositionInertial) Parent() Element {
-	return e.parent
 }
 
 func (e *PositionInertial) Children() []Element {
@@ -1001,12 +621,7 @@ func (e *PositionInertial) Children() []Element {
 }
 
 type PositionRoad struct {
-	parent   any
 	children []Element
-}
-
-func (e *PositionRoad) Parent() Element {
-	return e.parent
 }
 
 func (e *PositionRoad) Children() []Element {
@@ -1014,12 +629,7 @@ func (e *PositionRoad) Children() []Element {
 }
 
 type Dependency struct {
-	parent   any
 	children []Element
-}
-
-func (e *Dependency) Parent() Element {
-	return e.parent
 }
 
 func (e *Dependency) Children() []Element {
@@ -1027,12 +637,7 @@ func (e *Dependency) Children() []Element {
 }
 
 type Reference struct {
-	parent   any
 	children []Element
-}
-
-func (e *Reference) Parent() Element {
-	return e.parent
 }
 
 func (e *Reference) Children() []Element {
@@ -1040,12 +645,7 @@ func (e *Reference) Children() []Element {
 }
 
 type SignalReference struct {
-	parent   any
 	children []Element
-}
-
-func (e *SignalReference) Parent() Element {
-	return e.parent
 }
 
 func (e *SignalReference) Children() []Element {
@@ -1053,12 +653,7 @@ func (e *SignalReference) Children() []Element {
 }
 
 type CRG struct {
-	parent   any
 	children []Element
-}
-
-func (e *CRG) Parent() Element {
-	return e.parent
 }
 
 func (e *CRG) Children() []Element {
@@ -1066,12 +661,7 @@ func (e *CRG) Children() []Element {
 }
 
 type Railroad struct {
-	parent   any
 	children []Element
-}
-
-func (e *Railroad) Parent() Element {
-	return e.parent
 }
 
 func (e *Railroad) Children() []Element {
@@ -1079,12 +669,7 @@ func (e *Railroad) Children() []Element {
 }
 
 type Switch struct {
-	parent   any
 	children []Element
-}
-
-func (e *Switch) Parent() Element {
-	return e.parent
 }
 
 func (e *Switch) Children() []Element {
@@ -1092,12 +677,7 @@ func (e *Switch) Children() []Element {
 }
 
 type MainTrack struct {
-	parent   any
 	children []Element
-}
-
-func (e *MainTrack) Parent() Element {
-	return e.parent
 }
 
 func (e *MainTrack) Children() []Element {
@@ -1105,12 +685,7 @@ func (e *MainTrack) Children() []Element {
 }
 
 type SideTrack struct {
-	parent   any
 	children []Element
-}
-
-func (e *SideTrack) Parent() Element {
-	return e.parent
 }
 
 func (e *SideTrack) Children() []Element {
@@ -1118,12 +693,7 @@ func (e *SideTrack) Children() []Element {
 }
 
 type Partner struct {
-	parent   any
 	children []Element
-}
-
-func (e *Partner) Parent() Element {
-	return e.parent
 }
 
 func (e *Partner) Children() []Element {
@@ -1131,12 +701,7 @@ func (e *Partner) Children() []Element {
 }
 
 type Controller struct {
-	parent   any
 	children []Element
-}
-
-func (e *Controller) Parent() Element {
-	return e.parent
 }
 
 func (e *Controller) Children() []Element {
@@ -1144,12 +709,7 @@ func (e *Controller) Children() []Element {
 }
 
 type Control struct {
-	parent   any
 	children []Element
-}
-
-func (e *Control) Parent() Element {
-	return e.parent
 }
 
 func (e *Control) Children() []Element {
@@ -1157,12 +717,7 @@ func (e *Control) Children() []Element {
 }
 
 type JunctiontypeCrossing struct {
-	parent   any
 	children []Element
-}
-
-func (e *JunctiontypeCrossing) Parent() Element {
-	return e.parent
 }
 
 func (e *JunctiontypeCrossing) Children() []Element {
@@ -1170,12 +725,7 @@ func (e *JunctiontypeCrossing) Children() []Element {
 }
 
 type RoadSection struct {
-	parent   any
 	children []Element
-}
-
-func (e *RoadSection) Parent() Element {
-	return e.parent
 }
 
 func (e *RoadSection) Children() []Element {
@@ -1183,12 +733,7 @@ func (e *RoadSection) Children() []Element {
 }
 
 type Priority struct {
-	parent   any
 	children []Element
-}
-
-func (e *Priority) Parent() Element {
-	return e.parent
 }
 
 func (e *Priority) Children() []Element {
@@ -1196,12 +741,7 @@ func (e *Priority) Children() []Element {
 }
 
 type JunctiontypeDefault struct {
-	parent   any
 	children []Element
-}
-
-func (e *JunctiontypeDefault) Parent() Element {
-	return e.parent
 }
 
 func (e *JunctiontypeDefault) Children() []Element {
@@ -1209,12 +749,7 @@ func (e *JunctiontypeDefault) Children() []Element {
 }
 
 type Connection struct {
-	parent   any
 	children []Element
-}
-
-func (e *Connection) Parent() Element {
-	return e.parent
 }
 
 func (e *Connection) Children() []Element {
@@ -1222,12 +757,7 @@ func (e *Connection) Children() []Element {
 }
 
 type LaneLink struct {
-	parent   any
 	children []Element
-}
-
-func (e *LaneLink) Parent() Element {
-	return e.parent
 }
 
 func (e *LaneLink) Children() []Element {
@@ -1235,12 +765,7 @@ func (e *LaneLink) Children() []Element {
 }
 
 type CrossPath struct {
-	parent   any
 	children []Element
-}
-
-func (e *CrossPath) Parent() Element {
-	return e.parent
 }
 
 func (e *CrossPath) Children() []Element {
@@ -1248,12 +773,7 @@ func (e *CrossPath) Children() []Element {
 }
 
 type StartLaneLink struct {
-	parent   any
 	children []Element
-}
-
-func (e *StartLaneLink) Parent() Element {
-	return e.parent
 }
 
 func (e *StartLaneLink) Children() []Element {
@@ -1261,12 +781,7 @@ func (e *StartLaneLink) Children() []Element {
 }
 
 type EndLaneLink struct {
-	parent   any
 	children []Element
-}
-
-func (e *EndLaneLink) Parent() Element {
-	return e.parent
 }
 
 func (e *EndLaneLink) Children() []Element {
@@ -1274,12 +789,7 @@ func (e *EndLaneLink) Children() []Element {
 }
 
 type Boundary struct {
-	parent   any
 	children []Element
-}
-
-func (e *Boundary) Parent() Element {
-	return e.parent
 }
 
 func (e *Boundary) Children() []Element {
@@ -1287,12 +797,7 @@ func (e *Boundary) Children() []Element {
 }
 
 type SegmenttypeJoint struct {
-	parent   any
 	children []Element
-}
-
-func (e *SegmenttypeJoint) Parent() Element {
-	return e.parent
 }
 
 func (e *SegmenttypeJoint) Children() []Element {
@@ -1300,12 +805,7 @@ func (e *SegmenttypeJoint) Children() []Element {
 }
 
 type SegmenttypeLane struct {
-	parent   any
 	children []Element
-}
-
-func (e *SegmenttypeLane) Parent() Element {
-	return e.parent
 }
 
 func (e *SegmenttypeLane) Children() []Element {
@@ -1313,12 +813,7 @@ func (e *SegmenttypeLane) Children() []Element {
 }
 
 type ElevationGrid struct {
-	parent   any
 	children []Element
-}
-
-func (e *ElevationGrid) Parent() Element {
-	return e.parent
 }
 
 func (e *ElevationGrid) Children() []Element {
@@ -1326,12 +821,7 @@ func (e *ElevationGrid) Children() []Element {
 }
 
 type JunctiontypeDirect struct {
-	parent   any
 	children []Element
-}
-
-func (e *JunctiontypeDirect) Parent() Element {
-	return e.parent
 }
 
 func (e *JunctiontypeDirect) Children() []Element {
@@ -1339,12 +829,7 @@ func (e *JunctiontypeDirect) Children() []Element {
 }
 
 type JunctiontypeVirtual struct {
-	parent   any
 	children []Element
-}
-
-func (e *JunctiontypeVirtual) Parent() Element {
-	return e.parent
 }
 
 func (e *JunctiontypeVirtual) Children() []Element {
@@ -1352,12 +837,7 @@ func (e *JunctiontypeVirtual) Children() []Element {
 }
 
 type ConnectiontypeDefault struct {
-	parent   any
 	children []Element
-}
-
-func (e *ConnectiontypeDefault) Parent() Element {
-	return e.parent
 }
 
 func (e *ConnectiontypeDefault) Children() []Element {
@@ -1365,12 +845,7 @@ func (e *ConnectiontypeDefault) Children() []Element {
 }
 
 type ConnectiontypeVirtual struct {
-	parent   any
 	children []Element
-}
-
-func (e *ConnectiontypeVirtual) Parent() Element {
-	return e.parent
 }
 
 func (e *ConnectiontypeVirtual) Children() []Element {
@@ -1378,12 +853,7 @@ func (e *ConnectiontypeVirtual) Children() []Element {
 }
 
 type JunctionGroup struct {
-	parent   any
 	children []Element
-}
-
-func (e *JunctionGroup) Parent() Element {
-	return e.parent
 }
 
 func (e *JunctionGroup) Children() []Element {
@@ -1391,12 +861,7 @@ func (e *JunctionGroup) Children() []Element {
 }
 
 type JunctionReference struct {
-	parent   any
 	children []Element
-}
-
-func (e *JunctionReference) Parent() Element {
-	return e.parent
 }
 
 func (e *JunctionReference) Children() []Element {
@@ -1404,12 +869,7 @@ func (e *JunctionReference) Children() []Element {
 }
 
 type Station struct {
-	parent   any
 	children []Element
-}
-
-func (e *Station) Parent() Element {
-	return e.parent
 }
 
 func (e *Station) Children() []Element {
@@ -1417,12 +877,7 @@ func (e *Station) Children() []Element {
 }
 
 type Platform struct {
-	parent   any
 	children []Element
-}
-
-func (e *Platform) Parent() Element {
-	return e.parent
 }
 
 func (e *Platform) Children() []Element {
@@ -1430,12 +885,7 @@ func (e *Platform) Children() []Element {
 }
 
 type Segment struct {
-	parent   any
 	children []Element
-}
-
-func (e *Segment) Parent() Element {
-	return e.parent
 }
 
 func (e *Segment) Children() []Element {
