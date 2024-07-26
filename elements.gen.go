@@ -66,7 +66,7 @@ type Predecessor struct {
 type Successor struct {
 }
 
-type Type struct {
+type RoadType struct {
 	Speed *Speed
 }
 
@@ -120,6 +120,8 @@ type Shape struct {
 }
 
 type CrossSectionSurface struct {
+	TOffset       *TOffset
+	SurfaceStrips *SurfaceStrips
 }
 
 type TOffset struct {
@@ -150,30 +152,53 @@ type Cubic struct {
 }
 
 type Lanes struct {
+	LaneOffset  *LaneOffset
+	LaneSection *LaneSection
 }
 
 type LaneOffset struct {
 }
 
 type LaneSection struct {
+	Left   *Left
+	Center *Center
+	Right  *Right
 }
 
 type Left struct {
+	Lane *Lane
 }
 
 type Lane struct {
+	Width    *Width
+	Border   *Border
+	Link     *Link
+	RoadMark *RoadMark
+	Material *Material
+	Speed    *Speed
+	Access   *Access
+	Height   *Height
+	Rule     *Rule
 }
 
 type Border struct {
 }
 
 type RoadMark struct {
+	Sway         *Sway
+	RoadMarkType *RoadMarkType
+	Explicit     *Explicit
 }
 
 type Sway struct {
 }
 
+type RoadMarkType struct {
+	Line *Line
+}
+
 type Explicit struct {
+	Line *Line
 }
 
 type Material struct {
@@ -198,15 +223,31 @@ type Right struct {
 }
 
 type Objects struct {
+	Object          *Object
+	ObjectReference *ObjectReference
+	Tunnel          *Tunnel
+	Bridge          *Bridge
 }
 
 type Object struct {
+	Repeat       *Repeat
+	Outline      *Outline
+	Outlines     *Outlines
+	Material     *Material
+	Validity     *Validity
+	ParkingSpace *ParkingSpace
+	Markings     *Markings
+	Borders      *Borders
+	Surface      *Surface
+	Skeleton     *Skeleton
 }
 
 type Repeat struct {
 }
 
 type Outline struct {
+	CornerRoad  *CornerRoad
+	CornerLocal *CornerLocal
 }
 
 type CornerRoad struct {

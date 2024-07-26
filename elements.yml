@@ -43,7 +43,8 @@ elements:
         - name: successor
     - name: predecessor
     - name: successor
-    - name: type
+    - name: roadType
+      xmlName: type
       children:
         - name: speed
     - name: speed
@@ -74,6 +75,9 @@ elements:
     - name: superelevation
     - name: shape
     - name: crossSectionSurface
+      children:
+        - name: tOffset
+        - name: surfaceStrips
     - name: tOffset
     - name: coefficients
     - name: surfaceStrips
@@ -84,14 +88,43 @@ elements:
     - name: quadratic
     - name: cubic
     - name: lanes
+      children:
+        - name: laneOffset
+        - name: laneSection
     - name: laneOffset
     - name: laneSection
+      children:
+        - name: left
+        - name: center
+        - name: right
     - name: left
+      children:
+        - name: lane
     - name: lane
+      children:
+        - name: width
+        - name: border
+        - name: link
+        - name: roadMark
+        - name: material
+        - name: speed
+        - name: access
+        - name: height
+        - name: rule
     - name: border
     - name: roadMark
+      children:
+        - name: sway
+        - name: roadMarkType
+        - name: explicit
     - name: sway
+    - name: roadMarkType
+      xmlName: type
+      children:
+        - name: line
     - name: explicit
+      children:
+        - name: line
     - name: material
     - name: access
     - name: restriction
@@ -100,9 +133,28 @@ elements:
     - name: center
     - name: right
     - name: objects
+      children:
+        - name: object
+        - name: objectReference
+        - name: tunnel
+        - name: bridge
     - name: object
+      children:
+        - name: repeat
+        - name: outline
+        - name: outlines
+        - name: material
+        - name: validity
+        - name: parkingSpace
+        - name: markings
+        - name: borders
+        - name: surface
+        - name: skeleton
     - name: repeat
     - name: outline
+      children:
+        - name: cornerRoad
+        - name: cornerLocal
     - name: cornerRoad
     - name: cornerLocal
     - name: outlines
