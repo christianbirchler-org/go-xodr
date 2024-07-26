@@ -2,222 +2,181 @@ version: 1.8.0
 description: Static Road Network Description, 2023-11-22
 elements:
     - name: OpenDRIVE
-      isRoot: true
+      children:
+        - name: header
+        - name: road
+        - name: controller
+        - name: junction type='crossing'
+        - name: junction type='default'
+        - name: junction type='direct'
+        - name: junction type='virtual'
+        - name: junctionGroup
+        - name: station
     - name: header
-      parent: OpenDRIVE
+      children:
+        - name: geoReference
+        - name: offset
+        - name: license
+        - name: defaultRegulations
     - name: geoReference
-      parent: header
     - name: offset
-      parent: header
     - name: license
-      parent: header
     - name: defaultRegulations
-      parent: header
+      children:
+        - name: roadRegulations
+        - name: signalRegulations
     - name: roadRegulations
-      parent: defaultRegulations
     - name: signalRegulations
-      parent: defaultRegulations
     - name: road
-      parent: OpenDRIVE
+      children:
+        - name: link
+        - name: elevationProfile
+        - name: lateralProfile
+        - name: lanes
+        - name: objects
+        - name: signals
+        - name: surface
+        - name: railroad
     - name: link
-      parent: road
+      children:
+        - name: predecessor
+        - name: successor
     - name: predecessor
-      parent: link
     - name: successor
-      parent: link
     - name: type
-      parent: road
+      children:
+        - name: speed
     - name: speed
-      parent: type
     - name: planView
-      parent: road
     - name: geometry
-      parent: planView
     - name: line
-      parent: geometry
     - name: spiral
-      parent: geometry
     - name: arc
-      parent: geometry
     - name: poly3
-      parent: geometry
     - name: paramPoly3
-      parent: geometry
     - name: elevationProfile
-      parent: road
     - name: elevation
-      parent: elevationProfile
     - name: lateralProfile
-      parent: road
     - name: superelevation
-      parent: lateralProfile
     - name: shape
-      parent: lateralProfile
     - name: crossSectionSurface
-      parent: lateralProfile
     - name: tOffset
-      parent: crossSectionSurface
     - name: coefficients
-      parent: tOffset
     - name: surfaceStrips
-      parent: crossSectionSurface
     - name: strip
-      parent: surfaceStrips
     - name: width
-      parent: strip
     - name: constant
-      parent:
     - name: linear
-      parent:
     - name: quadratic
-      parent:
     - name: cubic
-      parent:
     - name: lanes
-      parent:
     - name: laneOffset
-      parent:
     - name: laneSection
-      parent:
     - name: left
-      parent:
     - name: lane
-      parent:
     - name: border
-      parent:
     - name: roadMark
-      parent:
     - name: sway
-      parent:
     - name: explicit
-      parent:
     - name: material
-      parent:
     - name: access
-      parent:
     - name: restriction
-      parent:
     - name: height
-      parent:
     - name: rule
-      parent:
     - name: center
-      parent:
     - name: right
-      parent:
     - name: objects
-      parent:
     - name: object
-      parent:
     - name: repeat
-      parent:
     - name: outline
-      parent:
     - name: cornerRoad
-      parent:
     - name: cornerLocal
-      parent:
     - name: outlines
-      parent:
     - name: validity
-      parent:
     - name: parkingSpace
-      parent:
     - name: markings
-      parent:
     - name: marking
-      parent:
     - name: cornerReference
-      parent:
     - name: borders
-      parent:
     - name: surface
-      parent:
     - name: skeleton
-      parent:
     - name: polyline
-      parent:
     - name: vertexRoad
-      parent:
     - name: vertexLocal
-      parent:
     - name: objectReference
-      parent:
     - name: tunnel
-      parent:
     - name: bridge
-      parent:
     - name: signals
-      parent:
     - name: signal
-      parent:
     - name: positionInertial
-      parent:
     - name: positionRoad
-      parent:
     - name: dependency
-      parent:
     - name: reference
-      parent:
     - name: signalReference
-      parent:
     - name: CRG
-      parent:
     - name: railroad
-      parent:
     - name: switch
-      parent:
     - name: mainTrack
-      parent:
     - name: sideTrack
-      parent:
     - name: partner
-      parent:
     - name: controller
-      parent:
+      children:
+        - name: control
     - name: control
-      parent:
     - name: junction type='crossing'
-      parent:
+      children:
+        - name: roadSection
+        - name: priority
+        - name: controller
+        - name: surface
+        - name: planView
     - name: roadSection
-      parent:
     - name: priority
-      parent:
     - name: junction type='default'
-      parent:
+      children:
+        - name: connection
+        - name: crossPath
+        - name: priority
+        - name: controller
+        - name: surface
+        - name: planView
+        - name: boundary
+        - name: elevationGrid
     - name: connection
-      parent:
     - name: laneLink
-      parent:
     - name: crossPath
-      parent:
     - name: startLaneLink
-      parent:
     - name: endLaneLink
-      parent:
     - name: boundary
-      parent:
     - name: segment type='joint'
-      parent:
     - name: segment type='lane'
-      parent:
     - name: elevationGrid
-      parent:
     - name: junction type='direct'
-      parent:
+      children:
+        - name: connection
+        - name: priority
+        - name: controller
+        - name: surface
+        - name: planView
     - name: junction type='virtual'
-      parent:
+      children:
+        - name: connection type='default'
+        - name: connection type='virtual'
+        - name: crossPath
+        - name: priority
+        - name: controller
+        - name: surface
+        - name: planView
     - name: connection type='default'
-      parent:
     - name: connection type='virtual'
-      parent:
     - name: junctionGroup
-      parent:
+      children:
+        - name: junctionReference
     - name: junctionReference
-      parent:
     - name: station
-      parent:
+      children:
+        - name: platform
     - name: platform
-      parent:
+      children:
+        - name: segment
     - name: segment
-      parent:
