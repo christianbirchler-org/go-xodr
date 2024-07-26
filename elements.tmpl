@@ -10,9 +10,9 @@ type Element interface {
     {{ if .Children }}
 
         type {{ .Name }} struct {
-            {{range .Children}}
-             {{.Name}} *{{.Name}}
-            {{end}}
+            {{- range .Children}}
+            {{.Name}} *{{.Name}}
+            {{- end}}
         }
 
     {{else}}

@@ -48,15 +48,29 @@ elements:
         - name: speed
     - name: speed
     - name: planView
+      children:
+        - name: geometry
     - name: geometry
+      children:
+        - name: line
+        - name: spiral
+        - name: arc
+        - name: poly3
+        - name: paramPoly3
     - name: line
     - name: spiral
     - name: arc
     - name: poly3
     - name: paramPoly3
     - name: elevationProfile
+      children:
+        - name: elevation
     - name: elevation
     - name: lateralProfile
+      children:
+        - name: superelevation
+        - name: shape
+        - name: crossSectionSurface
     - name: superelevation
     - name: shape
     - name: crossSectionSurface

@@ -6,32 +6,21 @@ type Element interface {
 }
 
 type OpenDRIVE struct {
-	Header *Header
-
-	Road *Road
-
-	Controller *Controller
-
+	Header               *Header
+	Road                 *Road
+	Controller           *Controller
 	JunctiontypeCrossing *JunctiontypeCrossing
-
-	JunctiontypeDefault *JunctiontypeDefault
-
-	JunctiontypeDirect *JunctiontypeDirect
-
-	JunctiontypeVirtual *JunctiontypeVirtual
-
-	JunctionGroup *JunctionGroup
-
-	Station *Station
+	JunctiontypeDefault  *JunctiontypeDefault
+	JunctiontypeDirect   *JunctiontypeDirect
+	JunctiontypeVirtual  *JunctiontypeVirtual
+	JunctionGroup        *JunctionGroup
+	Station              *Station
 }
 
 type Header struct {
-	GeoReference *GeoReference
-
-	Offset *Offset
-
-	License *License
-
+	GeoReference       *GeoReference
+	Offset             *Offset
+	License            *License
 	DefaultRegulations *DefaultRegulations
 }
 
@@ -45,8 +34,7 @@ type License struct {
 }
 
 type DefaultRegulations struct {
-	RoadRegulations *RoadRegulations
-
+	RoadRegulations   *RoadRegulations
 	SignalRegulations *SignalRegulations
 }
 
@@ -57,27 +45,19 @@ type SignalRegulations struct {
 }
 
 type Road struct {
-	Link *Link
-
+	Link             *Link
 	ElevationProfile *ElevationProfile
-
-	LateralProfile *LateralProfile
-
-	Lanes *Lanes
-
-	Objects *Objects
-
-	Signals *Signals
-
-	Surface *Surface
-
-	Railroad *Railroad
+	LateralProfile   *LateralProfile
+	Lanes            *Lanes
+	Objects          *Objects
+	Signals          *Signals
+	Surface          *Surface
+	Railroad         *Railroad
 }
 
 type Link struct {
 	Predecessor *Predecessor
-
-	Successor *Successor
+	Successor   *Successor
 }
 
 type Predecessor struct {
@@ -94,9 +74,15 @@ type Speed struct {
 }
 
 type PlanView struct {
+	Geometry *Geometry
 }
 
 type Geometry struct {
+	Line       *Line
+	Spiral     *Spiral
+	Arc        *Arc
+	Poly3      *Poly3
+	ParamPoly3 *ParamPoly3
 }
 
 type Line struct {
@@ -115,12 +101,16 @@ type ParamPoly3 struct {
 }
 
 type ElevationProfile struct {
+	Elevation *Elevation
 }
 
 type Elevation struct {
 }
 
 type LateralProfile struct {
+	Superelevation      *Superelevation
+	Shape               *Shape
+	CrossSectionSurface *CrossSectionSurface
 }
 
 type Superelevation struct {
@@ -318,14 +308,10 @@ type Control struct {
 
 type JunctiontypeCrossing struct {
 	RoadSection *RoadSection
-
-	Priority *Priority
-
-	Controller *Controller
-
-	Surface *Surface
-
-	PlanView *PlanView
+	Priority    *Priority
+	Controller  *Controller
+	Surface     *Surface
+	PlanView    *PlanView
 }
 
 type RoadSection struct {
@@ -335,20 +321,13 @@ type Priority struct {
 }
 
 type JunctiontypeDefault struct {
-	Connection *Connection
-
-	CrossPath *CrossPath
-
-	Priority *Priority
-
-	Controller *Controller
-
-	Surface *Surface
-
-	PlanView *PlanView
-
-	Boundary *Boundary
-
+	Connection    *Connection
+	CrossPath     *CrossPath
+	Priority      *Priority
+	Controller    *Controller
+	Surface       *Surface
+	PlanView      *PlanView
+	Boundary      *Boundary
 	ElevationGrid *ElevationGrid
 }
 
@@ -381,30 +360,20 @@ type ElevationGrid struct {
 
 type JunctiontypeDirect struct {
 	Connection *Connection
-
-	Priority *Priority
-
+	Priority   *Priority
 	Controller *Controller
-
-	Surface *Surface
-
-	PlanView *PlanView
+	Surface    *Surface
+	PlanView   *PlanView
 }
 
 type JunctiontypeVirtual struct {
 	ConnectiontypeDefault *ConnectiontypeDefault
-
 	ConnectiontypeVirtual *ConnectiontypeVirtual
-
-	CrossPath *CrossPath
-
-	Priority *Priority
-
-	Controller *Controller
-
-	Surface *Surface
-
-	PlanView *PlanView
+	CrossPath             *CrossPath
+	Priority              *Priority
+	Controller            *Controller
+	Surface               *Surface
+	PlanView              *PlanView
 }
 
 type ConnectiontypeDefault struct {
