@@ -11,13 +11,21 @@ import (
 	"unicode"
 )
 
+type Attribute struct {
+	Name        string `yaml:"name"`
+	Type        string `yaml:"type"`
+	Use         string `yaml:"use"`
+	Description string `yaml:"description"`
+}
+
 type Child struct {
 	Name string `yaml:"name"`
 }
 
 type Element struct {
-	Name     string  `yaml:"name"`
-	Children []Child `yaml:"children"`
+	Name       string      `yaml:"name"`
+	Children   []Child     `yaml:"children"`
+	Attributes []Attribute `yaml:"attributes"`
 }
 
 type OpenDriveElements struct {
@@ -50,15 +58,25 @@ func main() {
 
 	for elPos, element := range openDriveElements.Elements {
 		children := make([]Child, len(element.Children))
+		attributes := make([]Attribute, len(element.Attributes))
 		// create go names for children structs
 		for childPos, child := range element.Children {
 			children[childPos] = Child{
 				Name: goName(child.Name),
 			}
 		}
+		for attrPos, attr := range element.Attributes {
+			attributes[attrPos] = Attribute{
+				Name:        goName(attr.Name),
+				Type:        attr.Type,
+				Use:         attr.Use,
+				Description: attr.Description,
+			}
+		}
 		openDriveElements.Elements[elPos] = Element{
-			Name:     goName(element.Name),
-			Children: children,
+			Name:       goName(element.Name),
+			Children:   children,
+			Attributes: attributes,
 		}
 	}
 

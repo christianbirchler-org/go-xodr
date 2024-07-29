@@ -6,20 +6,13 @@ type Element interface {
 }
 
 {{range .Elements}}
-
-    {{ if .Children }}
-
-        type {{ .Name }} struct {
-            {{- range .Children}}
-            {{.Name}} *{{.Name}}
-            {{- end}}
-        }
-
-    {{else}}
-
-        type {{ .Name }} struct {
-        }
-
-    {{end}}
-
+    type {{ .Name }} struct {
+        {{- range .Attributes}}
+        // {{.Description}}
+        {{.Name}} {{.Type}}
+        {{- end}}
+        {{- range .Children}}
+        {{.Name}} *{{.Name}}
+        {{- end}}
+    }
 {{end}}

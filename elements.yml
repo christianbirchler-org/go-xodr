@@ -18,6 +18,42 @@ elements:
           type: string
           use: optional
           description: "Time/date of database creation according to ISO 8601 (preference: YYYY-MM-DDThh:mm:ss)"
+        - name: east
+          type: float64
+          use: optional
+          description: "Maximum inertial x value"
+        - name: name
+          type: string
+          use: optional
+          description: "Database name"
+        - name: north
+          type: float64
+          use: optional
+          description: "Maximum inertial y value"
+        - name: revMajor
+          type: int
+          use: required
+          description: "Major revision number of OpenDRIVE format"
+        - name: revMinor
+          type: int
+          use: required
+          description: "Minor revision number of OpenDRIVE format; 6 for OpenDrive 1.6"
+        - name: south
+          type: float64
+          use: optional
+          description: "Minimum inertial y value"
+        - name: vendor
+          type: string
+          use: optional
+          description: "Vendor name"
+        - name: version
+          type: string
+          use: optional
+          description: "Version of this road network"
+        - name: west
+          type: float64
+          use: optional
+          description: "Minimum inertial x value"
       children:
         - name: geoReference
         - name: offset
@@ -26,13 +62,63 @@ elements:
     - name: geoReference
     - name: offset
     - name: license
+      attributes:
+        - name: name
+          type: string
+          use: required
+          description: "The full name of the license. Informational only."
+        - name: resource
+          type: string
+          use: optional
+          description: "Link to an URL where the full license text can be found."
+        - name: spdxid
+          type: string
+          use: optional
+          description: "The identifier of the license from the SPDX license list. Can also be an SPDX License Expression, which is also applicable to custom licenses (LicenseRef-…)."
+        - name: text
+          type: string
+          use: optional
+          description: "The full license text"
+
     - name: defaultRegulations
       children:
         - name: roadRegulations
         - name: signalRegulations
     - name: roadRegulations
+      attributes:
+        - name: type
+          type: string
+          use: required
     - name: signalRegulations
+      attributes:
+        - name: subtype
+          type: string
+          use: required
+        - name: type
+          type: string
+          use: required
     - name: road
+      attributes:
+        - name: id
+          type: string
+          use: required
+          description: "Unique ID within the database. If it represents an integer number, it should comply to uint32_t and stay within the given range."
+        - name: junction
+          type: string
+          use: required
+          description: "ID of the junction to which the road belongs, for example connecting roads, cross paths, and roads of a junction boundary. Use -1 for none."
+        - name: length
+          type: int
+          use: required
+          description: "Total length of the reference line in the xy-plane. Change in length due to elevation is not considered"
+        - name: name
+          type: string
+          use: optional
+          description: "Name of the road. May be chosen freely."
+        - name: rule
+          type: string
+          use: optional
+          description: "Basic rule for using the road; RHT=right-hand traffic, LHT=left-hand traffic. When this attribute is missing, RHT is assumed."
       children:
         - name: link
         - name: elevationProfile
@@ -47,12 +133,77 @@ elements:
         - name: predecessor
         - name: successor
     - name: predecessor
+      attributes:
+        - name: contactPoint
+          type: string
+          use: optional
+          description: "Contact point of link on the linked element"
+        - name: elementDir
+          type: string
+          use: optional
+          description: "To be provided when elementS is used for the connection definition. Indicates the direction on the predecessor from which the road is entered."
+        - name: elementId
+          type: string
+          use: required
+          description: "ID of the linked element"
+        - name: elementS
+          type: int
+          use: optional
+          description: "Alternative to contactPoint for virtual junctions. Indicates a connection within the predecessor, meaning not at the start or end of the predecessor. Shall only be used for elementType 'road'"
+        - name: elementType
+          type: string
+          use: required
+          description: "Type of the linked element"
     - name: successor
+      attributes:
+        - name: contactPoint
+          type: string
+          use: optional
+          description: "Contact point of link on the linked element"
+        - name: elementDir
+          type: string
+          use: optional
+          description: "To be provided when elementS is used for the connection definition. Indicates the direction on the predecessor from which the road is entered."
+        - name: elementId
+          type: string
+          use: required
+          description: "ID of the linked element"
+        - name: elementS
+          type: int
+          use: optional
+          description: "Alternative to contactPoint for virtual junctions. Indicates a connection within the predecessor, meaning not at the start or end of the predecessor. Shall only be used for elementType 'road'"
+        - name: elementType
+          type: string
+          use: required
+          description: "Type of the linked element"
     - name: roadType
       xmlName: type
+      attributes:
+        - name: country
+          type: string
+          use: optional
+          description: "Country code of the road, see ISO 3166-1, alpha-2 codes."
+        - name: s
+          type: int
+          use: required
+          description: "s-coordinate of start position"
+        - name: type
+          type: string
+          use: required
+          description: "Type of the road defined as enumeration"
       children:
         - name: speed
     - name: speed
+      attributes:
+        - name: max
+          type: int
+          use: required
+          description: "Maximum allowed speed. Given as string (only 'no limit' / 'undefined') or numerical value in the respective unit (see attribute unit). If the attribute unit is not specified, m/s is used as default."
+        - name: unit
+          type: string
+          use: required
+          description: "Unit of the attribute max. For values, see chapter 'units'."
+
     - name: planView
       children:
         - name: geometry
@@ -72,6 +223,27 @@ elements:
       children:
         - name: elevation
     - name: elevation
+      attributes:
+        - name: a
+          type: float64
+          use: required
+          description: "Polynom parameter a, elevation at @s (ds=0)"
+        - name: b
+          type: float64
+          use: required
+          description: "Polynom parameter b"
+        - name: c
+          type: float64
+          use: required
+          description: "Polynom parameter c"
+        - name: d
+          type: float64
+          use: required
+          description: "Polynom parameter d"
+        - name: s
+          type: float64
+          use: required
+          description: "s-coordinate of start position"
     - name: lateralProfile
       children:
         - name: superelevation

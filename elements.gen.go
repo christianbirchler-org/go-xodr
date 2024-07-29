@@ -18,6 +18,26 @@ type OpenDRIVE struct {
 }
 
 type Header struct {
+	// Time/date of database creation according to ISO 8601 (preference: YYYY-MM-DDThh:mm:ss)
+	Date string
+	// Maximum inertial x value
+	East float64
+	// Database name
+	Name string
+	// Maximum inertial y value
+	North float64
+	// Major revision number of OpenDRIVE format
+	RevMajor int
+	// Minor revision number of OpenDRIVE format; 6 for OpenDrive 1.6
+	RevMinor int
+	// Minimum inertial y value
+	South float64
+	// Vendor name
+	Vendor string
+	// Version of this road network
+	Version string
+	// Minimum inertial x value
+	West               float64
 	GeoReference       *GeoReference
 	Offset             *Offset
 	License            *License
@@ -31,6 +51,14 @@ type Offset struct {
 }
 
 type License struct {
+	// The full name of the license. Informational only.
+	Name string
+	// Link to an URL where the full license text can be found.
+	Resource string
+	// The identifier of the license from the SPDX license list. Can also be an SPDX License Expression, which is also applicable to custom licenses (LicenseRef-…).
+	Spdxid string
+	// The full license text
+	Text string
 }
 
 type DefaultRegulations struct {
@@ -39,12 +67,28 @@ type DefaultRegulations struct {
 }
 
 type RoadRegulations struct {
+	//
+	Type string
 }
 
 type SignalRegulations struct {
+	//
+	Subtype string
+	//
+	Type string
 }
 
 type Road struct {
+	// Unique ID within the database. If it represents an integer number, it should comply to uint32_t and stay within the given range.
+	Id string
+	// ID of the junction to which the road belongs, for example connecting roads, cross paths, and roads of a junction boundary. Use -1 for none.
+	Junction string
+	// Total length of the reference line in the xy-plane. Change in length due to elevation is not considered
+	Length int
+	// Name of the road. May be chosen freely.
+	Name string
+	// Basic rule for using the road; RHT=right-hand traffic, LHT=left-hand traffic. When this attribute is missing, RHT is assumed.
+	Rule             string
 	Link             *Link
 	ElevationProfile *ElevationProfile
 	LateralProfile   *LateralProfile
@@ -61,16 +105,46 @@ type Link struct {
 }
 
 type Predecessor struct {
+	// Contact point of link on the linked element
+	ContactPoint string
+	// To be provided when elementS is used for the connection definition. Indicates the direction on the predecessor from which the road is entered.
+	ElementDir string
+	// ID of the linked element
+	ElementId string
+	// Alternative to contactPoint for virtual junctions. Indicates a connection within the predecessor, meaning not at the start or end of the predecessor. Shall only be used for elementType 'road'
+	ElementS int
+	// Type of the linked element
+	ElementType string
 }
 
 type Successor struct {
+	// Contact point of link on the linked element
+	ContactPoint string
+	// To be provided when elementS is used for the connection definition. Indicates the direction on the predecessor from which the road is entered.
+	ElementDir string
+	// ID of the linked element
+	ElementId string
+	// Alternative to contactPoint for virtual junctions. Indicates a connection within the predecessor, meaning not at the start or end of the predecessor. Shall only be used for elementType 'road'
+	ElementS int
+	// Type of the linked element
+	ElementType string
 }
 
 type RoadType struct {
+	// Country code of the road, see ISO 3166-1, alpha-2 codes.
+	Country string
+	// s-coordinate of start position
+	S int
+	// Type of the road defined as enumeration
+	Type  string
 	Speed *Speed
 }
 
 type Speed struct {
+	// Maximum allowed speed. Given as string (only 'no limit' / 'undefined') or numerical value in the respective unit (see attribute unit). If the attribute unit is not specified, m/s is used as default.
+	Max int
+	// Unit of the attribute max. For values, see chapter 'units'.
+	Unit string
 }
 
 type PlanView struct {
@@ -105,6 +179,16 @@ type ElevationProfile struct {
 }
 
 type Elevation struct {
+	// Polynom parameter a, elevation at @s (ds=0)
+	A float64
+	// Polynom parameter b
+	B float64
+	// Polynom parameter c
+	C float64
+	// Polynom parameter d
+	D float64
+	// s-coordinate of start position
+	S float64
 }
 
 type LateralProfile struct {
