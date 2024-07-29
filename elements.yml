@@ -13,6 +13,11 @@ elements:
         - name: junctionGroup
         - name: station
     - name: header
+      attributes:
+        - name: date
+          type: string
+          use: optional
+          description: "Time/date of database creation according to ISO 8601 (preference: YYYY-MM-DDThh:mm:ss)"
       children:
         - name: geoReference
         - name: offset
@@ -112,6 +117,8 @@ elements:
         - name: height
         - name: rule
     - name: border
+      children:
+        - name: cornerReference
     - name: roadMark
       children:
         - name: sway
@@ -158,30 +165,68 @@ elements:
     - name: cornerRoad
     - name: cornerLocal
     - name: outlines
+      children:
+        - name: outline
     - name: validity
     - name: parkingSpace
     - name: markings
+      children:
+        - name: marking
     - name: marking
+      children:
+        - name: cornerReference
     - name: cornerReference
     - name: borders
+      children:
+        - name: border
     - name: surface
+      children:
+        - name: CRG
     - name: skeleton
+      children:
+        - name: polyline
     - name: polyline
+      children:
+        - name: vertexRoad
+        - name: vertexLocal
     - name: vertexRoad
     - name: vertexLocal
     - name: objectReference
+      children:
+        - name: validity
     - name: tunnel
+      children:
+        - name: validity
     - name: bridge
+      children:
+        - name: validity
     - name: signals
+      children:
+        - name: signal
+        - name: signalReference
     - name: signal
+      children:
+        - name: positionInertial
+        - name: positionRoad
+        - name: validity
+        - name: dependency
+        - name: reference
     - name: positionInertial
     - name: positionRoad
     - name: dependency
     - name: reference
     - name: signalReference
+      children:
+        - name: validity
     - name: CRG
     - name: railroad
+      children:
+        - name: switch
     - name: switch
+      children:
+        - name: mainTrack
+        - name: sideTrack
+        - name: partner
     - name: mainTrack
     - name: sideTrack
     - name: partner
@@ -209,14 +254,24 @@ elements:
         - name: boundary
         - name: elevationGrid
     - name: connection
+      children:
+        - name: laneLink
     - name: laneLink
     - name: crossPath
+      children:
+        - name: startLaneLink
+        - name: endLaneLink
     - name: startLaneLink
     - name: endLaneLink
     - name: boundary
+      children:
+        - name: segment type='joint'
+        - name: segment type='lane'
     - name: segment type='joint'
     - name: segment type='lane'
     - name: elevationGrid
+      children:
+        - name: elevation
     - name: junction type='direct'
       children:
         - name: connection
@@ -234,7 +289,13 @@ elements:
         - name: surface
         - name: planView
     - name: connection type='default'
+      children:
+        - name: laneLink
     - name: connection type='virtual'
+      children:
+        - name: predecessor
+        - name: successor
+        - name: laneLink
     - name: junctionGroup
       children:
         - name: junctionReference

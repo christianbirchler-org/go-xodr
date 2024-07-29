@@ -182,6 +182,7 @@ type Lane struct {
 }
 
 type Border struct {
+	CornerReference *CornerReference
 }
 
 type RoadMark struct {
@@ -257,6 +258,7 @@ type CornerLocal struct {
 }
 
 type Outlines struct {
+	Outline *Outline
 }
 
 type Validity struct {
@@ -266,24 +268,31 @@ type ParkingSpace struct {
 }
 
 type Markings struct {
+	Marking *Marking
 }
 
 type Marking struct {
+	CornerReference *CornerReference
 }
 
 type CornerReference struct {
 }
 
 type Borders struct {
+	Border *Border
 }
 
 type Surface struct {
+	CRG *CRG
 }
 
 type Skeleton struct {
+	Polyline *Polyline
 }
 
 type Polyline struct {
+	VertexRoad  *VertexRoad
+	VertexLocal *VertexLocal
 }
 
 type VertexRoad struct {
@@ -293,18 +302,28 @@ type VertexLocal struct {
 }
 
 type ObjectReference struct {
+	Validity *Validity
 }
 
 type Tunnel struct {
+	Validity *Validity
 }
 
 type Bridge struct {
+	Validity *Validity
 }
 
 type Signals struct {
+	Signal          *Signal
+	SignalReference *SignalReference
 }
 
 type Signal struct {
+	PositionInertial *PositionInertial
+	PositionRoad     *PositionRoad
+	Validity         *Validity
+	Dependency       *Dependency
+	Reference        *Reference
 }
 
 type PositionInertial struct {
@@ -320,15 +339,20 @@ type Reference struct {
 }
 
 type SignalReference struct {
+	Validity *Validity
 }
 
 type CRG struct {
 }
 
 type Railroad struct {
+	Switch *Switch
 }
 
 type Switch struct {
+	MainTrack *MainTrack
+	SideTrack *SideTrack
+	Partner   *Partner
 }
 
 type MainTrack struct {
@@ -373,12 +397,15 @@ type JunctiontypeDefault struct {
 }
 
 type Connection struct {
+	LaneLink *LaneLink
 }
 
 type LaneLink struct {
 }
 
 type CrossPath struct {
+	StartLaneLink *StartLaneLink
+	EndLaneLink   *EndLaneLink
 }
 
 type StartLaneLink struct {
@@ -388,6 +415,8 @@ type EndLaneLink struct {
 }
 
 type Boundary struct {
+	SegmenttypeJoint *SegmenttypeJoint
+	SegmenttypeLane  *SegmenttypeLane
 }
 
 type SegmenttypeJoint struct {
@@ -397,6 +426,7 @@ type SegmenttypeLane struct {
 }
 
 type ElevationGrid struct {
+	Elevation *Elevation
 }
 
 type JunctiontypeDirect struct {
@@ -418,9 +448,13 @@ type JunctiontypeVirtual struct {
 }
 
 type ConnectiontypeDefault struct {
+	LaneLink *LaneLink
 }
 
 type ConnectiontypeVirtual struct {
+	Predecessor *Predecessor
+	Successor   *Successor
+	LaneLink    *LaneLink
 }
 
 type JunctionGroup struct {
