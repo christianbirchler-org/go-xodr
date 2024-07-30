@@ -21,6 +21,9 @@ jobs:
       with:
         go-version: '1.22'
 
+    - name: Download
+      run: go get github.com/christianbirchler-org/go-xodr
+
     - name: Build
       run: go build -v ./...
 

@@ -193,6 +193,21 @@ elements:
           description: "Type of the road defined as enumeration"
       children:
         - name: speed
+    - name: laneSpeed
+      xmlName: speed
+      attributes:
+        - name: max
+          type: float64
+          use: required
+          description: "Maximum allowed speed. If the attribute unit is not specified, m/s is used as default."
+        - name: sOffset
+          type: float64
+          use: required
+          description: "s-coordinate of start position, relative to the position of the preceding <laneSection> element"
+        - name: unit
+          type: string
+          use: optional
+          description: "Unit of the attribute max"
     - name: speed
       attributes:
         - name: max
@@ -215,6 +230,58 @@ elements:
         - name: poly3
         - name: paramPoly3
     - name: line
+      attributes:
+        - name: color
+          type: string
+          use: optional
+          description: "Line color. If given, this attribute supersedes the definition in the <roadMark> element."
+        - name: length
+          type: float64
+          use: required
+          description: "Length of the visible part"
+        - name: rule
+          type: string
+          use: optional
+          description: "Rule that must be observed when passing the line from inside, for example, from the lane with the lower absolute ID to the lane with the higher absolute ID"
+        - name: sOffset
+          type: float64
+          use: required
+          description: "Initial longitudinal offset of the line definition from the start of the road mark definition"
+        - name: space
+          type: float64
+          use: required
+          description: "Length of the gap between the visible parts"
+        - name: tOffset
+          type: float64
+          use: required
+          description: "Lateral offset from the lane border. If <sway> element is present, the lateral offset follows the sway."
+        - name: width
+          type: float64
+          use: optional
+          description: "Line width"
+    - name: explicitLine
+      xmlName: line
+      attributes:
+        - name: length
+          type: float64
+          use: required
+          description: "Length of the visible line"
+        - name: rule
+          type: string
+          use: optional
+          description: "Rule that must be observed when passing the line from inside, that is, from the lane with the lower absolute ID to the lane with the higher absolute ID"
+        - name: sOffset
+          type: float64
+          use: required
+          description: "Offset of start position of the <line> element, relative to the @sOffset given in the <roadMark> element"
+        - name: tOffset
+          type: float64
+          use: required
+          description: "Lateral offset from the lane border. If <sway> element is present, the lateral offset follows the sway."
+        - name: width
+          type: float64
+          use: optional
+          description: "Line width. This attribute supersedes the definition in the <roadMark> element."
     - name: spiral
     - name: arc
     - name: poly3
@@ -336,6 +403,27 @@ elements:
           use: optional
           description: "Can only be defined for an outer strip."
     - name: width
+      attributes:
+        - name: a
+          type: float64
+          use: required
+          description: "Polynom parameter a, width at @s (ds=0)"
+        - name: b
+          type: float64
+          use: required
+          description: "Polynom parameter b"
+        - name: c
+          type: float64
+          use: required
+          description: "Polynom parameter c"
+        - name: d
+          type: float64
+          use: required
+          description: "Polynom parameter d"
+        - name: sOffset
+          type: float64
+          use: required
+          description: "s-coordinate of start position of the <width> element, relative to the position of the preceding <laneSection> element"
     - name: constant
     - name: linear
     - name: quadratic
@@ -345,6 +433,27 @@ elements:
         - name: laneOffset
         - name: laneSection
     - name: laneOffset
+      attributes:
+        - name: a
+          type: float64
+          use: required
+          description: "Polynom parameter a, offset at @s (ds=0)"
+        - name: b
+          type: float64
+          use: required
+          description: "Polynom parameter b"
+        - name: c
+          type: float64
+          use: required
+          description: "Polynom parameter c"
+        - name: d
+          type: float64
+          use: required
+          description: "Polynom parameter d"
+        - name: s
+          type: float64
+          use: required
+          description: "s-coordinate of start position"
     - name: laneSection
       attributes:
         - name: s
@@ -407,26 +516,167 @@ elements:
         - name: height
         - name: rule
     - name: border
+      attributes:
+        - name: a
+          type: float64
+          use: required
+          description: "Polynom parameter a, width at @s (ds=0)"
+        - name: b
+          type: float64
+          use: required
+          description: "Polynom parameter b"
+        - name: c
+          type: float64
+          use: required
+          description: "Polynom parameter c"
+        - name: d
+          type: float64
+          use: required
+          description: "Polynom parameter d"
+        - name: sOffset
+          type: float64
+          use: required
+          description: "s-coordinate of start position of the <border> element , relative to the position of the preceding <laneSection> element"
       children:
         - name: cornerReference
     - name: roadMark
+      attributes:
+        - name: color
+          type: string
+          use: required
+          description: "Color of the road mark"
+        - name: height
+          type: float64
+          use: optional
+          description: "Height of road mark above the road, i.e. thickness of the road mark"
+        - name: laneChange
+          type: string
+          use: optional
+          description: "Allows a lane change in the indicated direction, taking into account that lanes are numbered in ascending order from right to left. If the attribute is missing, “both” is used as default."
+        - name: material
+          type: string
+          use: optional
+          description: "Material of the road mark. Identifiers to be defined by the user, use 'standard' as default value."
+        - name: sOffset
+          type: float64
+          use: required
+          description: "s-coordinate of start position of the <roadMark> element, relative to the position of the preceding <laneSection> element"
+        - name: type
+          type: string
+          use: required
+          description: "Type of the road mark"
+        - name: weight
+          type: string
+          use: optional
+          description: "Weight of the road mark. This attribute is optional if detailed definition is given below."
+        - name: width
+          type: float64
+          use: optional
+          description: "Width of the road mark. This attribute is optional if detailed definition is given by <line> element."
       children:
         - name: sway
         - name: roadMarkType
         - name: explicit
     - name: sway
+      attributes:
+        - name: a
+          type: float64
+          use: required
+          description: "Polynom parameter a, sway value at @s (ds=0)"
+        - name: b
+          type: float64
+          use: required
+          description: "Polynom parameter b"
+        - name: c
+          type: float64
+          use: required
+          description: "Polynom parameter c"
+        - name: d
+          type: float64
+          use: required
+          description: "Polynom parameter d"
+        - name: ds
+          type: float64
+          use: required
+          description: "s-coordinate of start position of the <sway> element, relative to the @sOffset given in the <roadMark> element"
     - name: roadMarkType
       xmlName: type
+      attributes:
+        - name: name
+          type: string
+          use: required
+          description: "Name of the road mark type. May be chosen freely."
+        - name: width
+          type: float64
+          use: required
+          description: "Accumulated width of the road mark. In case of several <line> elements this @width is the sum of all @width of <line> elements and spaces in between, necessary to form the road mark. This attribute supersedes the definition in the <roadMark> element."
       children:
         - name: line
     - name: explicit
       children:
         - name: line
     - name: material
+      attributes:
+        - name: friction
+          type: float64
+          use: required
+          description: "Friction coefficient"
+        - name: roughness
+          type: float64
+          use: optional
+          description: "Roughness, for example, for sound and motion systems"
+        - name: sOffset
+          type: float64
+          use: required
+          description: "s-coordinate of start position, relative to the position of the preceding <laneSection> element"
+        - name: surface
+          type: string
+          use: optional
+          description: "Surface material code, depending on application"
     - name: access
+      attributes:
+        - name: restriction
+          type: string
+          use: optional
+          description: "Identifier of the participant to whom the restriction applies"
+        - name: rule
+          type: string
+          use: optional
+          description: "Specifies whether the participant given in the attribute @restriction is allowed or denied access to the given lane"
+        - name: sOffset
+          type: float64
+          use: required
+          description: "s-coordinate of start position, relative to the position of the preceding <laneSection> element"
     - name: restriction
+      attributes:
+        - name: type
+          type: string
+          use: required
+          description: "Identifier of the participant to whom the restriction applies"
     - name: height
+      attributes:
+        - name: inner
+          type: float64
+          use: required
+          description: "Inner offset from road level"
+        - name: outer
+          type: float64
+          use: required
+          description: "Outer offset from road level"
+        - name: sOffset
+          type: float64
+          use: required
+          description: "s-coordinate of start position, relative to the position of the preceding <laneSection> element"
     - name: rule
+      attributes:
+        - name: sOffset
+          type: float64
+          use: required
+          description: "s-coordinate of start position, relative to the position of the preceding <laneSection> element"
+        - name: value
+          type: string
+          use: required
+          description: "Free text; currently recommended values are 'no stopping at any time', 'disabled parking', 'car pool'"
     - name: center
     - name: right
     - name: objects

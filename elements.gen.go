@@ -140,6 +140,15 @@ type RoadType struct {
 	Speed *Speed
 }
 
+type LaneSpeed struct {
+	// Maximum allowed speed. If the attribute unit is not specified, m/s is used as default.
+	Max float64
+	// s-coordinate of start position, relative to the position of the preceding <laneSection> element
+	SOffset float64
+	// Unit of the attribute max
+	Unit string
+}
+
 type Speed struct {
 	// Maximum allowed speed. Given as string (only 'no limit' / 'undefined') or numerical value in the respective unit (see attribute unit). If the attribute unit is not specified, m/s is used as default.
 	Max int
@@ -160,6 +169,33 @@ type Geometry struct {
 }
 
 type Line struct {
+	// Line color. If given, this attribute supersedes the definition in the <roadMark> element.
+	Color string
+	// Length of the visible part
+	Length float64
+	// Rule that must be observed when passing the line from inside, for example, from the lane with the lower absolute ID to the lane with the higher absolute ID
+	Rule string
+	// Initial longitudinal offset of the line definition from the start of the road mark definition
+	SOffset float64
+	// Length of the gap between the visible parts
+	Space float64
+	// Lateral offset from the lane border. If <sway> element is present, the lateral offset follows the sway.
+	TOffset float64
+	// Line width
+	Width float64
+}
+
+type ExplicitLine struct {
+	// Length of the visible line
+	Length float64
+	// Rule that must be observed when passing the line from inside, that is, from the lane with the lower absolute ID to the lane with the higher absolute ID
+	Rule string
+	// Offset of start position of the <line> element, relative to the @sOffset given in the <roadMark> element
+	SOffset float64
+	// Lateral offset from the lane border. If <sway> element is present, the lateral offset follows the sway.
+	TOffset float64
+	// Line width. This attribute supersedes the definition in the <roadMark> element.
+	Width float64
 }
 
 type Spiral struct {
@@ -257,6 +293,16 @@ type Strip struct {
 }
 
 type Width struct {
+	// Polynom parameter a, width at @s (ds=0)
+	A float64
+	// Polynom parameter b
+	B float64
+	// Polynom parameter c
+	C float64
+	// Polynom parameter d
+	D float64
+	// s-coordinate of start position of the <width> element, relative to the position of the preceding <laneSection> element
+	SOffset float64
 }
 
 type Constant struct {
@@ -277,6 +323,16 @@ type Lanes struct {
 }
 
 type LaneOffset struct {
+	// Polynom parameter a, offset at @s (ds=0)
+	A float64
+	// Polynom parameter b
+	B float64
+	// Polynom parameter c
+	C float64
+	// Polynom parameter d
+	D float64
+	// s-coordinate of start position
+	S float64
 }
 
 type LaneSection struct {
@@ -322,20 +378,60 @@ type Lane struct {
 }
 
 type Border struct {
+	// Polynom parameter a, width at @s (ds=0)
+	A float64
+	// Polynom parameter b
+	B float64
+	// Polynom parameter c
+	C float64
+	// Polynom parameter d
+	D float64
+	// s-coordinate of start position of the <border> element , relative to the position of the preceding <laneSection> element
+	SOffset         float64
 	CornerReference *CornerReference
 }
 
 type RoadMark struct {
+	// Color of the road mark
+	Color string
+	// Height of road mark above the road, i.e. thickness of the road mark
+	Height float64
+	// Allows a lane change in the indicated direction, taking into account that lanes are numbered in ascending order from right to left. If the attribute is missing, “both” is used as default.
+	LaneChange string
+	// Material of the road mark. Identifiers to be defined by the user, use 'standard' as default value.
+	Material string
+	// s-coordinate of start position of the <roadMark> element, relative to the position of the preceding <laneSection> element
+	SOffset float64
+	// Type of the road mark
+	Type string
+	// Weight of the road mark. This attribute is optional if detailed definition is given below.
+	Weight string
+	// Width of the road mark. This attribute is optional if detailed definition is given by <line> element.
+	Width        float64
 	Sway         *Sway
 	RoadMarkType *RoadMarkType
 	Explicit     *Explicit
 }
 
 type Sway struct {
+	// Polynom parameter a, sway value at @s (ds=0)
+	A float64
+	// Polynom parameter b
+	B float64
+	// Polynom parameter c
+	C float64
+	// Polynom parameter d
+	D float64
+	// s-coordinate of start position of the <sway> element, relative to the @sOffset given in the <roadMark> element
+	Ds float64
 }
 
 type RoadMarkType struct {
-	Line *Line
+	// Name of the road mark type. May be chosen freely.
+	Name string
+	// Accumulated width of the road mark. In case of several <line> elements this @width is the sum of all @width of <line> elements and spaces in between, necessary to form the road mark. This attribute supersedes the definition in the <roadMark> element.
+	Width float64
+	Line  *Line
 }
 
 type Explicit struct {
@@ -343,18 +439,44 @@ type Explicit struct {
 }
 
 type Material struct {
+	// Friction coefficient
+	Friction float64
+	// Roughness, for example, for sound and motion systems
+	Roughness float64
+	// s-coordinate of start position, relative to the position of the preceding <laneSection> element
+	SOffset float64
+	// Surface material code, depending on application
+	Surface string
 }
 
 type Access struct {
+	// Identifier of the participant to whom the restriction applies
+	Restriction string
+	// Specifies whether the participant given in the attribute @restriction is allowed or denied access to the given lane
+	Rule string
+	// s-coordinate of start position, relative to the position of the preceding <laneSection> element
+	SOffset float64
 }
 
 type Restriction struct {
+	// Identifier of the participant to whom the restriction applies
+	Type string
 }
 
 type Height struct {
+	// Inner offset from road level
+	Inner float64
+	// Outer offset from road level
+	Outer float64
+	// s-coordinate of start position, relative to the position of the preceding <laneSection> element
+	SOffset float64
 }
 
 type Rule struct {
+	// s-coordinate of start position, relative to the position of the preceding <laneSection> element
+	SOffset float64
+	// Free text; currently recommended values are 'no stopping at any time', 'disabled parking', 'car pool'
+	Value string
 }
 
 type Center struct {
