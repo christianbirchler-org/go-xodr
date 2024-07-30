@@ -280,9 +280,13 @@ type LaneOffset struct {
 }
 
 type LaneSection struct {
-	Left   *Left
-	Center *Center
-	Right  *Right
+	// s-coordinate of start position
+	S float64
+	// Lane section element is valid for one side only (left, center, or right), depending on the child elements.
+	SingleSide string
+	Left       *Left
+	Center     *Center
+	Right      *Right
 }
 
 type Left struct {

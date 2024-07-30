@@ -346,6 +346,15 @@ elements:
         - name: laneSection
     - name: laneOffset
     - name: laneSection
+      attributes:
+        - name: s
+          type: float64
+          use: required
+          description: "s-coordinate of start position"
+        - name: singleSide
+          type: string
+          use: optional
+          description: "Lane section element is valid for one side only (left, center, or right), depending on the child elements."
       children:
         - name: left
         - name: center
