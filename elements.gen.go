@@ -198,9 +198,31 @@ type LateralProfile struct {
 }
 
 type Superelevation struct {
+	// Polynom parameter a, superelevation at @s (ds=0)
+	A float64
+	// Polynom parameter b
+	B float64
+	// Polynom parameter c
+	C float64
+	// Polynom parameter d
+	D float64
+	// s-coordinate of start position
+	S float64
 }
 
 type Shape struct {
+	// Polynom parameter a, relative height at @t (dt=0)
+	A float64
+	// Polynom parameter b
+	B float64
+	// Polynom parameter c
+	C float64
+	// Polynom parameter d
+	D float64
+	// s-coordinate of start position
+	S float64
+	// t-coordinate of start position
+	T float64
 }
 
 type CrossSectionSurface struct {
@@ -212,12 +234,26 @@ type TOffset struct {
 }
 
 type Coefficients struct {
+	// Polynomial parameter a. If the attribute is not specified, the value is 0.
+	A float64
+	// Polynomial parameter b. If the attribute is not specified, the value is 0.
+	B float64
+	// Polynomial parameter c. If the attribute is not specified, the value is 0.
+	C float64
+	// Polynomial parameter d. If the attribute is not specified, the value is 0.
+	D float64
+	// s-coordinate of start position
+	S float64
 }
 
 type SurfaceStrips struct {
 }
 
 type Strip struct {
+	// 1 for the inner left strip, -1 for the inner right strip, 2 for the outer left strip, -2 for the outer right strip
+	Id int
+	// Can only be defined for an outer strip.
+	Mode string
 }
 
 type Width struct {
@@ -254,6 +290,22 @@ type Left struct {
 }
 
 type Lane struct {
+	// If true, lane can be used also by a neighboring lane. Advisory lane has priority, for example a bike lane, that can also be used by cars. If not specified, default value is none.
+	Advisory string
+	// If not specified, direction is determined by the combination of <left> or <right> lane grouping and the values LHT or RHT of the @rule attribute of a road. The standard direction can be overwritten with this attribute.
+	Direction string
+	// If true, lane direction can be changed dynamically by the scenario during the simulation. If not specified, default boolean value is false.
+	DynamicLaneDirection string
+	// If true, lane type can be changed dynamically by the scenario during the simulation. Typical example is a stop lane that can be changed by VMS boards to a driving lane. If not specified, default boolean value is false.
+	DynamicLaneType string
+	// ID of the lane
+	Id int
+	// 'true' = keep lane on level, that is, do not apply superelevation; 'false' = apply superelevation to this lane (default, also used if attribute level is missing)
+	Level string
+	// If true, lane is under construction.
+	RoadWorks string
+	// Type of the lane
+	Type     string
 	Width    *Width
 	Border   *Border
 	Link     *Link
@@ -427,6 +479,28 @@ type SignalReference struct {
 }
 
 type CRG struct {
+	// Name of the file containing the CRG data
+	File string
+	// Heading offset between CRG center line and reference line of the road (only allowed for mode genuine, default = 0.0).
+	HOffset float64
+	// Attachment mode for the surface data, see specification.
+	Mode string
+	// Orientation of the CRG data set relative to the parent <road> element. Only allowed for mode attached and attached0.
+	Orientation string
+	// Physical purpose of the data contained in the CRG file; if the attribute is missing, data will be interpreted as elevation data.
+	Purpose string
+	// End of the application of CRG (s-coordinate)
+	SEnd float64
+	// s-offset between CRG center line and reference line of the road (default = 0.0)
+	SOffset float64
+	// Start of the application of CRG data (s-coordinate)
+	SStart float64
+	// t-offset between CRG center line and reference line of the road (default = 0.0)
+	TOffset float64
+	// z-offset between CRG center line and reference line of the road (default = 0.0). Only allowed for purpose elevation.
+	ZOffset float64
+	// z-scale factor for the surface description (default = 1.0). Only allowed for purpose elevation.
+	ZScale float64
 }
 
 type Railroad struct {
