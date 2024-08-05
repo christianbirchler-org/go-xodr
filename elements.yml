@@ -6,10 +6,10 @@ elements:
         - name: header
         - name: road
         - name: controller
-        - name: junction type='crossing'
-        - name: junction type='default'
-        - name: junction type='direct'
-        - name: junction type='virtual'
+        - name: junctionCrossing
+        - name: junctionDefault
+        - name: junctionDirect
+        - name: junctionVirtual
         - name: junctionGroup
         - name: station
     - name: header
@@ -819,7 +819,8 @@ elements:
       children:
         - name: control
     - name: control
-    - name: junction type='crossing'
+    - name: junctionCrossing
+      xmlTag: junction type='crossing'
       children:
         - name: roadSection
         - name: priority
@@ -828,7 +829,30 @@ elements:
         - name: planView
     - name: roadSection
     - name: priority
-    - name: junction type='default'
+      attributes:
+        - name: high
+          type: string
+          use: required
+          description: "ID of the prioritized road"
+        - name: low
+          type: string
+          use: required
+          description: "ID of the road with lower priority"
+    - name: junctionDefault
+      xmlTag: junction type='default'
+      attributes:
+        - name: id
+          type: string
+          use: required
+          description: "ID of the junction to which the road belongs, for example connecting roads, cross paths, and roads of a junction boundary. Use -1 for none."
+        - name: name
+          type: string
+          use: optional
+          description: "Name of the junction. May be chosen freely."
+        - name: type
+          type: string
+          use: optional
+          description: "Common junctions are of type 'default'. If the attribute is not specified, the junction type is 'default'. This attribute is mandatory for all other junction types."
       children:
         - name: connection
         - name: crossPath
@@ -838,16 +862,111 @@ elements:
         - name: planView
         - name: boundary
         - name: elevationGrid
-    - name: connection
+    - name: junctionConnectionDirect
+      xmlTag: connection
+      attributes:
+        - name: contactPoint
+          type: string
+          use: optional
+          description: "Contact point on the @connectingRoad or @linkedRoad. Required for all junction types except virtual."
+        - name: id
+          type: string
+          use: required
+          description: "Unique ID within the junction"
+        - name: incomingRoad
+          type: string
+          use: optional
+          description: "ID of the incoming road. Required for all junction types except virtual."
+        - name: linkedRoad
+          type: string
+          use: optional
+          description: "ID of the directly linked road. Only to be used for junctions of @type='direct'."
       children:
-        - name: laneLink
-    - name: laneLink
+        - name: junctionConnectionLaneLink
+    - name: connection
+      attributes:
+        - name: connectingRoad
+          type: string
+          use: required
+          description: "ID of the connecting road. Only to be used for junctions of @type='default'."
+        - name: contactPoint
+          type: string
+          use: optional
+          description: "Contact point on the @connectingRoad or @linkedRoad. Required for all junction types except virtual."
+        - name: id
+          type: string
+          use: required
+          description: "Unique ID within the junction"
+        - name: incomingRoad
+          type: string
+          use: optional
+          description: "ID of the incoming road. Required for all junction types except virtual."
+      children:
+        - name: junctionConnectionLaneLink
+    - name: junctionConnectionLaneLink
+      xmlTag: laneLink
+      attributes:
+        - name: from
+          type: int
+          use: required
+          description: "ID of the incoming lane"
+        - name: overlapZone
+          type: float64
+          use: optional
+          description: "Specifies the length of the area where traffic from both overlapping lanes shares the space. It is defined in s length relative to the position of the junction. Intended for direct junctions only. Default is 100."
+        - name: to
+          type: int
+          use: required
+          description: "ID of the connection lane"
     - name: crossPath
+      attributes:
+        - name: crossingRoad
+          type: string
+          use: required
+          description: "ID of road defining the cross path."
+        - name: id
+          type: string
+          use: required
+          description: "Unique ID within the junction"
+        - name: roadAtEnd
+          type: string
+          use: required
+          description: "ID of road at end point of the crossing road"
+        - name: roadAtStart
+          type: string
+          use: required
+          description: "ID of road at start point of the crossing road"
       children:
         - name: startLaneLink
         - name: endLaneLink
     - name: startLaneLink
+      attributes:
+        - name: from
+          type: int
+          use: required
+          description: "Lane ID of either @roadAtEnd for <endLaneLink> or @roadAtStart for <startLaneLink>"
+        - name: s
+          type: float64
+          use: required
+          description: "s-coordinate of either start or end point in linked road."
+        - name: to
+          type: int
+          use: required
+          description: "Lane ID of @crossingRoad"
     - name: endLaneLink
+      attributes:
+        - name: from
+          type: int
+          use: required
+          description: "Lane ID of either @roadAtEnd for <endLaneLink> or @roadAtStart for <startLaneLink>"
+        - name: s
+          type: float64
+          use: required
+          description: "s-coordinate of either start or end point in linked road."
+        - name: to
+          type: int
+          use: required
+          description: "Lane ID of @crossingRoad"
     - name: boundary
       children:
         - name: segment type='joint'
@@ -857,30 +976,116 @@ elements:
     - name: elevationGrid
       children:
         - name: elevation
-    - name: junction type='direct'
+    - name: junctionDirect
+      xmlTag: junction type='direct'
+      attributes:
+        - name: id
+          type: string
+          use: required
+          description: "ID of the junction to which the road belongs, for example connecting roads, cross paths, and roads of a junction boundary. Use -1 for none."
+        - name: name
+          type: string
+          use: optional
+          description: "Name of the junction. May be chosen freely."
+        - name: type
+          type: string
+          use: optional
+          description: "Common junctions are of type 'default'. If the attribute is not specified, the junction type is 'default'. This attribute is mandatory for all other junction types."
       children:
         - name: connection
         - name: priority
         - name: controller
         - name: surface
         - name: planView
-    - name: junction type='virtual'
+    - name: junctionVirtual
+      xmlTag: junction type='virtual'
+      attributes:
+        - name: id
+          type: string
+          use: required
+          description: "ID of the junction to which the road belongs, for example connecting roads, cross paths, and roads of a junction boundary. Use -1 for none."
+        - name: mainRoad
+          type: string
+          use: required
+          description: "The main road from which the connecting roads of the virtual junction branch off. This attribute is mandatory for virtual junctions and shall not be specified for other junction types."
+        - name: name
+          type: string
+          use: optional
+          description: "Name of the junction. May be chosen freely."
+        - name: orientation
+          type: string
+          use: required
+          description: "Defines the relevance of the virtual junction according to the driving direction. This attribute is mandatory for virtual junctions and shall not be specified for other junction types. The enumerator 'none' specifies that the virtual junction is valid in both directions."
+        - name: sEnd
+          type: float64
+          use: required
+          description: "End position of the virtual junction in the reference line coordinate system. This attribute is mandatory for virtual junctions."
+        - name: sStart
+          type: float64
+          use: required
+          description: "Start position of the virtual junction in the reference line coordinate system. This attribute is mandatory for virtual junctions."
+        - name: type
+          type: string
+          use: required
+          description: "Common junctions are of type 'default'. If the attribute is not specified, the junction type is 'default'. This attribute is mandatory for all other junction types."
       children:
-        - name: connection type='default'
-        - name: connection type='virtual'
+        - name: junctionConnectionDefault
+        - name: junctionConnectionVirtual
         - name: crossPath
         - name: priority
         - name: controller
         - name: surface
         - name: planView
-    - name: connection type='default'
+    - name: junctionConnectionDefault
+      xmlTag: connection type='default'
+      attributes:
+        - name: connectingRoad
+          type: string
+          use: required
+        - name: contactPoint
+          type: string
+          use: optional
+          description: "Contact point on the @connectingRoad or @linkedRoad. Required for all junction types except virtual."
+        - name: id
+          type: string
+          use: required
+          description: "Unique ID within the junction"
+        - name: incomingRoad
+          type: string
+          use: optional
+          description: "ID of the incoming road. Required for all junction types except virtual."
+        - name: type
+          type: string
+          use: optional
+          description: "Type of the connection. Regular connections are @type=“default” . This attribute is mandatory for virtual connections."
       children:
-        - name: laneLink
-    - name: connection type='virtual'
+        - name: junctionConnectionLaneLink
+    - name: junctionConnectionVirtual
+      xmlTag: connection type='virtual'
+      attributes:
+        - name: connectingRoad
+          type: string
+          use: required
+        - name: contactPoint
+          type: string
+          use: optional
+          description: "Contact point on the @connectingRoad or @linkedRoad. Required for all junction types except virtual."
+        - name: id
+          type: string
+          use: required
+          description: "Unique ID within the junction"
+        - name: incomingRoad
+          type: string
+          use: optional
+          description: "ID of the incoming road. Required for all junction types except virtual."
+        - name: type
+          type: string
+          use: required
+          description: "Type of the connection. Regular connections are @type=“default” . This attribute is mandatory for virtual connections."
       children:
         - name: predecessor
         - name: successor
-        - name: laneLink
+        - name: junctionConnectionLaneLink
     - name: junctionGroup
       children:
         - name: junctionReference

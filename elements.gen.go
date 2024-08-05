@@ -6,15 +6,15 @@ type Element interface {
 }
 
 type OpenDRIVE struct {
-	Header               *Header
-	Road                 *Road
-	Controller           *Controller
-	JunctiontypeCrossing *JunctiontypeCrossing
-	JunctiontypeDefault  *JunctiontypeDefault
-	JunctiontypeDirect   *JunctiontypeDirect
-	JunctiontypeVirtual  *JunctiontypeVirtual
-	JunctionGroup        *JunctionGroup
-	Station              *Station
+	Header           *Header
+	Road             *Road
+	Controller       *Controller
+	JunctionCrossing *JunctionCrossing
+	JunctionDefault  *JunctionDefault
+	JunctionDirect   *JunctionDirect
+	JunctionVirtual  *JunctionVirtual
+	JunctionGroup    *JunctionGroup
+	Station          *Station
 }
 
 type Header struct {
@@ -655,7 +655,7 @@ type Controller struct {
 type Control struct {
 }
 
-type JunctiontypeCrossing struct {
+type JunctionCrossing struct {
 	RoadSection *RoadSection
 	Priority    *Priority
 	Controller  *Controller
@@ -667,9 +667,19 @@ type RoadSection struct {
 }
 
 type Priority struct {
+	// ID of the prioritized road
+	High string
+	// ID of the road with lower priority
+	Low string
 }
 
-type JunctiontypeDefault struct {
+type JunctionDefault struct {
+	// ID of the junction to which the road belongs, for example connecting roads, cross paths, and roads of a junction boundary. Use -1 for none.
+	Id string
+	// Name of the junction. May be chosen freely.
+	Name string
+	// Common junctions are of type 'default'. If the attribute is not specified, the junction type is 'default'. This attribute is mandatory for all other junction types.
+	Type          string
 	Connection    *Connection
 	CrossPath     *CrossPath
 	Priority      *Priority
@@ -680,22 +690,68 @@ type JunctiontypeDefault struct {
 	ElevationGrid *ElevationGrid
 }
 
-type Connection struct {
-	LaneLink *LaneLink
+type JunctionConnectionDirect struct {
+	// Contact point on the @connectingRoad or @linkedRoad. Required for all junction types except virtual.
+	ContactPoint string
+	// Unique ID within the junction
+	Id string
+	// ID of the incoming road. Required for all junction types except virtual.
+	IncomingRoad string
+	// ID of the directly linked road. Only to be used for junctions of @type='direct'.
+	LinkedRoad                 string
+	JunctionConnectionLaneLink *JunctionConnectionLaneLink
 }
 
-type LaneLink struct {
+type Connection struct {
+	// ID of the connecting road. Only to be used for junctions of @type='default'.
+	ConnectingRoad string
+	// Contact point on the @connectingRoad or @linkedRoad. Required for all junction types except virtual.
+	ContactPoint string
+	// Unique ID within the junction
+	Id string
+	// ID of the incoming road. Required for all junction types except virtual.
+	IncomingRoad               string
+	JunctionConnectionLaneLink *JunctionConnectionLaneLink
+}
+
+type JunctionConnectionLaneLink struct {
+	// ID of the incoming lane
+	From int
+	// Specifies the length of the area where traffic from both overlapping lanes shares the space. It is defined in s length relative to the position of the junction. Intended for direct junctions only. Default is 100.
+	OverlapZone float64
+	// ID of the connection lane
+	To int
 }
 
 type CrossPath struct {
+	// ID of road defining the cross path.
+	CrossingRoad string
+	// Unique ID within the junction
+	Id string
+	// ID of road at end point of the crossing road
+	RoadAtEnd string
+	// ID of road at start point of the crossing road
+	RoadAtStart   string
 	StartLaneLink *StartLaneLink
 	EndLaneLink   *EndLaneLink
 }
 
 type StartLaneLink struct {
+	// Lane ID of either @roadAtEnd for <endLaneLink> or @roadAtStart for <startLaneLink>
+	From int
+	// s-coordinate of either start or end point in linked road.
+	S float64
+	// Lane ID of @crossingRoad
+	To int
 }
 
 type EndLaneLink struct {
+	// Lane ID of either @roadAtEnd for <endLaneLink> or @roadAtStart for <startLaneLink>
+	From int
+	// s-coordinate of either start or end point in linked road.
+	S float64
+	// Lane ID of @crossingRoad
+	To int
 }
 
 type Boundary struct {
@@ -713,7 +769,13 @@ type ElevationGrid struct {
 	Elevation *Elevation
 }
 
-type JunctiontypeDirect struct {
+type JunctionDirect struct {
+	// ID of the junction to which the road belongs, for example connecting roads, cross paths, and roads of a junction boundary. Use -1 for none.
+	Id string
+	// Name of the junction. May be chosen freely.
+	Name string
+	// Common junctions are of type 'default'. If the attribute is not specified, the junction type is 'default'. This attribute is mandatory for all other junction types.
+	Type       string
 	Connection *Connection
 	Priority   *Priority
 	Controller *Controller
@@ -721,24 +783,58 @@ type JunctiontypeDirect struct {
 	PlanView   *PlanView
 }
 
-type JunctiontypeVirtual struct {
-	ConnectiontypeDefault *ConnectiontypeDefault
-	ConnectiontypeVirtual *ConnectiontypeVirtual
-	CrossPath             *CrossPath
-	Priority              *Priority
-	Controller            *Controller
-	Surface               *Surface
-	PlanView              *PlanView
+type JunctionVirtual struct {
+	// ID of the junction to which the road belongs, for example connecting roads, cross paths, and roads of a junction boundary. Use -1 for none.
+	Id string
+	// The main road from which the connecting roads of the virtual junction branch off. This attribute is mandatory for virtual junctions and shall not be specified for other junction types.
+	MainRoad string
+	// Name of the junction. May be chosen freely.
+	Name string
+	// Defines the relevance of the virtual junction according to the driving direction. This attribute is mandatory for virtual junctions and shall not be specified for other junction types. The enumerator 'none' specifies that the virtual junction is valid in both directions.
+	Orientation string
+	// End position of the virtual junction in the reference line coordinate system. This attribute is mandatory for virtual junctions.
+	SEnd float64
+	// Start position of the virtual junction in the reference line coordinate system. This attribute is mandatory for virtual junctions.
+	SStart float64
+	// Common junctions are of type 'default'. If the attribute is not specified, the junction type is 'default'. This attribute is mandatory for all other junction types.
+	Type                      string
+	JunctionConnectionDefault *JunctionConnectionDefault
+	JunctionConnectionVirtual *JunctionConnectionVirtual
+	CrossPath                 *CrossPath
+	Priority                  *Priority
+	Controller                *Controller
+	Surface                   *Surface
+	PlanView                  *PlanView
 }
 
-type ConnectiontypeDefault struct {
-	LaneLink *LaneLink
+type JunctionConnectionDefault struct {
+	//
+	ConnectingRoad string
+	// Contact point on the @connectingRoad or @linkedRoad. Required for all junction types except virtual.
+	ContactPoint string
+	// Unique ID within the junction
+	Id string
+	// ID of the incoming road. Required for all junction types except virtual.
+	IncomingRoad string
+	// Type of the connection. Regular connections are @type=“default” . This attribute is mandatory for virtual connections.
+	Type                       string
+	JunctionConnectionLaneLink *JunctionConnectionLaneLink
 }
 
-type ConnectiontypeVirtual struct {
-	Predecessor *Predecessor
-	Successor   *Successor
-	LaneLink    *LaneLink
+type JunctionConnectionVirtual struct {
+	//
+	ConnectingRoad string
+	// Contact point on the @connectingRoad or @linkedRoad. Required for all junction types except virtual.
+	ContactPoint string
+	// Unique ID within the junction
+	Id string
+	// ID of the incoming road. Required for all junction types except virtual.
+	IncomingRoad string
+	// Type of the connection. Regular connections are @type=“default” . This attribute is mandatory for virtual connections.
+	Type                       string
+	Predecessor                *Predecessor
+	Successor                  *Successor
+	JunctionConnectionLaneLink *JunctionConnectionLaneLink
 }
 
 type JunctionGroup struct {
