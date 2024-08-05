@@ -219,10 +219,33 @@ elements:
           use: required
           description: "Unit of the attribute max. For values, see chapter 'units'."
 
-    - name: planView
+    - name: roadPlanView
+      xmlTag: planView
       children:
-        - name: geometry
-    - name: geometry
+        - name: roadPlanViewGeometry
+    - name: roadPlanViewGeometry
+      xmlTag: geometry
+      attributes:
+        - name: hdg
+          type: float64
+          use: required
+          description: "Start orientation (inertial heading)"
+        - name: length
+          type: float64
+          use: required
+          description: "Length of the element’s reference line"
+        - name: s
+          type: float64
+          use: required
+          description: "s-coordinate of start position"
+        - name: x
+          type: float64
+          use: required
+          description: "Start position (x inertial)"
+        - name: y
+          type: float64
+          use: required
+          description: "Start position (y inertial)"
       children:
         - name: line
         - name: spiral
@@ -289,7 +312,24 @@ elements:
     - name: elevationProfile
       children:
         - name: elevation
+    - name: junctionElevationGridElevation
+      xmlTag: elevation
+      attributes:
+        - name: center
+          type: string
+          use: required
+          description: "List of defined z-values."
+        - name: left
+          type: string
+          use: optional
+          description: "List of defined z-values from inside to outside."
+        - name: right
+          type: string
+          use: optional
+          description: "List of defined z-values from inside to outside."
+
     - name: elevation
+      xmlTag: elevation
       attributes:
         - name: a
           type: float64
@@ -721,7 +761,7 @@ elements:
         - name: border
     - name: surface
       children:
-        - name: CRG
+        - name: roadSurfaceCRG
     - name: skeleton
       children:
         - name: polyline
@@ -758,7 +798,8 @@ elements:
     - name: signalReference
       children:
         - name: validity
-    - name: CRG
+    - name: roadSurfaceCRG
+      xmlTag: CRG
       attributes:
         - name: file
           type: string
@@ -822,12 +863,30 @@ elements:
     - name: junctionCrossing
       xmlTag: junction type='crossing'
       children:
-        - name: roadSection
+        - name: junctionRoadSection
         - name: priority
         - name: controller
         - name: surface
-        - name: planView
-    - name: roadSection
+        - name: roadPlanView
+    - name: junctionRoadSection
+      xmlTag: roadSection
+      attributes:
+        - name: id
+          type: string
+          use: required
+          description: "Unique ID within the junction"
+        - name: roadId
+          type: string
+          use: required
+          description: "ID of the road of this roadSection element"
+        - name: sEnd
+          type: float64
+          use: required
+          description: "End position of the crossing junction in the road reference line coordinate system. This attribute is mandatory for crossing junctions."
+        - name: sStart
+          type: float64
+          use: required
+          description: "Start position of the crossing junction in the road reference line coordinate system. This attribute is mandatory for crossing junctions."
     - name: priority
       attributes:
         - name: high
@@ -859,9 +918,9 @@ elements:
         - name: priority
         - name: controller
         - name: surface
-        - name: planView
-        - name: boundary
-        - name: elevationGrid
+        - name: roadPlanView
+        - name: junctionBoundary
+        - name: junctionElevationGrid
     - name: junctionConnectionDirect
       xmlTag: connection
       attributes:
@@ -967,15 +1026,72 @@ elements:
           type: int
           use: required
           description: "Lane ID of @crossingRoad"
-    - name: boundary
+    - name: junctionBoundary
+      xmlTag: boundary
       children:
-        - name: segment type='joint'
-        - name: segment type='lane'
-    - name: segment type='joint'
-    - name: segment type='lane'
-    - name: elevationGrid
+        - name: junctionBoundarySegmentJoint
+        - name: junctionBoundarySegmentLane
+    - name: junctionBoundarySegmentLane
+      xmlTag: segment type='lane'
+      attributes:
+        - name: boundaryLane
+          type: int
+          use: required
+          description: "ID of the lane of which the outer edge is the segment"
+        - name: roadId
+          type: string
+          use: required
+          description: "ID of the road used for the segment"
+        - name: sEnd
+          type: float64
+          use: required
+          description: "End of the segment (s-coordinate, begin, end)"
+        - name: sStart
+          type: float64
+          use: required
+          description: "Start of the segment (s-coordinate, begin, end)"
+        - name: type
+          type: string
+          use: required
+          description: "Type of the segment"
+    - name: junctionBoundarySegmentJoint
+      xmlTag: segment type='joint'
+      attributes:
+        - name: contactPoint
+          type: float64
+          use: required
+          description: "Contact point on the road"
+        - name: jointLaneEnd
+          type: int
+          use: optional
+          description: "ID of the lane crossed by the segment. If missing all lanes are crossed by the segment."
+        - name: jointLaneStart
+          type: int
+          use: optional
+          description: "ID of the lane crossed by the segment. If missing all lanes are crossed by the segment."
+        - name: roadId
+          type: string
+          use: required
+          description: "ID of the road used for the segment"
+        - name: transitionLength
+          type: float64
+          use: optional
+          description: "Length of the transition area where local height is interpolated between road data and the <elevationGrid> in order to ensure a smooth transition. The default is 0."
+        - name: type
+          type: string
+          use: required
+          description: "Type of the segment"
+    - name: junctionElevationGrid
+      xmlTag: elevationGrid
+      attributes:
+        - name: gridSpacing
+          type: float64
+          use: required
+        - name: sStart
+          type: float64
+          use: required
       children:
-        - name: elevation
+        - name: junctionElevationGridElevation
     - name: junctionDirect
       xmlTag: junction type='direct'
       attributes:
@@ -996,7 +1112,7 @@ elements:
         - name: priority
         - name: controller
         - name: surface
-        - name: planView
+        - name: roadPlanView
     - name: junctionVirtual
       xmlTag: junction type='virtual'
       attributes:
@@ -1035,7 +1151,7 @@ elements:
         - name: priority
         - name: controller
         - name: surface
-        - name: planView
+        - name: roadPlanView
     - name: junctionConnectionDefault
       xmlTag: connection type='default'
       attributes:

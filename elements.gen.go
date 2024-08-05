@@ -156,11 +156,21 @@ type Speed struct {
 	Unit string
 }
 
-type PlanView struct {
-	Geometry *Geometry
+type RoadPlanView struct {
+	RoadPlanViewGeometry *RoadPlanViewGeometry
 }
 
-type Geometry struct {
+type RoadPlanViewGeometry struct {
+	// Start orientation (inertial heading)
+	Hdg float64
+	// Length of the element’s reference line
+	Length float64
+	// s-coordinate of start position
+	S float64
+	// Start position (x inertial)
+	X float64
+	// Start position (y inertial)
+	Y          float64
 	Line       *Line
 	Spiral     *Spiral
 	Arc        *Arc
@@ -212,6 +222,15 @@ type ParamPoly3 struct {
 
 type ElevationProfile struct {
 	Elevation *Elevation
+}
+
+type JunctionElevationGridElevation struct {
+	// List of defined z-values.
+	Center string
+	// List of defined z-values from inside to outside.
+	Left string
+	// List of defined z-values from inside to outside.
+	Right string
 }
 
 type Elevation struct {
@@ -545,7 +564,7 @@ type Borders struct {
 }
 
 type Surface struct {
-	CRG *CRG
+	RoadSurfaceCRG *RoadSurfaceCRG
 }
 
 type Skeleton struct {
@@ -604,7 +623,7 @@ type SignalReference struct {
 	Validity *Validity
 }
 
-type CRG struct {
+type RoadSurfaceCRG struct {
 	// Name of the file containing the CRG data
 	File string
 	// Heading offset between CRG center line and reference line of the road (only allowed for mode genuine, default = 0.0).
@@ -656,14 +675,22 @@ type Control struct {
 }
 
 type JunctionCrossing struct {
-	RoadSection *RoadSection
-	Priority    *Priority
-	Controller  *Controller
-	Surface     *Surface
-	PlanView    *PlanView
+	JunctionRoadSection *JunctionRoadSection
+	Priority            *Priority
+	Controller          *Controller
+	Surface             *Surface
+	RoadPlanView        *RoadPlanView
 }
 
-type RoadSection struct {
+type JunctionRoadSection struct {
+	// Unique ID within the junction
+	Id string
+	// ID of the road of this roadSection element
+	RoadId string
+	// End position of the crossing junction in the road reference line coordinate system. This attribute is mandatory for crossing junctions.
+	SEnd float64
+	// Start position of the crossing junction in the road reference line coordinate system. This attribute is mandatory for crossing junctions.
+	SStart float64
 }
 
 type Priority struct {
@@ -679,15 +706,15 @@ type JunctionDefault struct {
 	// Name of the junction. May be chosen freely.
 	Name string
 	// Common junctions are of type 'default'. If the attribute is not specified, the junction type is 'default'. This attribute is mandatory for all other junction types.
-	Type          string
-	Connection    *Connection
-	CrossPath     *CrossPath
-	Priority      *Priority
-	Controller    *Controller
-	Surface       *Surface
-	PlanView      *PlanView
-	Boundary      *Boundary
-	ElevationGrid *ElevationGrid
+	Type                  string
+	Connection            *Connection
+	CrossPath             *CrossPath
+	Priority              *Priority
+	Controller            *Controller
+	Surface               *Surface
+	RoadPlanView          *RoadPlanView
+	JunctionBoundary      *JunctionBoundary
+	JunctionElevationGrid *JunctionElevationGrid
 }
 
 type JunctionConnectionDirect struct {
@@ -754,19 +781,45 @@ type EndLaneLink struct {
 	To int
 }
 
-type Boundary struct {
-	SegmenttypeJoint *SegmenttypeJoint
-	SegmenttypeLane  *SegmenttypeLane
+type JunctionBoundary struct {
+	JunctionBoundarySegmentJoint *JunctionBoundarySegmentJoint
+	JunctionBoundarySegmentLane  *JunctionBoundarySegmentLane
 }
 
-type SegmenttypeJoint struct {
+type JunctionBoundarySegmentLane struct {
+	// ID of the lane of which the outer edge is the segment
+	BoundaryLane int
+	// ID of the road used for the segment
+	RoadId string
+	// End of the segment (s-coordinate, begin, end)
+	SEnd float64
+	// Start of the segment (s-coordinate, begin, end)
+	SStart float64
+	// Type of the segment
+	Type string
 }
 
-type SegmenttypeLane struct {
+type JunctionBoundarySegmentJoint struct {
+	// Contact point on the road
+	ContactPoint float64
+	// ID of the lane crossed by the segment. If missing all lanes are crossed by the segment.
+	JointLaneEnd int
+	// ID of the lane crossed by the segment. If missing all lanes are crossed by the segment.
+	JointLaneStart int
+	// ID of the road used for the segment
+	RoadId string
+	// Length of the transition area where local height is interpolated between road data and the <elevationGrid> in order to ensure a smooth transition. The default is 0.
+	TransitionLength float64
+	// Type of the segment
+	Type string
 }
 
-type ElevationGrid struct {
-	Elevation *Elevation
+type JunctionElevationGrid struct {
+	//
+	GridSpacing float64
+	//
+	SStart                         float64
+	JunctionElevationGridElevation *JunctionElevationGridElevation
 }
 
 type JunctionDirect struct {
@@ -775,12 +828,12 @@ type JunctionDirect struct {
 	// Name of the junction. May be chosen freely.
 	Name string
 	// Common junctions are of type 'default'. If the attribute is not specified, the junction type is 'default'. This attribute is mandatory for all other junction types.
-	Type       string
-	Connection *Connection
-	Priority   *Priority
-	Controller *Controller
-	Surface    *Surface
-	PlanView   *PlanView
+	Type         string
+	Connection   *Connection
+	Priority     *Priority
+	Controller   *Controller
+	Surface      *Surface
+	RoadPlanView *RoadPlanView
 }
 
 type JunctionVirtual struct {
@@ -804,7 +857,7 @@ type JunctionVirtual struct {
 	Priority                  *Priority
 	Controller                *Controller
 	Surface                   *Surface
-	PlanView                  *PlanView
+	RoadPlanView              *RoadPlanView
 }
 
 type JunctionConnectionDefault struct {
