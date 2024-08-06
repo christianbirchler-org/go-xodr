@@ -124,7 +124,7 @@ elements:
         - name: elevationProfile
         - name: lateralProfile
         - name: lanes
-        - name: objects
+        - name: roadObjects
         - name: signals
         - name: roadSurface
         - name: railroad
@@ -719,13 +719,88 @@ elements:
           description: "Free text; currently recommended values are 'no stopping at any time', 'disabled parking', 'car pool'"
     - name: center
     - name: right
-    - name: objects
+    - name: roadObjects
+      xmlTag: objects
       children:
-        - name: object
+        - name: roadObjectsObject
         - name: objectReference
         - name: tunnel
         - name: bridge
-    - name: object
+    - name: roadObjectsObject
+      xmlTag: object
+      attributes:
+        - name: dynamic
+          type: string
+          use: optional
+          description: "Indicates whether the object is dynamic or static, default value is 'no' (static). Dynamic object cannot change its position."
+        - name: hdg
+          type: float64
+          use: optional
+          description: "Heading angle of the object relative to road direction"
+        - name: height
+          type: float64
+          use: optional
+          description: "Height of the object’s bounding box. @height is defined in the local coordinate system u/v along the z-axis"
+        - name: id
+          type: string
+          use: required
+          description: "Unique ID within database"
+        - name: length
+          type: float64
+          use: optional
+          description: "Length of the object's bounding box, alternative to @radius. @length is defined in the local coordinate system u/v along the u-axis"
+        - name: name
+          type: string
+          use: optional
+          description: "Name of the object. May be chosen freely."
+        - name: orientation
+          type: string
+          use: optional
+          description: "'+' = valid in positive s-direction '-' = valid in negative s-direction 'none' = valid in both directions (does not affect the heading)"
+        - name: perpToRoad
+          type: bool
+          use: required
+          description: "Alternative to @pitch and @roll. If true, the object is vertically perpendicular to the road surface at all points and @pitch and @roll are ignored. Default is false."
+        - name: pitch
+          type: float64
+          use: optional
+          description: "Pitch angle relative to the x/y-plane"
+        - name: radius
+          type: float64
+          use: optional
+          description: "radius of the circular object's bounding box, alternative to @length and @width. @radius is defined in the local coordinate system u/v"
+        - name: roll
+          type: float64
+          use: optional
+          description: "Roll angle relative to the x/y-plane"
+        - name: s
+          type: float64
+          use: required
+          description: "s-coordinate of object's origin"
+        - name: subtype
+          type: string
+          use: optional
+          description: "Variant of a type"
+        - name: t
+          type: float64
+          use: required
+          description: "t-coordinate of object's origin"
+        - name: type
+          type: string
+          use: optional
+          description: "Type of object. For a parking space, the <parkingSpace> element may be used additionally."
+        - name: validLength
+          type: float64
+          use: optional
+          description: "Validity of object along s-axis (0.0 for point object)"
+        - name: width
+          type: float64
+          use: optional
+          description: "Width of the object's bounding box, alternative to @radius. @width is defined in the local coordinate system u/v along the v-axis"
+        - name: zOffset
+          type: float64
+          use: required
+          description: "z-offset of object's origin relative to the elevation of the road reference line"
       children:
         - name: repeat
         - name: outline

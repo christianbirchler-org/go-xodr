@@ -93,7 +93,7 @@ type Road struct {
 	ElevationProfile *ElevationProfile
 	LateralProfile   *LateralProfile
 	Lanes            *Lanes
-	Objects          *Objects
+	RoadObjects      *RoadObjects
 	Signals          *Signals
 	RoadSurface      *RoadSurface
 	Railroad         *Railroad
@@ -504,14 +504,50 @@ type Center struct {
 type Right struct {
 }
 
-type Objects struct {
-	Object          *Object
-	ObjectReference *ObjectReference
-	Tunnel          *Tunnel
-	Bridge          *Bridge
+type RoadObjects struct {
+	RoadObjectsObject *RoadObjectsObject
+	ObjectReference   *ObjectReference
+	Tunnel            *Tunnel
+	Bridge            *Bridge
 }
 
-type Object struct {
+type RoadObjectsObject struct {
+	// Indicates whether the object is dynamic or static, default value is 'no' (static). Dynamic object cannot change its position.
+	Dynamic string
+	// Heading angle of the object relative to road direction
+	Hdg float64
+	// Height of the object’s bounding box. @height is defined in the local coordinate system u/v along the z-axis
+	Height float64
+	// Unique ID within database
+	Id string
+	// Length of the object's bounding box, alternative to @radius. @length is defined in the local coordinate system u/v along the u-axis
+	Length float64
+	// Name of the object. May be chosen freely.
+	Name string
+	// '+' = valid in positive s-direction '-' = valid in negative s-direction 'none' = valid in both directions (does not affect the heading)
+	Orientation string
+	// Alternative to @pitch and @roll. If true, the object is vertically perpendicular to the road surface at all points and @pitch and @roll are ignored. Default is false.
+	PerpToRoad bool
+	// Pitch angle relative to the x/y-plane
+	Pitch float64
+	// radius of the circular object's bounding box, alternative to @length and @width. @radius is defined in the local coordinate system u/v
+	Radius float64
+	// Roll angle relative to the x/y-plane
+	Roll float64
+	// s-coordinate of object's origin
+	S float64
+	// Variant of a type
+	Subtype string
+	// t-coordinate of object's origin
+	T float64
+	// Type of object. For a parking space, the <parkingSpace> element may be used additionally.
+	Type string
+	// Validity of object along s-axis (0.0 for point object)
+	ValidLength float64
+	// Width of the object's bounding box, alternative to @radius. @width is defined in the local coordinate system u/v along the v-axis
+	Width float64
+	// z-offset of object's origin relative to the elevation of the road reference line
+	ZOffset      float64
 	Repeat       *Repeat
 	Outline      *Outline
 	Outlines     *Outlines

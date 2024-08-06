@@ -24,6 +24,7 @@ type Child struct {
 
 type Element struct {
 	Name       string      `yaml:"name"`
+	XmlTag     string      `yaml:"xmlTag"`
 	Children   []Child     `yaml:"children"`
 	Attributes []Attribute `yaml:"attributes"`
 }
