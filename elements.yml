@@ -5,7 +5,7 @@ elements:
       children:
         - name: header
         - name: road
-        - name: controller
+        - name: junctionController
         - name: junctionCrossing
         - name: junctionDefault
         - name: junctionDirect
@@ -126,7 +126,7 @@ elements:
         - name: lanes
         - name: objects
         - name: signals
-        - name: surface
+        - name: roadSurface
         - name: railroad
     - name: link
       children:
@@ -735,7 +735,7 @@ elements:
         - name: parkingSpace
         - name: markings
         - name: borders
-        - name: surface
+        - name: roadSurface
         - name: skeleton
     - name: repeat
     - name: outline
@@ -759,7 +759,8 @@ elements:
     - name: borders
       children:
         - name: border
-    - name: surface
+    - name: roadSurface
+      xmlTag: surface
       children:
         - name: roadSurfaceCRG
     - name: skeleton
@@ -856,7 +857,21 @@ elements:
     - name: mainTrack
     - name: sideTrack
     - name: partner
-    - name: controller
+    - name: junctionController
+      xmlTag: controller
+      attributes:
+        - name: id
+          type: string
+          use: required
+          description: "ID of the controller"
+        - name: sequence
+          type: int
+          use: optional
+          description: "Sequence number (priority) of this controller with respect to other controllers in the same junction"
+        - name: type
+          type: string
+          use: optional
+          description: "Type of control for this junction. Free text, depending on the application."
       children:
         - name: control
     - name: control
@@ -865,8 +880,8 @@ elements:
       children:
         - name: junctionRoadSection
         - name: priority
-        - name: controller
-        - name: surface
+        - name: junctionController
+        - name: roadSurface
         - name: roadPlanView
     - name: junctionRoadSection
       xmlTag: roadSection
@@ -916,8 +931,8 @@ elements:
         - name: connection
         - name: crossPath
         - name: priority
-        - name: controller
-        - name: surface
+        - name: junctionController
+        - name: roadSurface
         - name: roadPlanView
         - name: junctionBoundary
         - name: junctionElevationGrid
@@ -1110,8 +1125,8 @@ elements:
       children:
         - name: connection
         - name: priority
-        - name: controller
-        - name: surface
+        - name: junctionController
+        - name: roadSurface
         - name: roadPlanView
     - name: junctionVirtual
       xmlTag: junction type='virtual'
@@ -1149,8 +1164,8 @@ elements:
         - name: junctionConnectionVirtual
         - name: crossPath
         - name: priority
-        - name: controller
-        - name: surface
+        - name: junctionController
+        - name: roadSurface
         - name: roadPlanView
     - name: junctionConnectionDefault
       xmlTag: connection type='default'
@@ -1203,9 +1218,29 @@ elements:
         - name: successor
         - name: junctionConnectionLaneLink
     - name: junctionGroup
+      xmlTag: junctionGroup
+      attributes:
+        - name: id
+          type: string
+          use: required
+          description: "Unique ID within database"
+        - name: name
+          type: string
+          use: optional
+          description: "Name of the junction group. May be chosen freely."
+        - name: type
+          type: string
+          use: required
+          description: "Type of junction group"
       children:
-        - name: junctionReference
-    - name: junctionReference
+        - name: junctionGroupJunctionReference
+    - name: junctionGroupJunctionReference
+      xmlTag: junctionReference
+      attributes:
+        - name: junction
+          type: string
+          use: required
+          description: "ID of the junction"
     - name: station
       children:
         - name: platform

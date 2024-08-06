@@ -6,15 +6,15 @@ type Element interface {
 }
 
 type OpenDRIVE struct {
-	Header           *Header
-	Road             *Road
-	Controller       *Controller
-	JunctionCrossing *JunctionCrossing
-	JunctionDefault  *JunctionDefault
-	JunctionDirect   *JunctionDirect
-	JunctionVirtual  *JunctionVirtual
-	JunctionGroup    *JunctionGroup
-	Station          *Station
+	Header             *Header
+	Road               *Road
+	JunctionController *JunctionController
+	JunctionCrossing   *JunctionCrossing
+	JunctionDefault    *JunctionDefault
+	JunctionDirect     *JunctionDirect
+	JunctionVirtual    *JunctionVirtual
+	JunctionGroup      *JunctionGroup
+	Station            *Station
 }
 
 type Header struct {
@@ -95,7 +95,7 @@ type Road struct {
 	Lanes            *Lanes
 	Objects          *Objects
 	Signals          *Signals
-	Surface          *Surface
+	RoadSurface      *RoadSurface
 	Railroad         *Railroad
 }
 
@@ -520,7 +520,7 @@ type Object struct {
 	ParkingSpace *ParkingSpace
 	Markings     *Markings
 	Borders      *Borders
-	Surface      *Surface
+	RoadSurface  *RoadSurface
 	Skeleton     *Skeleton
 }
 
@@ -563,7 +563,7 @@ type Borders struct {
 	Border *Border
 }
 
-type Surface struct {
+type RoadSurface struct {
 	RoadSurfaceCRG *RoadSurfaceCRG
 }
 
@@ -667,7 +667,13 @@ type SideTrack struct {
 type Partner struct {
 }
 
-type Controller struct {
+type JunctionController struct {
+	// ID of the controller
+	Id string
+	// Sequence number (priority) of this controller with respect to other controllers in the same junction
+	Sequence int
+	// Type of control for this junction. Free text, depending on the application.
+	Type    string
 	Control *Control
 }
 
@@ -677,8 +683,8 @@ type Control struct {
 type JunctionCrossing struct {
 	JunctionRoadSection *JunctionRoadSection
 	Priority            *Priority
-	Controller          *Controller
-	Surface             *Surface
+	JunctionController  *JunctionController
+	RoadSurface         *RoadSurface
 	RoadPlanView        *RoadPlanView
 }
 
@@ -710,8 +716,8 @@ type JunctionDefault struct {
 	Connection            *Connection
 	CrossPath             *CrossPath
 	Priority              *Priority
-	Controller            *Controller
-	Surface               *Surface
+	JunctionController    *JunctionController
+	RoadSurface           *RoadSurface
 	RoadPlanView          *RoadPlanView
 	JunctionBoundary      *JunctionBoundary
 	JunctionElevationGrid *JunctionElevationGrid
@@ -828,12 +834,12 @@ type JunctionDirect struct {
 	// Name of the junction. May be chosen freely.
 	Name string
 	// Common junctions are of type 'default'. If the attribute is not specified, the junction type is 'default'. This attribute is mandatory for all other junction types.
-	Type         string
-	Connection   *Connection
-	Priority     *Priority
-	Controller   *Controller
-	Surface      *Surface
-	RoadPlanView *RoadPlanView
+	Type               string
+	Connection         *Connection
+	Priority           *Priority
+	JunctionController *JunctionController
+	RoadSurface        *RoadSurface
+	RoadPlanView       *RoadPlanView
 }
 
 type JunctionVirtual struct {
@@ -855,8 +861,8 @@ type JunctionVirtual struct {
 	JunctionConnectionVirtual *JunctionConnectionVirtual
 	CrossPath                 *CrossPath
 	Priority                  *Priority
-	Controller                *Controller
-	Surface                   *Surface
+	JunctionController        *JunctionController
+	RoadSurface               *RoadSurface
 	RoadPlanView              *RoadPlanView
 }
 
@@ -891,10 +897,18 @@ type JunctionConnectionVirtual struct {
 }
 
 type JunctionGroup struct {
-	JunctionReference *JunctionReference
+	// Unique ID within database
+	Id string
+	// Name of the junction group. May be chosen freely.
+	Name string
+	// Type of junction group
+	Type                           string
+	JunctionGroupJunctionReference *JunctionGroupJunctionReference
 }
 
-type JunctionReference struct {
+type JunctionGroupJunctionReference struct {
+	// ID of the junction
+	Junction string
 }
 
 type Station struct {
