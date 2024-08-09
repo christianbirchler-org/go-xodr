@@ -9,10 +9,10 @@ type Element interface {
     type {{ .Name }} struct {
         {{- range .Attributes}}
         // {{.Description}}
-        {{.Name}} {{.Type}}
+        {{.Name}} {{.Type}} `xml:"{{.XmlTag}}"`
         {{- end}}
         {{- range .Children}}
-        {{.Name}} *{{.Name}}
+        {{.Name}} *{{.Name}} `xml:"{{.XmlTag}}"`
         {{- end}}
     }
 {{end}}

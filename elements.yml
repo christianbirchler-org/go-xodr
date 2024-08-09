@@ -1,7 +1,8 @@
 version: 1.8.0
 description: Static Road Network Description, 2023-11-22
 elements:
-    - name: OpenDRIVE
+    - name: openDrive
+      xmlTag: OpenDRIVE
       children:
         - name: header
         - name: road
@@ -13,6 +14,7 @@ elements:
         - name: junctionGroup
         - name: station
     - name: header
+      xmlTag: header
       attributes:
         - name: date
           type: string
@@ -60,8 +62,11 @@ elements:
         - name: license
         - name: defaultRegulations
     - name: geoReference
+      xmlTag: geoReference
     - name: offset
+      xmlTag: offset
     - name: license
+      xmlTag: license
       attributes:
         - name: name
           type: string
@@ -81,15 +86,18 @@ elements:
           description: "The full license text"
 
     - name: defaultRegulations
+      xmlTag: defaultRegulations
       children:
         - name: roadRegulations
         - name: signalRegulations
     - name: roadRegulations
+      xmlTag: roadRegulations
       attributes:
         - name: type
           type: string
           use: required
     - name: signalRegulations
+      xmlTag: signalRegulations
       attributes:
         - name: subtype
           type: string
@@ -98,6 +106,7 @@ elements:
           type: string
           use: required
     - name: road
+      xmlTag: road
       attributes:
         - name: id
           type: string

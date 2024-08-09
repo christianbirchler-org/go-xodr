@@ -16,10 +16,12 @@ type Attribute struct {
 	Type        string `yaml:"type"`
 	Use         string `yaml:"use"`
 	Description string `yaml:"description"`
+	XmlTag      string
 }
 
 type Child struct {
-	Name string `yaml:"name"`
+	Name   string `yaml:"name"`
+	XmlTag string
 }
 
 type Element struct {
@@ -57,13 +59,20 @@ func main() {
 		log.Fatal(err)
 	}
 
+	xmlTagMap := make(map[string]string)
+	for _, element := range openDriveElements.Elements {
+		xmlTagMap[element.Name] = element.XmlTag
+	}
+
+	newOpendDriveElements := make([]Element, len(openDriveElements.Elements))
 	for elPos, element := range openDriveElements.Elements {
 		children := make([]Child, len(element.Children))
 		attributes := make([]Attribute, len(element.Attributes))
 		// create go names for children structs
 		for childPos, child := range element.Children {
 			children[childPos] = Child{
-				Name: goName(child.Name),
+				Name:   goName(child.Name),
+				XmlTag: xmlTagMap[child.Name],
 			}
 		}
 		for attrPos, attr := range element.Attributes {
@@ -72,12 +81,14 @@ func main() {
 				Type:        attr.Type,
 				Use:         attr.Use,
 				Description: attr.Description,
+				XmlTag:      xmlTagMap[attr.Name],
 			}
 		}
-		openDriveElements.Elements[elPos] = Element{
+		newOpendDriveElements[elPos] = Element{
 			Name:       goName(element.Name),
 			Children:   children,
 			Attributes: attributes,
+			XmlTag:     xmlTagMap[element.Name],
 		}
 	}
 
@@ -86,8 +97,12 @@ func main() {
 		log.Fatal(err)
 	}
 
+	newOpenDrive := OpenDriveElements{
+		Elements: newOpendDriveElements,
+	}
+
 	buf := new(bytes.Buffer)
-	err = tmpl.Execute(buf, openDriveElements)
+	err = tmpl.Execute(buf, newOpenDrive)
 	if err != nil {
 		log.Fatal(err)
 	}
