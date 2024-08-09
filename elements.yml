@@ -138,10 +138,12 @@ elements:
         - name: roadSurface
         - name: railroad
     - name: link
+      xmlTag: link
       children:
         - name: predecessor
         - name: successor
     - name: predecessor
+      xmlTag: predecessor
       attributes:
         - name: contactPoint
           type: string
@@ -164,6 +166,7 @@ elements:
           use: required
           description: "Type of the linked element"
     - name: successor
+      xmlTag: successor
       attributes:
         - name: contactPoint
           type: string
@@ -186,7 +189,7 @@ elements:
           use: required
           description: "Type of the linked element"
     - name: roadType
-      xmlName: type
+      xmlTag: type
       attributes:
         - name: country
           type: string
@@ -203,7 +206,7 @@ elements:
       children:
         - name: speed
     - name: laneSpeed
-      xmlName: speed
+      xmlTag: speed
       attributes:
         - name: max
           type: float64
@@ -218,6 +221,7 @@ elements:
           use: optional
           description: "Unit of the attribute max"
     - name: speed
+      xmlTag: speed
       attributes:
         - name: max
           type: int

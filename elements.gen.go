@@ -89,7 +89,7 @@ type Road struct {
 	Name string `xml:""`
 	// Basic rule for using the road; RHT=right-hand traffic, LHT=left-hand traffic. When this attribute is missing, RHT is assumed.
 	Rule             string            `xml:""`
-	Link             *Link             `xml:""`
+	Link             *Link             `xml:"link"`
 	ElevationProfile *ElevationProfile `xml:""`
 	LateralProfile   *LateralProfile   `xml:""`
 	Lanes            *Lanes            `xml:""`
@@ -100,8 +100,8 @@ type Road struct {
 }
 
 type Link struct {
-	Predecessor *Predecessor `xml:""`
-	Successor   *Successor   `xml:""`
+	Predecessor *Predecessor `xml:"predecessor"`
+	Successor   *Successor   `xml:"successor"`
 }
 
 type Predecessor struct {
@@ -137,7 +137,7 @@ type RoadType struct {
 	S int `xml:""`
 	// Type of the road defined as enumeration
 	Type  string `xml:""`
-	Speed *Speed `xml:""`
+	Speed *Speed `xml:"speed"`
 }
 
 type LaneSpeed struct {
@@ -387,10 +387,10 @@ type Lane struct {
 	Type     string    `xml:""`
 	Width    *Width    `xml:""`
 	Border   *Border   `xml:""`
-	Link     *Link     `xml:""`
+	Link     *Link     `xml:"link"`
 	RoadMark *RoadMark `xml:""`
 	Material *Material `xml:""`
-	Speed    *Speed    `xml:""`
+	Speed    *Speed    `xml:"speed"`
 	Access   *Access   `xml:""`
 	Height   *Height   `xml:""`
 	Rule     *Rule     `xml:""`
@@ -927,8 +927,8 @@ type JunctionConnectionVirtual struct {
 	IncomingRoad string `xml:""`
 	// Type of the connection. Regular connections are @type=“default” . This attribute is mandatory for virtual connections.
 	Type                       string                      `xml:""`
-	Predecessor                *Predecessor                `xml:""`
-	Successor                  *Successor                  `xml:""`
+	Predecessor                *Predecessor                `xml:"predecessor"`
+	Successor                  *Successor                  `xml:"successor"`
 	JunctionConnectionLaneLink *JunctionConnectionLaneLink `xml:"laneLink"`
 }
 
