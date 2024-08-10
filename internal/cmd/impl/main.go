@@ -81,7 +81,7 @@ func main() {
 				Type:        attr.Type,
 				Use:         attr.Use,
 				Description: attr.Description,
-				XmlTag:      xmlTagMap[attr.Name],
+				XmlTag:      attr.Name,
 			}
 		}
 		newOpendDriveElements[elPos] = Element{
