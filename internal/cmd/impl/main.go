@@ -2,121 +2,74 @@ package main
 
 import (
 	"bytes"
-	"flag"
+	"encoding/xml"
+	"github.com/iancoleman/strcase"
 	"go/format"
-	"gopkg.in/yaml.v3"
 	"log"
 	"os"
 	"text/template"
 	"unicode"
 )
 
-type Attribute struct {
-	Name        string `yaml:"name"`
-	Type        string `yaml:"type"`
-	Use         string `yaml:"use"`
-	Description string `yaml:"description"`
-	XmlTag      string
-}
-
-type Child struct {
-	Name   string `yaml:"name"`
-	XmlTag string
-}
-
-type Element struct {
-	Name       string      `yaml:"name"`
-	XmlTag     string      `yaml:"xmlTag"`
-	Children   []Child     `yaml:"children"`
-	Attributes []Attribute `yaml:"attributes"`
-}
-
-type OpenDriveElements struct {
-	Version     string    `yaml:"version"`
-	Description string    `yaml:"description"`
-	Elements    []Element `yaml:"elements"`
-}
-
 func main() {
-	in := flag.String("in", "", "YAML file to parse")
-	templateInput := flag.String("tmpl", "", "template file")
-	out := flag.String("out", "", "generated Go file")
-	flag.Parse()
 
-	yamlFile, err := os.ReadFile(*in)
+	file, err := os.ReadFile("C:\\Users\\birch\\repositories\\go-xodr\\xsd_schema\\OpenDRIVE_Core.xsd")
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 
-	tmplFile, err := os.ReadFile(*templateInput)
+	coreSchema := new(CoreSchema)
+	err = xml.Unmarshal(file, coreSchema)
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 
-	var openDriveElements OpenDriveElements
-	err = yaml.Unmarshal(yamlFile, &openDriveElements)
+	fnMap := template.FuncMap{
+		"mapPrimitives":             mapPrimitives,
+		"formatStructDocumentation": formatStructDocumentation,
+		"toCamel":                   strcase.ToCamel,
+	}
+
+	tmpl := template.New("elements.tmpl").Funcs(fnMap)
+	tmpl, err = tmpl.ParseFiles("C:\\Users\\birch\\repositories\\go-xodr\\elements.tmpl")
 	if err != nil {
-		log.Fatal(err)
-	}
-
-	xmlTagMap := make(map[string]string)
-	for _, element := range openDriveElements.Elements {
-		xmlTagMap[element.Name] = element.XmlTag
-	}
-
-	newOpendDriveElements := make([]Element, len(openDriveElements.Elements))
-	for elPos, element := range openDriveElements.Elements {
-		children := make([]Child, len(element.Children))
-		attributes := make([]Attribute, len(element.Attributes))
-		// create go names for children structs
-		for childPos, child := range element.Children {
-			children[childPos] = Child{
-				Name:   goName(child.Name),
-				XmlTag: xmlTagMap[child.Name],
-			}
-		}
-		for attrPos, attr := range element.Attributes {
-			attributes[attrPos] = Attribute{
-				Name:        goName(attr.Name),
-				Type:        attr.Type,
-				Use:         attr.Use,
-				Description: attr.Description,
-				XmlTag:      attr.Name,
-			}
-		}
-		newOpendDriveElements[elPos] = Element{
-			Name:       goName(element.Name),
-			Children:   children,
-			Attributes: attributes,
-			XmlTag:     xmlTagMap[element.Name],
-		}
-	}
-
-	tmpl, err := template.New("OpenDRIVE Elements").Parse(string(tmplFile))
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	newOpenDrive := OpenDriveElements{
-		Elements: newOpendDriveElements,
+		panic(err)
 	}
 
 	buf := new(bytes.Buffer)
-	err = tmpl.Execute(buf, newOpenDrive)
+	err = tmpl.Execute(buf, coreSchema)
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 
 	fmtSrc, err := format.Source(buf.Bytes())
 	if err != nil {
-		log.Fatal(err)
+		fmtSrc = buf.Bytes()
 	}
 
-	err = os.WriteFile(*out, fmtSrc, 0644)
+	err = os.WriteFile("els.go", fmtSrc, 0644)
 	if err != nil {
 		log.Fatal(err)
 	}
 
+}
+func formatStructDocumentation(doc string) string {
+	// TODO
+	return "TODO: Doc formatting needs to be implemented!"
+}
+
+var primitives = map[string]string{
+	"xs:double": "float64",
+	"xs:int":    "int",
+	"xs:string": "string",
+}
+
+func mapPrimitives(t string) string {
+	goType := primitives[t]
+	if goType == "" {
+		return strcase.ToCamel(t)
+	}
+	return goType
 }
 
 func goName(n string) string {

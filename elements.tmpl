@@ -2,17 +2,20 @@
 
 package xodr
 
-type Element interface {
-}
+{{range .SimpleType}}
+    type {{ toCamel .Name }} struct {
+    }
+{{end}}
 
-{{range .Elements}}
-    type {{ .Name }} struct {
-        {{- range .Attributes}}
-        // {{.Description}}
-        {{.Name}} {{.Type}} `xml:"{{.XmlTag}}"`
+{{range .ComplexType}}
+    // {{ formatStructDocumentation .Annotation.Documentation.Text }}
+    type {{ toCamel .Name }} struct {
+        {{- range .Attribute}}
+        {{ toCamel .Name}} {{mapPrimitives .Type}}
         {{- end}}
-        {{- range .Children}}
-        {{.Name}} *{{.Name}} `xml:"{{.XmlTag}}"`
-        {{- end}}
+
+        {{range .Sequence.Element}}
+        {{ toCamel .Name}} {{mapPrimitives .Type}}
+        {{end}}
     }
 {{end}}
