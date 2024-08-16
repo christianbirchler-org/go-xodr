@@ -44,9 +44,6 @@ type OpenDriveElement struct {
 
 // TODO: Doc formatting needs to be implemented!
 type TDataQuality struct {
-	Error TDataQualityError
-
-	RawData TDataQualityRawData
 }
 
 // TODO: Doc formatting needs to be implemented!
@@ -68,10 +65,22 @@ type TDataQualityRawData struct {
 
 // TODO: Doc formatting needs to be implemented!
 type THeader struct {
+	GeoReference THeaderGeoReference
+
+	Offset THeaderOffset
+
+	License TLicense
+
+	DefaultRegulations THeaderDefaultRegulations
 }
 
 // TODO: Doc formatting needs to be implemented!
 type THeaderDefaultRegulations struct {
+	RoadRegulations THeaderRoadRegulation
+
+	SignalRegulations THeaderSignalRegulation
+
+	OpenDriveElement OpenDriveElement
 }
 
 // TODO: Doc formatting needs to be implemented!
@@ -84,10 +93,16 @@ type THeaderOffset struct {
 
 // TODO: Doc formatting needs to be implemented!
 type THeaderRoadRegulation struct {
+	OpenDriveElement OpenDriveElement
+
+	Semantics TSignalsSemantics
 }
 
 // TODO: Doc formatting needs to be implemented!
 type THeaderSignalRegulation struct {
+	OpenDriveElement OpenDriveElement
+
+	Semantics TSignalsSemantics
 }
 
 // TODO: Doc formatting needs to be implemented!

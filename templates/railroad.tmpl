@@ -1,0 +1,17 @@
+// Code generated; DO NOT EDIT.
+
+package xodr
+
+{{range .SimpleType}}
+    type {{ toCamel .Name }} struct {
+    }
+{{end}}
+
+{{range .ComplexType}}
+    // {{ formatStructDocumentation .Annotation.Documentation.Text }}
+    type {{ toCamel .Name }} struct {
+        {{range .ComplexContent.Extension.Sequence.Element}}
+        {{ toCamel .Name}} {{mapPrimitives .Type}}
+        {{end}}
+    }
+{{end}}

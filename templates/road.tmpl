@@ -8,13 +8,9 @@ package xodr
 {{end}}
 
 {{range .ComplexType}}
-    // {{ formatStructDocumentation .Annotation.Documentation.Text }}
+    // {{ formatStructDocumentation .Annotation.Documentation }}
     type {{ toCamel .Name }} struct {
-        {{- range .Attribute}}
-        {{ toCamel .Name}} {{mapPrimitives .Type}}
-        {{- end}}
-
-        {{range .Sequence.Element}}
+        {{range .ComplexContent.Extension.Sequence.Element}}
         {{ toCamel .Name}} {{mapPrimitives .Type}}
         {{end}}
     }
