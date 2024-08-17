@@ -9,13 +9,20 @@ package xodr
 
 {{range .ComplexType}}
     // {{ formatStructDocumentation .Annotation.Documentation.Text }}
-    type {{ toCamel .Name }} struct {
-        {{- range .Attribute}}
-        {{ toCamel .Name}} {{mapPrimitives .Type}}
-        {{- end }}
+    type {{ toCamel (removeTypePrefix .Name) }} struct {
+        {{$base := toCamel .ComplexContent.Extension.Base}}
+        {{toCamel (removeTypePrefix $base)}}
 
         {{range .ComplexContent.Extension.Sequence.Element}}
-        {{ toCamel .Name}} {{mapPrimitives .Type}}
+        {{toCamel .Name}} {{toCamel (removeTypePrefix .Type)}}
         {{end}}
+
+        {{- range .Attribute}}
+        {{toCamel .Name}} {{mapPrimitives .Type}}
+        {{- end }}
+
+        {{- range .Sequence.Element}}
+        {{toCamel .Name}} {{toCamel (removeTypePrefix .Type)}}
+        {{- end }}
     }
 {{end}}

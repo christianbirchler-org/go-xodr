@@ -3,12 +3,13 @@ package main
 import (
 	"bytes"
 	"encoding/xml"
-	"github.com/iancoleman/strcase"
 	"go/format"
 	"log"
 	"os"
 	"text/template"
 	"unicode"
+
+	"github.com/iancoleman/strcase"
 )
 
 func main() {
@@ -81,6 +82,7 @@ func main() {
 		"formatStructDocumentation":            formatStructDocumentation,
 		"toCamel":                              strcase.ToCamel,
 		"canCreateTRoadSignalsSignalReference": canCreateTRoadSignalsSignalReference,
+		"removeTypePrefix":                     removeTypePrefix,
 	}
 
 	generate(fnMap, coreSchema, "core")
@@ -90,6 +92,23 @@ func main() {
 	generate(fnMap, railroadSchema, "railroad")
 	generate(fnMap, roadSchema, "road")
 	generate(fnMap, signalSchema, "signal")
+}
+
+func removeTypePrefix(t string) string {
+	if len(t) < 3 {
+		return t
+	}
+	firstLetter := t[0:1]
+	suffix := t[2:]
+	switch firstLetter {
+	case "t_":
+		return suffix
+	case "T_":
+		return suffix
+	default:
+		return t
+
+	}
 }
 
 var funcCnt = 0
