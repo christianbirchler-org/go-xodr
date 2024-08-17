@@ -65,22 +65,18 @@ type TDataQualityRawData struct {
 
 // TODO: Doc formatting needs to be implemented!
 type THeader struct {
-	GeoReference THeaderGeoReference
-
-	Offset THeaderOffset
-
-	License TLicense
-
+	OpenDriveElement
+	GeoReference       THeaderGeoReference
+	Offset             THeaderOffset
+	License            TLicense
 	DefaultRegulations THeaderDefaultRegulations
 }
 
 // TODO: Doc formatting needs to be implemented!
 type THeaderDefaultRegulations struct {
-	RoadRegulations THeaderRoadRegulation
-
+	OpenDriveElement
+	RoadRegulations   THeaderRoadRegulation
 	SignalRegulations THeaderSignalRegulation
-
-	OpenDriveElement OpenDriveElement
 }
 
 // TODO: Doc formatting needs to be implemented!
@@ -89,19 +85,18 @@ type THeaderGeoReference struct {
 
 // TODO: Doc formatting needs to be implemented!
 type THeaderOffset struct {
+	OpenDriveElement
 }
 
 // TODO: Doc formatting needs to be implemented!
 type THeaderRoadRegulation struct {
-	OpenDriveElement OpenDriveElement
-
+	OpenDriveElement
 	Semantics TSignalsSemantics
 }
 
 // TODO: Doc formatting needs to be implemented!
 type THeaderSignalRegulation struct {
-	OpenDriveElement OpenDriveElement
-
+	OpenDriveElement
 	Semantics TSignalsSemantics
 }
 
@@ -112,6 +107,7 @@ type TInclude struct {
 
 // TODO: Doc formatting needs to be implemented!
 type TLicense struct {
+	OpenDriveElement
 }
 
 // TODO: Doc formatting needs to be implemented!
