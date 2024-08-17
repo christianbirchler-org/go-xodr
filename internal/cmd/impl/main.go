@@ -77,9 +77,9 @@ func main() {
 	}
 
 	fnMap := template.FuncMap{
-		"mapPrimitives":             mapPrimitives,
-		"formatStructDocumentation": formatStructDocumentation,
-		"toCamel":                   strcase.ToCamel,
+		"mapPrimitives":                        mapPrimitives,
+		"formatStructDocumentation":            formatStructDocumentation,
+		"toCamel":                              strcase.ToCamel,
 		"canCreateTRoadSignalsSignalReference": canCreateTRoadSignalsSignalReference,
 	}
 
