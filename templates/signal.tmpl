@@ -8,10 +8,14 @@ package xodr
 {{end}}
 
 {{range .ComplexType}}
+
+    {{if canCreateTRoadSignalsSignalReference (toCamel .Name)}}
     // {{ formatStructDocumentation .Annotation.Documentation }}
     type {{ toCamel .Name }} struct {
         {{range .ComplexContent.Extension.Sequence.Element}}
         {{ toCamel .Name}} {{mapPrimitives .Type}}
         {{end}}
     }
+    {{end}}
+
 {{end}}

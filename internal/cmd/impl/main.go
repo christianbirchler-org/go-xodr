@@ -80,6 +80,7 @@ func main() {
 		"mapPrimitives":             mapPrimitives,
 		"formatStructDocumentation": formatStructDocumentation,
 		"toCamel":                   strcase.ToCamel,
+		"canCreateTRoadSignalsSignalReference": canCreateTRoadSignalsSignalReference,
 	}
 
 	generate(fnMap, coreSchema, "core")
@@ -89,6 +90,16 @@ func main() {
 	generate(fnMap, railroadSchema, "railroad")
 	generate(fnMap, roadSchema, "road")
 	generate(fnMap, signalSchema, "signal")
+}
+
+var funcCnt = 0
+
+func canCreateTRoadSignalsSignalReference(camelCaseName string) bool {
+	if camelCaseName != "TRoadSignalsSignalReference" {
+		return true
+	}
+	funcCnt++
+	return funcCnt < 2
 }
 
 func generate(fnMap template.FuncMap, schema any, name string) {
