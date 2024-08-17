@@ -12,41 +12,67 @@ type EStationType struct {
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadRailroad struct {
-	Switch TRoadRailroadSwitch
+type RoadRailroad struct {
+	OpenDriveElement
+	Switch RoadRailroadSwitch
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadRailroadSwitch struct {
-	MainTrack TRoadRailroadSwitchMainTrack
-
-	SideTrack TRoadRailroadSwitchSideTrack
-
-	Partner TRoadRailroadSwitchPartner
+type RoadRailroadSwitch struct {
+	OpenDriveElement
+	MainTrack RoadRailroadSwitchMainTrack
+	SideTrack RoadRailroadSwitchSideTrack
+	Partner   RoadRailroadSwitchPartner
+	Id        string
+	Name      string
+	Position  ERoadRailroadSwitchPosition
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadRailroadSwitchMainTrack struct {
+type RoadRailroadSwitchMainTrack struct {
+	OpenDriveElement
+	Dir EElementDir
+	Id  string
+	S   TGrEqZero
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadRailroadSwitchPartner struct {
+type RoadRailroadSwitchPartner struct {
+	OpenDriveElement
+	Id   string
+	Name string
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadRailroadSwitchSideTrack struct {
+type RoadRailroadSwitchSideTrack struct {
+	OpenDriveElement
+	Dir EElementDir
+	Id  string
+	S   TGrEqZero
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TStation struct {
-	Platform TStationPlatform
+type Station struct {
+	OpenDriveElement
+	Platform StationPlatform
+	Id       string
+	Name     string
+	Type     EStationType
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TStationPlatform struct {
-	Segment TStationPlatformSegment
+type StationPlatform struct {
+	OpenDriveElement
+	Segment StationPlatformSegment
+	Id      string
+	Name    string
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TStationPlatformSegment struct {
+type StationPlatformSegment struct {
+	OpenDriveElement
+	RoadId string
+	SEnd   TGrEqZero
+	Side   EStationPlatformSegmentSide
+	SStart TGrEqZero
 }

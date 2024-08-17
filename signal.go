@@ -26,189 +26,278 @@ type ESignalsSemanticsSupplementaryEnvironment struct {
 type ESignalsSemanticsSupplementaryTime struct {
 }
 
-// TODO: Doc formatting needs to be implemented!
-type TController struct {
-	Control TControllerControl
+type EsignalsSemanticsSpeed struct {
+}
+
+type EunitSpeed struct {
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TControllerControl struct {
+type Controller struct {
+	OpenDriveElement
+	Control  *ControllerControl
+	Id       string
+	Name     string
+	Sequence int
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadSignals struct {
-	Signal TRoadSignalsSignalRoad
-
-	SignalReference TRoadSignalsSignalReference
+type ControllerControl struct {
+	OpenDriveElement
+	SignalId string
+	Type     string
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadSignalsBoard struct {
-	Validity TRoadObjectsObjectLaneValidity
-
-	Dependency TRoadSignalsSignalDependency
-
-	Reference TRoadSignalsSignalReference
+type RoadSignals struct {
+	OpenDriveElement
+	Signal          *RoadSignalsSignalRoad
+	SignalReference *RoadSignalsSpatialSignalReference
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadSignalsBoardSign struct {
+type RoadSignalsBoard struct {
+	OpenDriveElement
+	Validity   *RoadObjectsObjectLaneValidity
+	Dependency *RoadSignalsSignalDependency
+	Reference  *RoadSignalsSignalReference
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadSignalsDisplayArea struct {
+type RoadSignalsBoardSign struct {
+	RoadSignalsSignal
+	V float64
+	Z float64
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadSignalsSignal struct {
-	Validity TRoadObjectsObjectLaneValidity
-
-	Dependency TRoadSignalsSignalDependency
-
-	Reference TRoadSignalsSignalReference
-
-	StaticBoard TRoadSignalsStaticBoard
-
-	VmsBoard TRoadSignalsVmsBoard
-
-	Semantics TSignalsSemantics
+type RoadSignalsDisplayArea struct {
+	OpenDriveElement
+	Height string
+	Index  int
+	V      float64
+	Width  string
+	Z      float64
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadSignalsSignalDependency struct {
+type RoadSignalsSignal struct {
+	OpenDriveElement
+	Validity        *RoadObjectsObjectLaneValidity
+	Dependency      *RoadSignalsSignalDependency
+	Reference       *RoadSignalsSignalReference
+	StaticBoard     *RoadSignalsStaticBoard
+	VmsBoard        *RoadSignalsVmsBoard
+	Semantics       *SignalsSemantics
+	Country         ECountryCode
+	CountryRevision string
+	Dynamic         TYesNo
+	Height          TGrEqZero
+	HOffset         float64
+	Id              string
+	Length          TGrEqZero
+	Name            string
+	Orientation     EOrientation
+	Pitch           float64
+	Roll            float64
+	Subtype         string
+	Text            string
+	Type            string
+	Unit            EUnit
+	Value           float64
+	Width           TGrEqZero
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadSignalsSignalPositionInertial struct {
+type RoadSignalsSignalDependency struct {
+	OpenDriveElement
+	Id   string
+	Type string
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadSignalsSignalPositionRoad struct {
+type RoadSignalsSignalPositionInertial struct {
+	OpenDriveElement
+	Hdg   float64
+	Pitch float64
+	Roll  float64
+	X     float64
+	Y     float64
+	Z     float64
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadSignalsSignalReference struct {
+type RoadSignalsSignalPositionRoad struct {
+	OpenDriveElement
+	HOffset float64
+	Pitch   float64
+	RoadId  string
+	Roll    float64
+	S       TGrEqZero
+	T       float64
+	ZOffset float64
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadSignalsSignalRoad struct {
+type RoadSignalsSignalReference struct {
+	OpenDriveElement
+	ElementId   string
+	ElementType ERoadSignalsSignalReferenceElementType
+	Type        string
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadSignalsStaticBoard struct {
-	Sign TRoadSignalsBoardSign
+type RoadSignalsSignalRoad struct {
+	RoadSignalsSignal
+	S       TGrEqZero
+	T       float64
+	ZOffset float64
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadSignalsVmsBoard struct {
-	DisplayArea TRoadSignalsDisplayArea
+type RoadSignalsSpatialSignalReference struct {
+	OpenDriveElement
+	Validity    *RoadObjectsObjectLaneValidity
+	Id          string
+	Orientation EOrientation
+	S           TGrEqZero
+	T           float64
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TSignalGroupVmsBoardReference struct {
+type RoadSignalsStaticBoard struct {
+	RoadSignalsBoard
+	Sign *RoadSignalsBoardSign
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TSignalGroupVmsGroup struct {
-	VmsBoardReference TSignalGroupVmsBoardReference
-
-	OpenDriveElement OpenDriveElement
+type RoadSignalsVmsBoard struct {
+	RoadSignalsBoard
+	DisplayArea   *RoadSignalsDisplayArea
+	DisplayHeight float64
+	DisplayType   ERoadSignalsDisplayType
+	DisplayWidth  float64
+	V             float64
+	Z             float64
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TSignalsSemantics struct {
-	Speed TSignalsSemanticsSpeed
-
-	Lane TSignalsSemanticsLane
-
-	Priority TSignalsSemanticsPriority
-
-	Prohibited TSignalsSemanticsProhibited
-
-	Warning TSignalsSemanticsWarning
-
-	Routing TSignalsSemanticsRouting
-
-	Streetname TSignalsSemanticsStreetname
-
-	Parking TSignalsSemanticsParking
-
-	Tourist TSignalsSemanticsTourist
-
-	SupplementaryTime TSignalsSemanticsSupplementaryTime
-
-	SupplementaryAllows TSignalsSemanticsSupplementaryAllows
-
-	SupplementaryProhibits TSignalsSemanticsSupplementaryProhibits
-
-	SupplementaryDistance TSignalsSemanticsSupplementaryDistance
-
-	SupplementaryEnvironment TSignalsSemanticsSupplementaryEnvironment
-
-	SupplementaryExplanatory TSignalsSemanticsSupplementaryExplanatory
+type SignalGroupVmsBoardReference struct {
+	OpenDriveElement
+	GroupIndex int
+	SignalId   string
+	VmsIndex   int
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TSignalsSemanticsLane struct {
+type SignalGroupVmsGroup struct {
+	OpenDriveElement
+	VmsBoardReference *SignalGroupVmsBoardReference
+	Id                string
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TSignalsSemanticsParking struct {
+type SignalsSemantics struct {
+	OpenDriveElement
+	Speed                    *SignalsSemanticsSpeed
+	Lane                     *SignalsSemanticsLane
+	Priority                 *SignalsSemanticsPriority
+	Prohibited               *SignalsSemanticsProhibited
+	Warning                  *SignalsSemanticsWarning
+	Routing                  *SignalsSemanticsRouting
+	Streetname               *SignalsSemanticsStreetname
+	Parking                  *SignalsSemanticsParking
+	Tourist                  *SignalsSemanticsTourist
+	SupplementaryTime        *SignalsSemanticsSupplementaryTime
+	SupplementaryAllows      *SignalsSemanticsSupplementaryAllows
+	SupplementaryProhibits   *SignalsSemanticsSupplementaryProhibits
+	SupplementaryDistance    *SignalsSemanticsSupplementaryDistance
+	SupplementaryEnvironment *SignalsSemanticsSupplementaryEnvironment
+	SupplementaryExplanatory *SignalsSemanticsSupplementaryExplanatory
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TSignalsSemanticsPriority struct {
+type SignalsSemanticsLane struct {
+	OpenDriveElement
+	Type ESignalsSemanticsLane
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TSignalsSemanticsProhibited struct {
+type SignalsSemanticsParking struct {
+	OpenDriveElement
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TSignalsSemanticsRouting struct {
+type SignalsSemanticsPriority struct {
+	OpenDriveElement
+	Type ESignalsSemanticsPriority
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TSignalsSemanticsSpeed struct {
-	Type ESignalsSemanticsSpeed
+type SignalsSemanticsProhibited struct {
+	OpenDriveElement
+}
 
-	Unit EUnitSpeed
+// TODO: Doc formatting needs to be implemented!
+type SignalsSemanticsRouting struct {
+	OpenDriveElement
+}
 
+// TODO: Doc formatting needs to be implemented!
+type SignalsSemanticsSpeed struct {
+	OpenDriveElement
+	Type  *EsignalsSemanticsSpeed
+	Unit  *EunitSpeed
+	Value *float64
+}
+
+// TODO: Doc formatting needs to be implemented!
+type SignalsSemanticsStreetname struct {
+	OpenDriveElement
+}
+
+// TODO: Doc formatting needs to be implemented!
+type SignalsSemanticsSupplementaryAllows struct {
+	OpenDriveElement
+}
+
+// TODO: Doc formatting needs to be implemented!
+type SignalsSemanticsSupplementaryDistance struct {
+	OpenDriveElement
+	Type  ESignalsSemanticsSupplementaryDistance
+	Unit  EUnitDistance
 	Value float64
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TSignalsSemanticsStreetname struct {
+type SignalsSemanticsSupplementaryEnvironment struct {
+	OpenDriveElement
+	Type ESignalsSemanticsSupplementaryEnvironment
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TSignalsSemanticsSupplementaryAllows struct {
+type SignalsSemanticsSupplementaryExplanatory struct {
+	OpenDriveElement
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TSignalsSemanticsSupplementaryDistance struct {
+type SignalsSemanticsSupplementaryProhibits struct {
+	OpenDriveElement
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TSignalsSemanticsSupplementaryEnvironment struct {
+type SignalsSemanticsSupplementaryTime struct {
+	OpenDriveElement
+	Type  ESignalsSemanticsSupplementaryTime
+	Value float64
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TSignalsSemanticsSupplementaryExplanatory struct {
+type SignalsSemanticsTourist struct {
+	OpenDriveElement
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TSignalsSemanticsSupplementaryProhibits struct {
-}
-
-// TODO: Doc formatting needs to be implemented!
-type TSignalsSemanticsSupplementaryTime struct {
-}
-
-// TODO: Doc formatting needs to be implemented!
-type TSignalsSemanticsTourist struct {
-}
-
-// TODO: Doc formatting needs to be implemented!
-type TSignalsSemanticsWarning struct {
+type SignalsSemanticsWarning struct {
+	OpenDriveElement
 }

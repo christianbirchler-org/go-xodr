@@ -43,75 +43,84 @@ type OpenDriveElement struct {
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TDataQuality struct {
+type DataQuality struct {
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TDataQualityError struct {
-	XyAbsolute float64
-	XyRelative float64
-	ZAbsolute  float64
-	ZRelative  float64
+type DataQualityError struct {
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TDataQualityRawData struct {
-	Date                  string
-	PostProcessing        EDataQualityRawDataPostProcessing
-	PostProcessingComment string
-	Source                EDataQualityRawDataSource
-	SourceComment         string
+type DataQualityRawData struct {
 }
 
 // TODO: Doc formatting needs to be implemented!
-type THeader struct {
+type Header struct {
 	OpenDriveElement
-	GeoReference       THeaderGeoReference
-	Offset             THeaderOffset
-	License            TLicense
-	DefaultRegulations THeaderDefaultRegulations
+	GeoReference       HeaderGeoReference
+	Offset             HeaderOffset
+	License            License
+	DefaultRegulations HeaderDefaultRegulations
+	Date               string
+	East               float64
+	Name               string
+	North              float64
+	RevMajor           int
+	RevMinor           int
+	South              float64
+	Vendor             string
+	Version            string
+	West               float64
 }
 
 // TODO: Doc formatting needs to be implemented!
-type THeaderDefaultRegulations struct {
+type HeaderDefaultRegulations struct {
 	OpenDriveElement
-	RoadRegulations   THeaderRoadRegulation
-	SignalRegulations THeaderSignalRegulation
+	RoadRegulations   HeaderRoadRegulation
+	SignalRegulations HeaderSignalRegulation
 }
 
 // TODO: Doc formatting needs to be implemented!
-type THeaderGeoReference struct {
+type HeaderGeoReference struct {
 }
 
 // TODO: Doc formatting needs to be implemented!
-type THeaderOffset struct {
+type HeaderOffset struct {
 	OpenDriveElement
+	Hdg float64
+	X   float64
+	Y   float64
+	Z   float64
 }
 
 // TODO: Doc formatting needs to be implemented!
-type THeaderRoadRegulation struct {
+type HeaderRoadRegulation struct {
 	OpenDriveElement
-	Semantics TSignalsSemantics
+	Semantics SignalsSemantics
+	Type      ERoadType
 }
 
 // TODO: Doc formatting needs to be implemented!
-type THeaderSignalRegulation struct {
+type HeaderSignalRegulation struct {
 	OpenDriveElement
-	Semantics TSignalsSemantics
+	Semantics SignalsSemantics
+	Subtype   string
+	Type      string
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TInclude struct {
-	File string
+type Include struct {
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TLicense struct {
+type License struct {
 	OpenDriveElement
+	Name     string
+	Resource string
+	Spdxid   string
+	Text     string
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TUserData struct {
-	Code  string
-	Value string
+type UserData struct {
 }

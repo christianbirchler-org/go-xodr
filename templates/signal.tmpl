@@ -7,15 +7,30 @@ package xodr
     }
 {{end}}
 
+type EsignalsSemanticsSpeed struct {
+}
+
+type EunitSpeed struct {
+
+}
+
 {{range .ComplexType}}
-
-    {{if canCreateTRoadSignalsSignalReference (toCamel .Name)}}
     // {{ formatStructDocumentation .Annotation.Documentation }}
-    type {{ toCamel .Name }} struct {
-        {{range .ComplexContent.Extension.Sequence.Element}}
-        {{ toCamel .Name}} {{mapPrimitives .Type}}
-        {{end}}
-    }
-    {{end}}
+    type {{ distinctSignalsReferenceToCamel (removeTypePrefix .Name) }} struct {
+        {{$base := .ComplexContent.Extension.Base}}
+        {{distinctSignalsReferenceToCamel (removeTypePrefix $base)}}
 
+        {{- range .ComplexContent.Extension.Sequence.Element}}
+        {{- if ne $base  .Type}}
+        {{toCamel .Name}} * {{mapPrimitives (distinctSignalsReferenceToCamel (removeTypePrefix .Type))}}
+        {{- end}}
+        {{- end}}
+
+        {{- range .ComplexContent.Extension.Attribute}}
+        {{- if ne $base (toCamel .Type)}}
+        {{toCamel .Name}} {{mapPrimitives .Type}}
+        {{- end }}
+        {{- end }}
+
+    }
 {{end}}

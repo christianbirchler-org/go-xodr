@@ -27,110 +27,187 @@ type ETunnelType struct {
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadObjects struct {
-	Object TRoadObjectsObject
-
-	ObjectReference TRoadObjectsObjectReference
-
-	Tunnel TRoadObjectsTunnel
-
-	Bridge TRoadObjectsBridge
+type RoadObjects struct {
+	OpenDriveElement
+	Object          RoadObjectsObject
+	ObjectReference RoadObjectsObjectReference
+	Tunnel          RoadObjectsTunnel
+	Bridge          RoadObjectsBridge
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadObjectsBridge struct {
-	Validity TRoadObjectsObjectLaneValidity
+type RoadObjectsBridge struct {
+	OpenDriveElement
+	Validity RoadObjectsObjectLaneValidity
+	Id       string
+	Length   TGrEqZero
+	Name     string
+	S        TGrEqZero
+	Type     EBridgeType
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadObjectsObject struct {
-	Repeat TRoadObjectsObjectRepeat
-
-	Outline TRoadObjectsObjectOutlinesOutline
-
-	Outlines TRoadObjectsObjectOutlines
-
-	Material TRoadObjectsObjectMaterial
-
-	Validity TRoadObjectsObjectLaneValidity
-
-	ParkingSpace TRoadObjectsObjectParkingSpace
-
-	Markings TRoadObjectsObjectMarkings
-
-	Borders TRoadObjectsObjectBorders
-
-	Surface TRoadObjectsObjectSurface
-
-	Skeleton TRoadObjectsObjectSkeleton
+type RoadObjectsObject struct {
+	OpenDriveElement
+	Repeat       RoadObjectsObjectRepeat
+	Outline      RoadObjectsObjectOutlinesOutline
+	Outlines     RoadObjectsObjectOutlines
+	Material     RoadObjectsObjectMaterial
+	Validity     RoadObjectsObjectLaneValidity
+	ParkingSpace RoadObjectsObjectParkingSpace
+	Markings     RoadObjectsObjectMarkings
+	Borders      RoadObjectsObjectBorders
+	Surface      RoadObjectsObjectSurface
+	Skeleton     RoadObjectsObjectSkeleton
+	Dynamic      TYesNo
+	Hdg          float64
+	Height       TGrEqZero
+	Id           string
+	Length       TGrZero
+	Name         string
+	Orientation  EOrientation
+	PerpToRoad   TBool
+	Pitch        float64
+	Radius       TGrZero
+	Roll         float64
+	S            TGrEqZero
+	Subtype      string
+	T            float64
+	Type         EObjectType
+	ValidLength  TGrEqZero
+	Width        float64
+	ZOffset      float64
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadObjectsObjectBorders struct {
-	Border TRoadObjectsObjectBordersBorder
+type RoadObjectsObjectBorders struct {
+	OpenDriveElement
+	Border RoadObjectsObjectBordersBorder
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadObjectsObjectBordersBorder struct {
-	CornerReference TRoadObjectsObjectMarkingsMarkingCornerReference
+type RoadObjectsObjectBordersBorder struct {
+	OpenDriveElement
+	CornerReference    RoadObjectsObjectMarkingsMarkingCornerReference
+	OutlineId          int
+	Type               EBorderType
+	UseCompleteOutline TBool
+	Width              TGrEqZero
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadObjectsObjectMarkings struct {
-	Marking TRoadObjectsObjectMarkingsMarking
+type RoadObjectsObjectMarkings struct {
+	OpenDriveElement
+	Marking RoadObjectsObjectMarkingsMarking
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadObjectsObjectMarkingsMarking struct {
-	CornerReference TRoadObjectsObjectMarkingsMarkingCornerReference
+type RoadObjectsObjectMarkingsMarking struct {
+	OpenDriveElement
+	CornerReference RoadObjectsObjectMarkingsMarkingCornerReference
+	Color           ERoadMarkColor
+	LineLength      TGrZero
+	Side            ESideType
+	SpaceLength     TGrEqZero
+	StartOffset     float64
+	StopOffset      float64
+	Weight          ERoadMarkWeight
+	Width           TGrZero
+	ZOffset         TGrEqZero
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadObjectsObjectMarkingsMarkingCornerReference struct {
-}
-
-// TODO: Doc formatting needs to be implemented!
-type TRoadObjectsObjectMaterial struct {
-}
-
-// TODO: Doc formatting needs to be implemented!
-type TRoadObjectsObjectOutlines struct {
-	Outline TRoadObjectsObjectOutlinesOutline
-}
-
-// TODO: Doc formatting needs to be implemented!
-type TRoadObjectsObjectOutlinesOutline struct {
-}
-
-// TODO: Doc formatting needs to be implemented!
-type TRoadObjectsObjectOutlinesOutlineCornerLocal struct {
-}
-
-// TODO: Doc formatting needs to be implemented!
-type TRoadObjectsObjectOutlinesOutlineCornerRoad struct {
-}
-
-// TODO: Doc formatting needs to be implemented!
-type TRoadObjectsObjectParkingSpace struct {
-}
-
-// TODO: Doc formatting needs to be implemented!
-type TRoadObjectsObjectRepeat struct {
-}
-
-// TODO: Doc formatting needs to be implemented!
-type TRoadObjectsObjectSkeleton struct {
-}
-
-// TODO: Doc formatting needs to be implemented!
-type TRoadObjectsObjectSkeletonPolyline struct {
+type RoadObjectsObjectMarkingsMarkingCornerReference struct {
+	OpenDriveElement
 	Id int
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadObjectsObjectSkeletonPolylineVertexLocal struct {
+type RoadObjectsObjectMaterial struct {
+	OpenDriveElement
+	Friction      TGrEqZero
+	RoadMarkColor ERoadMarkColor
+	Roughness     TGrEqZero
+	Surface       string
+}
+
+// TODO: Doc formatting needs to be implemented!
+type RoadObjectsObjectOutlines struct {
+	OpenDriveElement
+	Outline RoadObjectsObjectOutlinesOutline
+}
+
+// TODO: Doc formatting needs to be implemented!
+type RoadObjectsObjectOutlinesOutline struct {
+	OpenDriveElement
+	Closed   TBool
+	FillType EOutlineFillType
+	Id       int
+	LaneType ELaneType
+	Outer    TBool
+}
+
+// TODO: Doc formatting needs to be implemented!
+type RoadObjectsObjectOutlinesOutlineCornerLocal struct {
+	OpenDriveElement
+	Height TGrEqZero
+	Id     int
+	U      float64
+	V      float64
+	Z      float64
+}
+
+// TODO: Doc formatting needs to be implemented!
+type RoadObjectsObjectOutlinesOutlineCornerRoad struct {
+	OpenDriveElement
+	Dz     float64
+	Height TGrEqZero
+	Id     int
+	S      TGrEqZero
+	T      float64
+}
+
+// TODO: Doc formatting needs to be implemented!
+type RoadObjectsObjectParkingSpace struct {
+	OpenDriveElement
+	Access       ERoadObjectsObjectParkingSpaceAccess
+	Restrictions string
+}
+
+// TODO: Doc formatting needs to be implemented!
+type RoadObjectsObjectRepeat struct {
+	OpenDriveElement
+	DetachFromReferenceLine TBool
+	Distance                TGrEqZero
+	HeightEnd               TGrEqZero
+	HeightStart             TGrEqZero
+	Length                  TGrEqZero
+	LengthEnd               TGrEqZero
+	LengthStart             TGrEqZero
+	RadiusEnd               TGrEqZero
+	RadiusStart             TGrEqZero
+	S                       TGrEqZero
+	TEnd                    float64
+	TStart                  float64
+	WidthEnd                TGrEqZero
+	WidthStart              TGrEqZero
+	ZOffsetEnd              float64
+	ZOffsetStart            float64
+}
+
+// TODO: Doc formatting needs to be implemented!
+type RoadObjectsObjectSkeleton struct {
+}
+
+// TODO: Doc formatting needs to be implemented!
+type RoadObjectsObjectSkeletonPolyline struct {
+	Id int
+}
+
+// TODO: Doc formatting needs to be implemented!
+type RoadObjectsObjectSkeletonPolylineVertexLocal struct {
 	Id                int
-	IntersectionPoint TBool
+	IntersectionPoint bool
 	Radius            float64
 	U                 float64
 	V                 float64
@@ -138,30 +215,50 @@ type TRoadObjectsObjectSkeletonPolylineVertexLocal struct {
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadObjectsObjectSkeletonPolylineVertexRoad struct {
+type RoadObjectsObjectSkeletonPolylineVertexRoad struct {
 	Dz                float64
 	Id                int
-	IntersectionPoint TBool
+	IntersectionPoint bool
 	Radius            float64
-	S                 TGrEqZero
+	S                 float64
 	T                 float64
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadObjectsObjectSurface struct {
-	Crg TRoadObjectsObjectSurfaceCrg
+type RoadObjectsObjectSurface struct {
+	OpenDriveElement
+	Crg RoadObjectsObjectSurfaceCrg
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadObjectsObjectSurfaceCrg struct {
+type RoadObjectsObjectSurfaceCrg struct {
+	OpenDriveElement
+	File               string
+	HideRoadSurfaceCrg TBool
+	ZScale             float64
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadObjectsObjectReference struct {
-	Validity TRoadObjectsObjectLaneValidity
+type RoadObjectsObjectReference struct {
+	OpenDriveElement
+	Validity    RoadObjectsObjectLaneValidity
+	Id          string
+	Orientation EOrientation
+	S           TGrEqZero
+	T           float64
+	ValidLength TGrEqZero
+	ZOffset     float64
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadObjectsTunnel struct {
-	Validity TRoadObjectsObjectLaneValidity
+type RoadObjectsTunnel struct {
+	OpenDriveElement
+	Validity RoadObjectsObjectLaneValidity
+	Daylight TZeroOne
+	Id       string
+	Length   TGrEqZero
+	Lighting TZeroOne
+	Name     string
+	S        TGrEqZero
+	Type     ETunnelType
 }

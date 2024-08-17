@@ -13,9 +13,9 @@ package xodr
         {{$base := .ComplexContent.Extension.Base}}
         {{toCamel (removeTypePrefix $base)}}
 
-        {{range .ComplexContent.Extension.Sequence.Element}}
+        {{- range .ComplexContent.Extension.Sequence.Element}}
         {{toCamel .Name}} {{toCamel (removeTypePrefix .Type)}}
-        {{end}}
+        {{- end}}
 
         {{- range .Attribute}}
         {{toCamel .Name}} {{mapPrimitives .Type}}

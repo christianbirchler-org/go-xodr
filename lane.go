@@ -36,147 +36,163 @@ type TBool struct {
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadLanes struct {
-	LaneOffset TRoadLanesLaneOffset
-
-	LaneSection TRoadLanesLaneSection
+type RoadLanes struct {
+	OpenDriveElement
+	LaneOffset  RoadLanesLaneOffset
+	LaneSection RoadLanesLaneSection
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadLanesLaneOffset struct {
+type RoadLanesLaneOffset struct {
+	OpenDriveElement
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadLanesLaneSection struct {
-	Left TRoadLanesLaneSectionLeft
-
-	Center TRoadLanesLaneSectionCenter
-
-	Right TRoadLanesLaneSectionRight
+type RoadLanesLaneSection struct {
+	OpenDriveElement
+	Left   RoadLanesLaneSectionLeft
+	Center RoadLanesLaneSectionCenter
+	Right  RoadLanesLaneSectionRight
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadLanesLaneSectionCenter struct {
-	Lane TRoadLanesLaneSectionCenterLane
+type RoadLanesLaneSectionCenter struct {
+	OpenDriveElement
+	Lane RoadLanesLaneSectionCenterLane
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadLanesLaneSectionCenterLane struct {
-	Id    int
-	Level TBool
-	Type  ELaneType
+type RoadLanesLaneSectionCenterLane struct {
+	Id       int
+	Level    TBool
+	Type     ELaneType
+	Link     RoadLanesLaneSectionLcrLaneLink
+	RoadMark RoadLanesLaneSectionLcrLaneRoadMark
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadLanesLaneSectionLcrLaneLink struct {
-	Predecessor TRoadLanesLaneSectionLcrLaneLinkPredecessorSuccessor
-
-	Successor TRoadLanesLaneSectionLcrLaneLinkPredecessorSuccessor
+type RoadLanesLaneSectionLcrLaneLink struct {
+	OpenDriveElement
+	Predecessor RoadLanesLaneSectionLcrLaneLinkPredecessorSuccessor
+	Successor   RoadLanesLaneSectionLcrLaneLinkPredecessorSuccessor
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadLanesLaneSectionLcrLaneLinkPredecessorSuccessor struct {
+type RoadLanesLaneSectionLcrLaneLinkPredecessorSuccessor struct {
+	OpenDriveElement
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadLanesLaneSectionLcrLaneRoadMark struct {
-	Sway TRoadLanesLaneSectionLcrLaneRoadMarkSway
-
-	Type TRoadLanesLaneSectionLcrLaneRoadMarkType
-
-	Explicit TRoadLanesLaneSectionLcrLaneRoadMarkExplicit
+type RoadLanesLaneSectionLcrLaneRoadMark struct {
+	OpenDriveElement
+	Sway     RoadLanesLaneSectionLcrLaneRoadMarkSway
+	Type     RoadLanesLaneSectionLcrLaneRoadMarkType
+	Explicit RoadLanesLaneSectionLcrLaneRoadMarkExplicit
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadLanesLaneSectionLcrLaneRoadMarkExplicit struct {
-	Line TRoadLanesLaneSectionLcrLaneRoadMarkExplicitLine
+type RoadLanesLaneSectionLcrLaneRoadMarkExplicit struct {
+	OpenDriveElement
+	Line RoadLanesLaneSectionLcrLaneRoadMarkExplicitLine
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadLanesLaneSectionLcrLaneRoadMarkExplicitLine struct {
+type RoadLanesLaneSectionLcrLaneRoadMarkExplicitLine struct {
+	OpenDriveElement
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadLanesLaneSectionLcrLaneRoadMarkSway struct {
+type RoadLanesLaneSectionLcrLaneRoadMarkSway struct {
+	OpenDriveElement
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadLanesLaneSectionLcrLaneRoadMarkType struct {
-	Line TRoadLanesLaneSectionLcrLaneRoadMarkTypeLine
+type RoadLanesLaneSectionLcrLaneRoadMarkType struct {
+	OpenDriveElement
+	Line RoadLanesLaneSectionLcrLaneRoadMarkTypeLine
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadLanesLaneSectionLcrLaneRoadMarkTypeLine struct {
+type RoadLanesLaneSectionLcrLaneRoadMarkTypeLine struct {
+	OpenDriveElement
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadLanesLaneSectionLeft struct {
-	Lane TRoadLanesLaneSectionLeftLane
+type RoadLanesLaneSectionLeft struct {
+	OpenDriveElement
+	Lane RoadLanesLaneSectionLeftLane
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadLanesLaneSectionLeftLane struct {
+type RoadLanesLaneSectionLeftLane struct {
+	RoadLanesLaneSectionLrLane
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadLanesLaneSectionLrLane struct {
-	Link TRoadLanesLaneSectionLcrLaneLink
-
-	RoadMark TRoadLanesLaneSectionLcrLaneRoadMark
-
-	Material TRoadLanesLaneSectionLrLaneMaterial
-
-	Speed TRoadLanesLaneSectionLrLaneSpeed
-
-	Access TRoadLanesLaneSectionLrLaneAccess
-
-	Height TRoadLanesLaneSectionLrLaneHeight
-
-	Rule TRoadLanesLaneSectionLrLaneRule
+type RoadLanesLaneSectionLrLane struct {
+	OpenDriveElement
+	Link     RoadLanesLaneSectionLcrLaneLink
+	RoadMark RoadLanesLaneSectionLcrLaneRoadMark
+	Material RoadLanesLaneSectionLrLaneMaterial
+	Speed    RoadLanesLaneSectionLrLaneSpeed
+	Access   RoadLanesLaneSectionLrLaneAccess
+	Height   RoadLanesLaneSectionLrLaneHeight
+	Rule     RoadLanesLaneSectionLrLaneRule
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadLanesLaneSectionLrLaneAccess struct {
-	Restriction TRoadLanesLaneSectionLrLaneAccessRestriction
+type RoadLanesLaneSectionLrLaneAccess struct {
+	OpenDriveElement
+	Restriction RoadLanesLaneSectionLrLaneAccessRestriction
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadLanesLaneSectionLrLaneAccessRestriction struct {
+type RoadLanesLaneSectionLrLaneAccessRestriction struct {
+	OpenDriveElement
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadLanesLaneSectionLrLaneBorder struct {
+type RoadLanesLaneSectionLrLaneBorder struct {
+	OpenDriveElement
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadLanesLaneSectionLrLaneHeight struct {
+type RoadLanesLaneSectionLrLaneHeight struct {
+	OpenDriveElement
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadLanesLaneSectionLrLaneMaterial struct {
+type RoadLanesLaneSectionLrLaneMaterial struct {
+	OpenDriveElement
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadLanesLaneSectionLrLaneRule struct {
+type RoadLanesLaneSectionLrLaneRule struct {
+	OpenDriveElement
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadLanesLaneSectionLrLaneSpeed struct {
+type RoadLanesLaneSectionLrLaneSpeed struct {
+	OpenDriveElement
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadLanesLaneSectionLrLaneWidth struct {
+type RoadLanesLaneSectionLrLaneWidth struct {
+	OpenDriveElement
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadLanesLaneSectionRight struct {
-	Lane TRoadLanesLaneSectionRightLane
+type RoadLanesLaneSectionRight struct {
+	OpenDriveElement
+	Lane RoadLanesLaneSectionRightLane
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadLanesLaneSectionRightLane struct {
+type RoadLanesLaneSectionRightLane struct {
+	RoadLanesLaneSectionLrLane
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TRoadObjectsObjectLaneValidity struct {
+type RoadObjectsObjectLaneValidity struct {
+	OpenDriveElement
 }

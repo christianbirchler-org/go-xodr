@@ -30,199 +30,165 @@ type TJunctionGridPositionList struct {
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TJunction struct {
+type Junction struct {
 	OpenDriveElement
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TJunctionBoundary struct {
+type JunctionBoundary struct {
 	OpenDriveElement
-
-	Segment TJunctionBoundarySegment
+	Segment JunctionBoundarySegment
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TJunctionBoundarySegment struct {
-	OpenDriveElement
-}
-
-// TODO: Doc formatting needs to be implemented!
-type TJunctionBoundarySegmentJoint struct {
-	TJunctionBoundarySegment
-}
-
-// TODO: Doc formatting needs to be implemented!
-type TJunctionBoundarySegmentLane struct {
-	TJunctionBoundarySegment
-}
-
-// TODO: Doc formatting needs to be implemented!
-type TJunctionCommon struct {
-	TJunction
-
-	Connection TJunctionConnectionCommon
-
-	CrossPath TJunctionCrossPath
-
-	Priority TJunctionPriority
-
-	Controller TJunctionController
-
-	Surface TRoadSurface
-
-	PlanView TRoadPlanView
-
-	Objects TRoadObjects
-
-	Boundary TJunctionBoundary
-
-	ElevationGrid TJunctionElevationGrid
-}
-
-// TODO: Doc formatting needs to be implemented!
-type TJunctionConnection struct {
-	OpenDriveElement
-
-	LaneLink TJunctionConnectionLaneLink
-}
-
-// TODO: Doc formatting needs to be implemented!
-type TJunctionConnectionCommon struct {
-	TJunctionConnection
-}
-
-// TODO: Doc formatting needs to be implemented!
-type TJunctionConnectionDirect struct {
-	TJunctionConnection
-}
-
-// TODO: Doc formatting needs to be implemented!
-type TJunctionConnectionLaneLink struct {
+type JunctionBoundarySegment struct {
 	OpenDriveElement
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TJunctionConnectionVirtual struct {
-	TJunctionConnection
-
-	Predecessor TJunctionPredecessorSuccessor
-
-	Successor TJunctionPredecessorSuccessor
+type JunctionBoundarySegmentJoint struct {
+	JunctionBoundarySegment
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TJunctionConnectionVirtualDefault struct {
-	TJunctionConnection
+type JunctionBoundarySegmentLane struct {
+	JunctionBoundarySegment
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TJunctionController struct {
+type JunctionCommon struct {
+	Junction
+	Connection    JunctionConnectionCommon
+	CrossPath     JunctionCrossPath
+	Priority      JunctionPriority
+	Controller    JunctionController
+	Surface       RoadSurface
+	PlanView      RoadPlanView
+	Objects       RoadObjects
+	Boundary      JunctionBoundary
+	ElevationGrid JunctionElevationGrid
+}
+
+// TODO: Doc formatting needs to be implemented!
+type JunctionConnection struct {
+	OpenDriveElement
+	LaneLink JunctionConnectionLaneLink
+}
+
+// TODO: Doc formatting needs to be implemented!
+type JunctionConnectionCommon struct {
+	JunctionConnection
+}
+
+// TODO: Doc formatting needs to be implemented!
+type JunctionConnectionDirect struct {
+	JunctionConnection
+}
+
+// TODO: Doc formatting needs to be implemented!
+type JunctionConnectionLaneLink struct {
 	OpenDriveElement
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TJunctionCrossing struct {
-	TJunction
-
-	RoadSection TJunctionRoadSection
-
-	Priority TJunctionPriority
-
-	Controller TJunctionController
-
-	Surface TRoadSurface
-
-	PlanView TRoadPlanView
-
-	Objects TRoadObjects
+type JunctionConnectionVirtual struct {
+	JunctionConnection
+	Predecessor JunctionPredecessorSuccessor
+	Successor   JunctionPredecessorSuccessor
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TJunctionCrossPath struct {
+type JunctionConnectionVirtualDefault struct {
+	JunctionConnection
+}
+
+// TODO: Doc formatting needs to be implemented!
+type JunctionController struct {
+	OpenDriveElement
+}
+
+// TODO: Doc formatting needs to be implemented!
+type JunctionCrossing struct {
+	Junction
+	RoadSection JunctionRoadSection
+	Priority    JunctionPriority
+	Controller  JunctionController
+	Surface     RoadSurface
+	PlanView    RoadPlanView
+	Objects     RoadObjects
+}
+
+// TODO: Doc formatting needs to be implemented!
+type JunctionCrossPath struct {
 	CrossingRoad  string
 	Id            string
 	RoadAtEnd     string
 	RoadAtStart   string
-	StartLaneLink TJunctionCrossPathLaneLink
-	EndLaneLink   TJunctionCrossPathLaneLink
+	StartLaneLink JunctionCrossPathLaneLink
+	EndLaneLink   JunctionCrossPathLaneLink
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TJunctionCrossPathLaneLink struct {
+type JunctionCrossPathLaneLink struct {
 	OpenDriveElement
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TJunctionDirect struct {
-	TJunction
-
-	Connection TJunctionConnectionDirect
-
-	Priority TJunctionPriority
-
-	Controller TJunctionController
-
-	Surface TRoadSurface
-
-	PlanView TRoadPlanView
-
-	Objects TRoadObjects
+type JunctionDirect struct {
+	Junction
+	Connection JunctionConnectionDirect
+	Priority   JunctionPriority
+	Controller JunctionController
+	Surface    RoadSurface
+	PlanView   RoadPlanView
+	Objects    RoadObjects
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TJunctionElevationGrid struct {
+type JunctionElevationGrid struct {
 	OpenDriveElement
-
-	Elevation TJunctionElevationGridElevation
+	Elevation JunctionElevationGridElevation
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TJunctionElevationGridElevation struct {
+type JunctionElevationGridElevation struct {
 	OpenDriveElement
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TJunctionPredecessorSuccessor struct {
+type JunctionPredecessorSuccessor struct {
 	OpenDriveElement
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TJunctionPriority struct {
+type JunctionPriority struct {
 	OpenDriveElement
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TJunctionRoadSection struct {
+type JunctionRoadSection struct {
 	OpenDriveElement
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TJunctionVirtual struct {
-	TJunction
-
-	Connection TJunctionConnection
-
-	CrossPath TJunctionCrossPath
-
-	Priority TJunctionPriority
-
-	Controller TJunctionController
-
-	Surface TRoadSurface
-
-	PlanView TRoadPlanView
-
-	Objects TRoadObjects
+type JunctionVirtual struct {
+	Junction
+	Connection JunctionConnection
+	CrossPath  JunctionCrossPath
+	Priority   JunctionPriority
+	Controller JunctionController
+	Surface    RoadSurface
+	PlanView   RoadPlanView
+	Objects    RoadObjects
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TJunctionGroup struct {
+type JunctionGroup struct {
 	OpenDriveElement
-
-	JunctionReference TJunctionGroupJunctionReference
+	JunctionReference JunctionGroupJunctionReference
 }
 
 // TODO: Doc formatting needs to be implemented!
-type TJunctionGroupJunctionReference struct {
+type JunctionGroupJunctionReference struct {
 	OpenDriveElement
 }

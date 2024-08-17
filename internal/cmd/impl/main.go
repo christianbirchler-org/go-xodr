@@ -7,6 +7,7 @@ import (
 	"go/format"
 	"log"
 	"os"
+	"regexp"
 	"text/template"
 	"unicode"
 
@@ -17,7 +18,7 @@ func main() {
 	xsdPath := flag.String("xsd", ".", "path to xsd_schema directory")
 	flag.Parse()
 
-	coreFile, err := os.ReadFile(*xsdPath+"/OpenDRIVE_Core.xsd")
+	coreFile, err := os.ReadFile(*xsdPath + "/OpenDRIVE_Core.xsd")
 	if err != nil {
 		panic(err)
 	}
@@ -26,7 +27,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	junctionFile, err := os.ReadFile(*xsdPath+"/OpenDRIVE_Junction.xsd")
+	junctionFile, err := os.ReadFile(*xsdPath + "/OpenDRIVE_Junction.xsd")
 	if err != nil {
 		panic(err)
 	}
@@ -35,7 +36,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	laneFile, err := os.ReadFile(*xsdPath+"/OpenDRIVE_Lane.xsd")
+	laneFile, err := os.ReadFile(*xsdPath + "/OpenDRIVE_Lane.xsd")
 	if err != nil {
 		panic(err)
 	}
@@ -44,7 +45,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	objectFile, err := os.ReadFile(*xsdPath+"/OpenDRIVE_Object.xsd")
+	objectFile, err := os.ReadFile(*xsdPath + "/OpenDRIVE_Object.xsd")
 	if err != nil {
 		panic(err)
 	}
@@ -53,7 +54,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	railroadFile, err := os.ReadFile(*xsdPath+"/OpenDRIVE_Railroad.xsd")
+	railroadFile, err := os.ReadFile(*xsdPath + "/OpenDRIVE_Railroad.xsd")
 	if err != nil {
 		panic(err)
 	}
@@ -62,7 +63,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	roadFile, err := os.ReadFile(*xsdPath+"/OpenDRIVE_Road.xsd")
+	roadFile, err := os.ReadFile(*xsdPath + "/OpenDRIVE_Road.xsd")
 	if err != nil {
 		panic(err)
 	}
@@ -71,7 +72,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	signalFile, err := os.ReadFile(*xsdPath+"/OpenDRIVE_Signal.xsd")
+	signalFile, err := os.ReadFile(*xsdPath + "/OpenDRIVE_Signal.xsd")
 	if err != nil {
 		panic(err)
 	}
@@ -87,6 +88,7 @@ func main() {
 		"toCamel":                              strcase.ToCamel,
 		"canCreateTRoadSignalsSignalReference": canCreateTRoadSignalsSignalReference,
 		"removeTypePrefix":                     removeTypePrefix,
+		"distinctSignalsReferenceToCamel":      distinctSignalsReferenceToCamel,
 	}
 
 	generate(fnMap, coreSchema, "core")
@@ -98,21 +100,29 @@ func main() {
 	generate(fnMap, signalSchema, "signal")
 }
 
-func removeTypePrefix(t string) string {
-	if len(t) < 3 {
-		return t
-	}
-	firstLetter := t[0:1]
-	suffix := t[2:]
-	switch firstLetter {
-	case "t_":
-		return suffix
-	case "T_":
-		return suffix
+func distinctSignalsReferenceToCamel(t string) string {
+	switch t {
+	case "road_signals_signal_reference":
+		return strcase.ToCamel("road_signals_signal_reference")
+	case "road_signals_signalReference":
+		return strcase.ToCamel("road_signals_SpatialSignalReference")
+	case "t_road_signals_signal_reference":
+		return strcase.ToCamel("road_signals_signal_reference")
+	case "t_road_signals_signalReference":
+		return strcase.ToCamel("road_signals_SpatialSignalReference")
 	default:
-		return t
+		return strcase.ToCamel(t)
 
 	}
+}
+
+func removeTypePrefix(t string) string {
+	re, err := regexp.Compile("^t_")
+	if err != nil {
+		panic(err)
+	}
+	return string(re.ReplaceAll([]byte(t), []byte("")))
+
 }
 
 var funcCnt = 0
@@ -151,11 +161,16 @@ func formatStructDocumentation(doc string) string {
 }
 
 var primitives = map[string]string{
-	"xs:double":          "float64",
-	"xs:int":             "int",
-	"xs:integer":         "int",
-	"xs:positiveInteger": "int",
-	"xs:string":          "string",
+	"xs:double":             "float64",
+	"Xsdouble":              "float64",
+	"GrEqZero":              "float64",
+	"xs:int":                "int",
+	"xs:integer":            "int",
+	"xs:nonNegativeInteger": "int",
+	"xs:positiveInteger":    "int",
+	"XspositiveInteger":     "int",
+	"xs:string":             "string",
+	"Bool":                  "bool",
 }
 
 func mapPrimitives(t string) string {
