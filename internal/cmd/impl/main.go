@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"encoding/xml"
+	"flag"
 	"go/format"
 	"log"
 	"os"
@@ -13,7 +14,10 @@ import (
 )
 
 func main() {
-	coreFile, err := os.ReadFile("C:\\Users\\birch\\repositories\\go-xodr\\xsd_schema\\OpenDRIVE_Core.xsd")
+	xsdPath := flag.String("xsd", ".", "path to xsd_schema directory")
+	flag.Parse()
+
+	coreFile, err := os.ReadFile(*xsdPath+"/OpenDRIVE_Core.xsd")
 	if err != nil {
 		panic(err)
 	}
@@ -22,7 +26,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	junctionFile, err := os.ReadFile("C:\\Users\\birch\\repositories\\go-xodr\\xsd_schema\\OpenDRIVE_Junction.xsd")
+	junctionFile, err := os.ReadFile(*xsdPath+"/OpenDRIVE_Junction.xsd")
 	if err != nil {
 		panic(err)
 	}
@@ -31,7 +35,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	laneFile, err := os.ReadFile("C:\\Users\\birch\\repositories\\go-xodr\\xsd_schema\\OpenDRIVE_Lane.xsd")
+	laneFile, err := os.ReadFile(*xsdPath+"/OpenDRIVE_Lane.xsd")
 	if err != nil {
 		panic(err)
 	}
@@ -40,7 +44,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	objectFile, err := os.ReadFile("C:\\Users\\birch\\repositories\\go-xodr\\xsd_schema\\OpenDRIVE_Object.xsd")
+	objectFile, err := os.ReadFile(*xsdPath+"/OpenDRIVE_Object.xsd")
 	if err != nil {
 		panic(err)
 	}
@@ -49,7 +53,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	railroadFile, err := os.ReadFile("C:\\Users\\birch\\repositories\\go-xodr\\xsd_schema\\OpenDRIVE_Railroad.xsd")
+	railroadFile, err := os.ReadFile(*xsdPath+"/OpenDRIVE_Railroad.xsd")
 	if err != nil {
 		panic(err)
 	}
@@ -58,7 +62,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	roadFile, err := os.ReadFile("C:\\Users\\birch\\repositories\\go-xodr\\xsd_schema\\OpenDRIVE_Road.xsd")
+	roadFile, err := os.ReadFile(*xsdPath+"/OpenDRIVE_Road.xsd")
 	if err != nil {
 		panic(err)
 	}
@@ -67,7 +71,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	signalFile, err := os.ReadFile("C:\\Users\\birch\\repositories\\go-xodr\\xsd_schema\\OpenDRIVE_Signal.xsd")
+	signalFile, err := os.ReadFile(*xsdPath+"/OpenDRIVE_Signal.xsd")
 	if err != nil {
 		panic(err)
 	}
@@ -123,7 +127,7 @@ func canCreateTRoadSignalsSignalReference(camelCaseName string) bool {
 
 func generate(fnMap template.FuncMap, schema any, name string) {
 	tmpl := template.New(name + ".tmpl").Funcs(fnMap)
-	tmpl, err := tmpl.ParseFiles("C:\\Users\\birch\\repositories\\go-xodr\\templates\\" + name + ".tmpl")
+	tmpl, err := tmpl.ParseFiles("/Users/christian/repositories/go-xodr/templates/" + name + ".tmpl")
 	if err != nil {
 		panic(err)
 	}
