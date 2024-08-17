@@ -10,7 +10,7 @@ package xodr
 {{range .ComplexType}}
     // {{ formatStructDocumentation .Annotation.Documentation.Text }}
     type {{ toCamel (removeTypePrefix .Name) }} struct {
-        {{$base := toCamel .ComplexContent.Extension.Base}}
+        {{$base := .ComplexContent.Extension.Base}}
         {{toCamel (removeTypePrefix $base)}}
 
         {{range .ComplexContent.Extension.Sequence.Element}}

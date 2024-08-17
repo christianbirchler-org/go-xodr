@@ -48,17 +48,17 @@ type TJunctionBoundarySegment struct {
 
 // TODO: Doc formatting needs to be implemented!
 type TJunctionBoundarySegmentJoint struct {
-	TjunctionBoundarySegment
+	TJunctionBoundarySegment
 }
 
 // TODO: Doc formatting needs to be implemented!
 type TJunctionBoundarySegmentLane struct {
-	TjunctionBoundarySegment
+	TJunctionBoundarySegment
 }
 
 // TODO: Doc formatting needs to be implemented!
 type TJunctionCommon struct {
-	Tjunction
+	TJunction
 
 	Connection TJunctionConnectionCommon
 
@@ -88,12 +88,12 @@ type TJunctionConnection struct {
 
 // TODO: Doc formatting needs to be implemented!
 type TJunctionConnectionCommon struct {
-	TjunctionConnection
+	TJunctionConnection
 }
 
 // TODO: Doc formatting needs to be implemented!
 type TJunctionConnectionDirect struct {
-	TjunctionConnection
+	TJunctionConnection
 }
 
 // TODO: Doc formatting needs to be implemented!
@@ -103,7 +103,7 @@ type TJunctionConnectionLaneLink struct {
 
 // TODO: Doc formatting needs to be implemented!
 type TJunctionConnectionVirtual struct {
-	TjunctionConnection
+	TJunctionConnection
 
 	Predecessor TJunctionPredecessorSuccessor
 
@@ -112,7 +112,7 @@ type TJunctionConnectionVirtual struct {
 
 // TODO: Doc formatting needs to be implemented!
 type TJunctionConnectionVirtualDefault struct {
-	TjunctionConnection
+	TJunctionConnection
 }
 
 // TODO: Doc formatting needs to be implemented!
@@ -122,7 +122,7 @@ type TJunctionController struct {
 
 // TODO: Doc formatting needs to be implemented!
 type TJunctionCrossing struct {
-	Tjunction
+	TJunction
 
 	RoadSection TJunctionRoadSection
 
@@ -154,7 +154,7 @@ type TJunctionCrossPathLaneLink struct {
 
 // TODO: Doc formatting needs to be implemented!
 type TJunctionDirect struct {
-	Tjunction
+	TJunction
 
 	Connection TJunctionConnectionDirect
 
@@ -198,7 +198,7 @@ type TJunctionRoadSection struct {
 
 // TODO: Doc formatting needs to be implemented!
 type TJunctionVirtual struct {
-	Tjunction
+	TJunction
 
 	Connection TJunctionConnection
 
