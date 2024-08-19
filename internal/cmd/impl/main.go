@@ -52,7 +52,8 @@ var (
 		"toCamel":                              strcase.ToCamel,
 		"canCreateTRoadSignalsSignalReference": canCreateTRoadSignalsSignalReference,
 		"removeTypePrefix":                     removeTypePrefix,
-		"distinctSignalsReferenceToCamel":      distinctSignalsReferenceToCamel,
+		"distinctSignalsReferenceToCamel":      distinctSignalsReference,
+		"goType":                               goType,
 	}
 )
 
@@ -67,6 +68,19 @@ func main() {
 		fmt.Printf("generate %v\n", name)
 		generate(schemaDetail[1], name)
 	}
+}
+
+func goType(rawXodrType string) string {
+	p, ok := primitives[rawXodrType]
+	if ok {
+		return p
+	}
+	t := removeTypePrefix(rawXodrType)
+
+	t = distinctSignalsReference(t)
+
+	t = strcase.ToCamel(t)
+	return t
 }
 
 func loadSchemaFiles() {
@@ -86,18 +100,18 @@ func loadSchemaFiles() {
 
 }
 
-func distinctSignalsReferenceToCamel(t string) string {
+func distinctSignalsReference(t string) string {
 	switch t {
 	case "road_signals_signal_reference":
-		return strcase.ToCamel("road_signals_signal_reference")
+		return "road_signals_signal_reference"
 	case "road_signals_signalReference":
-		return strcase.ToCamel("road_signals_SpatialSignalReference")
+		return "road_signals_SpatialSignalReference"
 	case "t_road_signals_signal_reference":
-		return strcase.ToCamel("road_signals_signal_reference")
+		return "road_signals_signal_reference"
 	case "t_road_signals_signalReference":
-		return strcase.ToCamel("road_signals_SpatialSignalReference")
+		return "road_signals_SpatialSignalReference"
 	default:
-		return strcase.ToCamel(t)
+		return t
 
 	}
 }
