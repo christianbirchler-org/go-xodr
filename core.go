@@ -2,41 +2,29 @@
 
 package xodr
 
-type EDataQualityRawDataPostProcessing struct {
-}
+type EDataQualityRawDataPostProcessing string
 
-type EDataQualityRawDataSource struct {
-}
+type EDataQualityRawDataSource string
 
-type EUnit struct {
-}
+type EUnit any
 
-type EUnitDistance struct {
-}
+type EUnitDistance string
 
-type EUnitMass struct {
-}
+type EUnitMass string
 
-type EUnitSlope struct {
-}
+type EUnitSlope string
 
-type EUnitSpeed struct {
-}
+type EUnitSpeed string
 
-type GrEqZero struct {
-}
+type GrEqZero float64
 
-type GrEqZeroOrContactPoint struct {
-}
+type GrEqZeroOrContactPoint any
 
-type GrZero struct {
-}
+type GrZero float64
 
-type YesNo struct {
-}
+type YesNo string
 
-type ZeroOne struct {
-}
+type ZeroOne float64
 
 // TODO: Doc formatting needs to be implemented!
 type OpenDriveElement struct {
