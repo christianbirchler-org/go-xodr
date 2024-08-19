@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/xml"
 	"flag"
+	"fmt"
 	"go/format"
 	"log"
 	"os"
@@ -14,78 +15,38 @@ import (
 	"github.com/iancoleman/strcase"
 )
 
-var templPath *string
+type SchemaDetail []any
 
-func main() {
-	xsdPath := flag.String("xsd", ".", "path to xsd_schema directory")
-	templPath = flag.String("templ", ".", "path to templates directory")
-	flag.Parse()
+var (
+	// flags
+	templPath *string
+	xsdPath   *string
 
-	coreFile, err := os.ReadFile(*xsdPath + "/OpenDRIVE_Core.xsd")
-	if err != nil {
-		panic(err)
-	}
-	coreSchema := new(CoreSchema)
-	err = xml.Unmarshal(coreFile, coreSchema)
-	if err != nil {
-		panic(err)
-	}
-	junctionFile, err := os.ReadFile(*xsdPath + "/OpenDRIVE_Junction.xsd")
-	if err != nil {
-		panic(err)
-	}
-	junctionSchema := new(JunctionSchema)
-	err = xml.Unmarshal(junctionFile, junctionSchema)
-	if err != nil {
-		panic(err)
-	}
-	laneFile, err := os.ReadFile(*xsdPath + "/OpenDRIVE_Lane.xsd")
-	if err != nil {
-		panic(err)
-	}
-	laneSchema := new(LaneSchema)
-	err = xml.Unmarshal(laneFile, laneSchema)
-	if err != nil {
-		panic(err)
-	}
-	objectFile, err := os.ReadFile(*xsdPath + "/OpenDRIVE_Object.xsd")
-	if err != nil {
-		panic(err)
-	}
-	objectSchema := new(ObjectSchema)
-	err = xml.Unmarshal(objectFile, objectSchema)
-	if err != nil {
-		panic(err)
-	}
-	railroadFile, err := os.ReadFile(*xsdPath + "/OpenDRIVE_Railroad.xsd")
-	if err != nil {
-		panic(err)
-	}
-	railroadSchema := new(RailroadSchema)
-	err = xml.Unmarshal(railroadFile, railroadSchema)
-	if err != nil {
-		panic(err)
-	}
-	roadFile, err := os.ReadFile(*xsdPath + "/OpenDRIVE_Road.xsd")
-	if err != nil {
-		panic(err)
-	}
-	roadSchema := new(RoadSchema)
-	err = xml.Unmarshal(roadFile, roadSchema)
-	if err != nil {
-		panic(err)
-	}
-	signalFile, err := os.ReadFile(*xsdPath + "/OpenDRIVE_Signal.xsd")
-	if err != nil {
-		panic(err)
-	}
-	signalSchema := new(SignalSchema)
-	err = xml.Unmarshal(signalFile, signalSchema)
-	if err != nil {
-		panic(err)
+	funcCnt    = 0
+	primitives = map[string]string{
+		"xs:double":             "float64",
+		"Xsdouble":              "float64",
+		"GrEqZero":              "float64",
+		"xs:int":                "int",
+		"xs:integer":            "int",
+		"xs:nonNegativeInteger": "int",
+		"xs:positiveInteger":    "int",
+		"XspositiveInteger":     "int",
+		"xs:string":             "string",
+		"Bool":                  "bool",
 	}
 
-	fnMap := template.FuncMap{
+	schemas = map[string][]any{
+		"core":     SchemaDetail{"OpenDRIVE_Core.xsd", new(CoreSchema)},
+		"junction": SchemaDetail{"OpenDRIVE_Junction.xsd", new(JunctionSchema)},
+		"lane":     SchemaDetail{"OpenDRIVE_Lane.xsd", new(LaneSchema)},
+		"object":   SchemaDetail{"OpenDRIVE_Object.xsd", new(ObjectSchema)},
+		"railroad": SchemaDetail{"OpenDRIVE_Railroad.xsd", new(RailroadSchema)},
+		"road":     SchemaDetail{"OpenDRIVE_Road.xsd", new(RoadSchema)},
+		"signal":   SchemaDetail{"OpenDRIVE_Signal.xsd", new(SignalSchema)},
+	}
+
+	fnMap = template.FuncMap{
 		"mapPrimitives":                        mapPrimitives,
 		"formatStructDocumentation":            formatStructDocumentation,
 		"toCamel":                              strcase.ToCamel,
@@ -93,14 +54,36 @@ func main() {
 		"removeTypePrefix":                     removeTypePrefix,
 		"distinctSignalsReferenceToCamel":      distinctSignalsReferenceToCamel,
 	}
+)
 
-	generate(fnMap, coreSchema, "core")
-	generate(fnMap, junctionSchema, "junction")
-	generate(fnMap, laneSchema, "lane")
-	generate(fnMap, objectSchema, "object")
-	generate(fnMap, railroadSchema, "railroad")
-	generate(fnMap, roadSchema, "road")
-	generate(fnMap, signalSchema, "signal")
+func main() {
+	xsdPath = flag.String("xsd", ".", "path to xsd_schema directory")
+	templPath = flag.String("templ", ".", "path to templates directory")
+	flag.Parse()
+
+	loadSchemaFiles()
+
+	for name, schemaDetail := range schemas {
+		fmt.Printf("generate %v\n", name)
+		generate(schemaDetail[1], name)
+	}
+}
+
+func loadSchemaFiles() {
+	for name, schemaDetails := range schemas {
+		fmt.Printf("load %v schema\n", name)
+
+		file, err := os.ReadFile(*xsdPath + "/" + schemaDetails[0].(string))
+		if err != nil {
+			panic(err)
+		}
+		err = xml.Unmarshal(file, schemaDetails[1])
+		if err != nil {
+			panic(err)
+		}
+
+	}
+
 }
 
 func distinctSignalsReferenceToCamel(t string) string {
@@ -127,8 +110,6 @@ func removeTypePrefix(t string) string {
 	return string(re.ReplaceAll([]byte(t), []byte("")))
 }
 
-var funcCnt = 0
-
 func canCreateTRoadSignalsSignalReference(camelCaseName string) bool {
 	if camelCaseName != "TRoadSignalsSignalReference" {
 		return true
@@ -137,7 +118,7 @@ func canCreateTRoadSignalsSignalReference(camelCaseName string) bool {
 	return funcCnt < 2
 }
 
-func generate(fnMap template.FuncMap, schema any, name string) {
+func generate(schema any, name string) {
 	tmpl := template.New(name + ".tmpl").Funcs(fnMap)
 	tmpl, err := tmpl.ParseFiles(*templPath + name + ".tmpl")
 	if err != nil {
@@ -160,19 +141,6 @@ func generate(fnMap template.FuncMap, schema any, name string) {
 func formatStructDocumentation(doc string) string {
 	// TODO
 	return "TODO: Doc formatting needs to be implemented!"
-}
-
-var primitives = map[string]string{
-	"xs:double":             "float64",
-	"Xsdouble":              "float64",
-	"GrEqZero":              "float64",
-	"xs:int":                "int",
-	"xs:integer":            "int",
-	"xs:nonNegativeInteger": "int",
-	"xs:positiveInteger":    "int",
-	"XspositiveInteger":     "int",
-	"xs:string":             "string",
-	"Bool":                  "bool",
 }
 
 func mapPrimitives(t string) string {
