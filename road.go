@@ -35,25 +35,25 @@ type EStripMode struct {
 type ETrafficRule struct {
 }
 
-type TMaxSpeed struct {
+type MaxSpeed struct {
 }
 
 // TODO: Doc formatting needs to be implemented!
 type Road struct {
 	OpenDriveElement
-	Link             RoadLink
-	Type             RoadType
-	PlanView         RoadPlanView
-	ElevationProfile RoadElevationProfile
-	LateralProfile   RoadLateralProfile
-	Lanes            RoadLanes
-	Objects          RoadObjects
-	Signals          RoadSignals
-	Surface          RoadSurface
-	Railroad         RoadRailroad
+	Link             []*RoadLink
+	Type             []*RoadType
+	PlanView         []*RoadPlanView
+	ElevationProfile []*RoadElevationProfile
+	LateralProfile   []*RoadLateralProfile
+	Lanes            []*RoadLanes
+	Objects          []*RoadObjects
+	Signals          []*RoadSignals
+	Surface          []*RoadSurface
+	Railroad         []*RoadRailroad
 	Id               string
 	Junction         string
-	Length           TGrZero
+	Length           GrZero
 	Name             string
 	Rule             ETrafficRule
 }
@@ -61,7 +61,7 @@ type Road struct {
 // TODO: Doc formatting needs to be implemented!
 type RoadElevationProfile struct {
 	OpenDriveElement
-	Elevation RoadElevationProfileElevation
+	Elevation []*RoadElevationProfileElevation
 }
 
 // TODO: Doc formatting needs to be implemented!
@@ -71,22 +71,22 @@ type RoadElevationProfileElevation struct {
 	B float64
 	C float64
 	D float64
-	S TGrEqZero
+	S GrEqZero
 }
 
 // TODO: Doc formatting needs to be implemented!
 type RoadLateralProfile struct {
 	OpenDriveElement
-	Superelevation      RoadLateralProfileSuperelevation
-	Shape               RoadLateralProfileShape
-	CrossSectionSurface RoadLateralProfileCrossSectionSurface
+	Superelevation      []*RoadLateralProfileSuperelevation
+	Shape               []*RoadLateralProfileShape
+	CrossSectionSurface []*RoadLateralProfileCrossSectionSurface
 }
 
 // TODO: Doc formatting needs to be implemented!
 type RoadLateralProfileCrossSectionSurface struct {
 	OpenDriveElement
-	TOffset       RoadLateralProfileCrossSectionSurfaceTOffset
-	SurfaceStrips RoadLateralProfileCrossSectionSurfaceSurfaceStrip
+	TOffset       []*RoadLateralProfileCrossSectionSurfaceTOffset
+	SurfaceStrips []*RoadLateralProfileCrossSectionSurfaceSurfaceStrip
 }
 
 // TODO: Doc formatting needs to be implemented!
@@ -96,17 +96,17 @@ type RoadLateralProfileCrossSectionSurfaceCoefficients struct {
 	B float64
 	C float64
 	D float64
-	S TGrEqZero
+	S GrEqZero
 }
 
 // TODO: Doc formatting needs to be implemented!
 type RoadLateralProfileCrossSectionSurfaceStrip struct {
 	OpenDriveElement
-	Width     RoadLateralProfileCrossSectionSurfaceStripWidth
-	Constant  RoadLateralProfileCrossSectionSurfaceStripConstant
-	Linear    RoadLateralProfileCrossSectionSurfaceStripLinear
-	Quadratic RoadLateralProfileCrossSectionSurfaceStripQuadratic
-	Cubic     RoadLateralProfileCrossSectionSurfaceStripCubic
+	Width     []*RoadLateralProfileCrossSectionSurfaceStripWidth
+	Constant  []*RoadLateralProfileCrossSectionSurfaceStripConstant
+	Linear    []*RoadLateralProfileCrossSectionSurfaceStripLinear
+	Quadratic []*RoadLateralProfileCrossSectionSurfaceStripQuadratic
+	Cubic     []*RoadLateralProfileCrossSectionSurfaceStripCubic
 	Id        int
 	Mode      EStripMode
 }
@@ -114,43 +114,43 @@ type RoadLateralProfileCrossSectionSurfaceStrip struct {
 // TODO: Doc formatting needs to be implemented!
 type RoadLateralProfileCrossSectionSurfaceStripConstant struct {
 	OpenDriveElement
-	Coefficients RoadLateralProfileCrossSectionSurfaceCoefficients
+	Coefficients []*RoadLateralProfileCrossSectionSurfaceCoefficients
 }
 
 // TODO: Doc formatting needs to be implemented!
 type RoadLateralProfileCrossSectionSurfaceStripCubic struct {
 	OpenDriveElement
-	Coefficients RoadLateralProfileCrossSectionSurfaceCoefficients
+	Coefficients []*RoadLateralProfileCrossSectionSurfaceCoefficients
 }
 
 // TODO: Doc formatting needs to be implemented!
 type RoadLateralProfileCrossSectionSurfaceStripLinear struct {
 	OpenDriveElement
-	Coefficients RoadLateralProfileCrossSectionSurfaceCoefficients
+	Coefficients []*RoadLateralProfileCrossSectionSurfaceCoefficients
 }
 
 // TODO: Doc formatting needs to be implemented!
 type RoadLateralProfileCrossSectionSurfaceStripQuadratic struct {
 	OpenDriveElement
-	Coefficients RoadLateralProfileCrossSectionSurfaceCoefficients
+	Coefficients []*RoadLateralProfileCrossSectionSurfaceCoefficients
 }
 
 // TODO: Doc formatting needs to be implemented!
 type RoadLateralProfileCrossSectionSurfaceStripWidth struct {
 	OpenDriveElement
-	Coefficients RoadLateralProfileCrossSectionSurfaceCoefficients
+	Coefficients []*RoadLateralProfileCrossSectionSurfaceCoefficients
 }
 
 // TODO: Doc formatting needs to be implemented!
 type RoadLateralProfileCrossSectionSurfaceSurfaceStrip struct {
 	OpenDriveElement
-	Strip RoadLateralProfileCrossSectionSurfaceStrip
+	Strip []*RoadLateralProfileCrossSectionSurfaceStrip
 }
 
 // TODO: Doc formatting needs to be implemented!
 type RoadLateralProfileCrossSectionSurfaceTOffset struct {
 	OpenDriveElement
-	Coefficients RoadLateralProfileCrossSectionSurfaceCoefficients
+	Coefficients []*RoadLateralProfileCrossSectionSurfaceCoefficients
 }
 
 // TODO: Doc formatting needs to be implemented!
@@ -160,7 +160,7 @@ type RoadLateralProfileShape struct {
 	B float64
 	C float64
 	D float64
-	S TGrEqZero
+	S GrEqZero
 	T float64
 }
 
@@ -171,14 +171,14 @@ type RoadLateralProfileSuperelevation struct {
 	B float64
 	C float64
 	D float64
-	S TGrEqZero
+	S GrEqZero
 }
 
 // TODO: Doc formatting needs to be implemented!
 type RoadLink struct {
 	OpenDriveElement
-	Predecessor RoadLinkPredecessorSuccessor
-	Successor   RoadLinkPredecessorSuccessor
+	Predecessor []*RoadLinkPredecessorSuccessor
+	Successor   []*RoadLinkPredecessorSuccessor
 }
 
 // TODO: Doc formatting needs to be implemented!
@@ -187,22 +187,22 @@ type RoadLinkPredecessorSuccessor struct {
 	ContactPoint EContactPoint
 	ElementDir   EElementDir
 	ElementId    string
-	ElementS     TGrEqZero
+	ElementS     GrEqZero
 	ElementType  ERoadLinkElementType
 }
 
 // TODO: Doc formatting needs to be implemented!
 type RoadPlanView struct {
 	OpenDriveElement
-	Geometry RoadPlanViewGeometry
+	Geometry []*RoadPlanViewGeometry
 }
 
 // TODO: Doc formatting needs to be implemented!
 type RoadPlanViewGeometry struct {
 	OpenDriveElement
 	Hdg    float64
-	Length TGrZero
-	S      TGrEqZero
+	Length GrZero
+	S      GrEqZero
 	X      float64
 	Y      float64
 }
@@ -251,7 +251,7 @@ type RoadPlanViewGeometrySpiral struct {
 // TODO: Doc formatting needs to be implemented!
 type RoadSurface struct {
 	OpenDriveElement
-	Crg RoadSurfaceCrg
+	Crg []*RoadSurfaceCrg
 }
 
 // TODO: Doc formatting needs to be implemented!
@@ -262,9 +262,9 @@ type RoadSurfaceCrg struct {
 	Mode        ERoadSurfaceCrgMode
 	Orientation EDirection
 	Purpose     ERoadSurfaceCrgPurpose
-	SEnd        TGrEqZero
+	SEnd        GrEqZero
 	SOffset     float64
-	SStart      TGrEqZero
+	SStart      GrEqZero
 	TOffset     float64
 	ZOffset     float64
 	ZScale      float64
@@ -273,15 +273,15 @@ type RoadSurfaceCrg struct {
 // TODO: Doc formatting needs to be implemented!
 type RoadType struct {
 	OpenDriveElement
-	Speed   RoadTypeSpeed
+	Speed   []*RoadTypeSpeed
 	Country ECountryCode
-	S       TGrEqZero
+	S       GrEqZero
 	Type    ERoadType
 }
 
 // TODO: Doc formatting needs to be implemented!
 type RoadTypeSpeed struct {
 	OpenDriveElement
-	Max  TMaxSpeed
+	Max  MaxSpeed
 	Unit EUnitSpeed
 }

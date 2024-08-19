@@ -29,52 +29,52 @@ type ETunnelType struct {
 // TODO: Doc formatting needs to be implemented!
 type RoadObjects struct {
 	OpenDriveElement
-	Object          RoadObjectsObject
-	ObjectReference RoadObjectsObjectReference
-	Tunnel          RoadObjectsTunnel
-	Bridge          RoadObjectsBridge
+	Object          []*RoadObjectsObject
+	ObjectReference []*RoadObjectsObjectReference
+	Tunnel          []*RoadObjectsTunnel
+	Bridge          []*RoadObjectsBridge
 }
 
 // TODO: Doc formatting needs to be implemented!
 type RoadObjectsBridge struct {
 	OpenDriveElement
-	Validity RoadObjectsObjectLaneValidity
+	Validity []*RoadObjectsObjectLaneValidity
 	Id       string
-	Length   TGrEqZero
+	Length   GrEqZero
 	Name     string
-	S        TGrEqZero
+	S        GrEqZero
 	Type     EBridgeType
 }
 
 // TODO: Doc formatting needs to be implemented!
 type RoadObjectsObject struct {
 	OpenDriveElement
-	Repeat       RoadObjectsObjectRepeat
-	Outline      RoadObjectsObjectOutlinesOutline
-	Outlines     RoadObjectsObjectOutlines
-	Material     RoadObjectsObjectMaterial
-	Validity     RoadObjectsObjectLaneValidity
-	ParkingSpace RoadObjectsObjectParkingSpace
-	Markings     RoadObjectsObjectMarkings
-	Borders      RoadObjectsObjectBorders
-	Surface      RoadObjectsObjectSurface
-	Skeleton     RoadObjectsObjectSkeleton
-	Dynamic      TYesNo
+	Repeat       []*RoadObjectsObjectRepeat
+	Outline      []*RoadObjectsObjectOutlinesOutline
+	Outlines     []*RoadObjectsObjectOutlines
+	Material     []*RoadObjectsObjectMaterial
+	Validity     []*RoadObjectsObjectLaneValidity
+	ParkingSpace []*RoadObjectsObjectParkingSpace
+	Markings     []*RoadObjectsObjectMarkings
+	Borders      []*RoadObjectsObjectBorders
+	Surface      []*RoadObjectsObjectSurface
+	Skeleton     []*RoadObjectsObjectSkeleton
+	Dynamic      YesNo
 	Hdg          float64
-	Height       TGrEqZero
+	Height       GrEqZero
 	Id           string
-	Length       TGrZero
+	Length       GrZero
 	Name         string
 	Orientation  EOrientation
-	PerpToRoad   TBool
+	PerpToRoad   Bool
 	Pitch        float64
-	Radius       TGrZero
+	Radius       GrZero
 	Roll         float64
-	S            TGrEqZero
+	S            GrEqZero
 	Subtype      string
 	T            float64
 	Type         EObjectType
-	ValidLength  TGrEqZero
+	ValidLength  GrEqZero
 	Width        float64
 	ZOffset      float64
 }
@@ -82,38 +82,38 @@ type RoadObjectsObject struct {
 // TODO: Doc formatting needs to be implemented!
 type RoadObjectsObjectBorders struct {
 	OpenDriveElement
-	Border RoadObjectsObjectBordersBorder
+	Border []*RoadObjectsObjectBordersBorder
 }
 
 // TODO: Doc formatting needs to be implemented!
 type RoadObjectsObjectBordersBorder struct {
 	OpenDriveElement
-	CornerReference    RoadObjectsObjectMarkingsMarkingCornerReference
+	CornerReference    []*RoadObjectsObjectMarkingsMarkingCornerReference
 	OutlineId          int
 	Type               EBorderType
-	UseCompleteOutline TBool
-	Width              TGrEqZero
+	UseCompleteOutline Bool
+	Width              GrEqZero
 }
 
 // TODO: Doc formatting needs to be implemented!
 type RoadObjectsObjectMarkings struct {
 	OpenDriveElement
-	Marking RoadObjectsObjectMarkingsMarking
+	Marking []*RoadObjectsObjectMarkingsMarking
 }
 
 // TODO: Doc formatting needs to be implemented!
 type RoadObjectsObjectMarkingsMarking struct {
 	OpenDriveElement
-	CornerReference RoadObjectsObjectMarkingsMarkingCornerReference
+	CornerReference []*RoadObjectsObjectMarkingsMarkingCornerReference
 	Color           ERoadMarkColor
-	LineLength      TGrZero
+	LineLength      GrZero
 	Side            ESideType
-	SpaceLength     TGrEqZero
+	SpaceLength     GrEqZero
 	StartOffset     float64
 	StopOffset      float64
 	Weight          ERoadMarkWeight
-	Width           TGrZero
-	ZOffset         TGrEqZero
+	Width           GrZero
+	ZOffset         GrEqZero
 }
 
 // TODO: Doc formatting needs to be implemented!
@@ -125,32 +125,32 @@ type RoadObjectsObjectMarkingsMarkingCornerReference struct {
 // TODO: Doc formatting needs to be implemented!
 type RoadObjectsObjectMaterial struct {
 	OpenDriveElement
-	Friction      TGrEqZero
+	Friction      GrEqZero
 	RoadMarkColor ERoadMarkColor
-	Roughness     TGrEqZero
+	Roughness     GrEqZero
 	Surface       string
 }
 
 // TODO: Doc formatting needs to be implemented!
 type RoadObjectsObjectOutlines struct {
 	OpenDriveElement
-	Outline RoadObjectsObjectOutlinesOutline
+	Outline []*RoadObjectsObjectOutlinesOutline
 }
 
 // TODO: Doc formatting needs to be implemented!
 type RoadObjectsObjectOutlinesOutline struct {
 	OpenDriveElement
-	Closed   TBool
+	Closed   Bool
 	FillType EOutlineFillType
 	Id       int
 	LaneType ELaneType
-	Outer    TBool
+	Outer    Bool
 }
 
 // TODO: Doc formatting needs to be implemented!
 type RoadObjectsObjectOutlinesOutlineCornerLocal struct {
 	OpenDriveElement
-	Height TGrEqZero
+	Height GrEqZero
 	Id     int
 	U      float64
 	V      float64
@@ -161,9 +161,9 @@ type RoadObjectsObjectOutlinesOutlineCornerLocal struct {
 type RoadObjectsObjectOutlinesOutlineCornerRoad struct {
 	OpenDriveElement
 	Dz     float64
-	Height TGrEqZero
+	Height GrEqZero
 	Id     int
-	S      TGrEqZero
+	S      GrEqZero
 	T      float64
 }
 
@@ -177,20 +177,20 @@ type RoadObjectsObjectParkingSpace struct {
 // TODO: Doc formatting needs to be implemented!
 type RoadObjectsObjectRepeat struct {
 	OpenDriveElement
-	DetachFromReferenceLine TBool
-	Distance                TGrEqZero
-	HeightEnd               TGrEqZero
-	HeightStart             TGrEqZero
-	Length                  TGrEqZero
-	LengthEnd               TGrEqZero
-	LengthStart             TGrEqZero
-	RadiusEnd               TGrEqZero
-	RadiusStart             TGrEqZero
-	S                       TGrEqZero
+	DetachFromReferenceLine Bool
+	Distance                GrEqZero
+	HeightEnd               GrEqZero
+	HeightStart             GrEqZero
+	Length                  GrEqZero
+	LengthEnd               GrEqZero
+	LengthStart             GrEqZero
+	RadiusEnd               GrEqZero
+	RadiusStart             GrEqZero
+	S                       GrEqZero
 	TEnd                    float64
 	TStart                  float64
-	WidthEnd                TGrEqZero
-	WidthStart              TGrEqZero
+	WidthEnd                GrEqZero
+	WidthStart              GrEqZero
 	ZOffsetEnd              float64
 	ZOffsetStart            float64
 }
@@ -207,7 +207,7 @@ type RoadObjectsObjectSkeletonPolyline struct {
 // TODO: Doc formatting needs to be implemented!
 type RoadObjectsObjectSkeletonPolylineVertexLocal struct {
 	Id                int
-	IntersectionPoint bool
+	IntersectionPoint Bool
 	Radius            float64
 	U                 float64
 	V                 float64
@@ -218,47 +218,47 @@ type RoadObjectsObjectSkeletonPolylineVertexLocal struct {
 type RoadObjectsObjectSkeletonPolylineVertexRoad struct {
 	Dz                float64
 	Id                int
-	IntersectionPoint bool
+	IntersectionPoint Bool
 	Radius            float64
-	S                 float64
+	S                 GrEqZero
 	T                 float64
 }
 
 // TODO: Doc formatting needs to be implemented!
 type RoadObjectsObjectSurface struct {
 	OpenDriveElement
-	Crg RoadObjectsObjectSurfaceCrg
+	Crg []*RoadObjectsObjectSurfaceCrg
 }
 
 // TODO: Doc formatting needs to be implemented!
 type RoadObjectsObjectSurfaceCrg struct {
 	OpenDriveElement
 	File               string
-	HideRoadSurfaceCrg TBool
+	HideRoadSurfaceCrg Bool
 	ZScale             float64
 }
 
 // TODO: Doc formatting needs to be implemented!
 type RoadObjectsObjectReference struct {
 	OpenDriveElement
-	Validity    RoadObjectsObjectLaneValidity
+	Validity    []*RoadObjectsObjectLaneValidity
 	Id          string
 	Orientation EOrientation
-	S           TGrEqZero
+	S           GrEqZero
 	T           float64
-	ValidLength TGrEqZero
+	ValidLength GrEqZero
 	ZOffset     float64
 }
 
 // TODO: Doc formatting needs to be implemented!
 type RoadObjectsTunnel struct {
 	OpenDriveElement
-	Validity RoadObjectsObjectLaneValidity
-	Daylight TZeroOne
+	Validity []*RoadObjectsObjectLaneValidity
+	Daylight ZeroOne
 	Id       string
-	Length   TGrEqZero
-	Lighting TZeroOne
+	Length   GrEqZero
+	Lighting ZeroOne
 	Name     string
-	S        TGrEqZero
+	S        GrEqZero
 	Type     ETunnelType
 }

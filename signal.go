@@ -35,7 +35,7 @@ type EunitSpeed struct {
 // TODO: Doc formatting needs to be implemented!
 type Controller struct {
 	OpenDriveElement
-	Control  *ControllerControl
+	Control  []*ControllerControl
 	Id       string
 	Name     string
 	Sequence int
@@ -51,16 +51,16 @@ type ControllerControl struct {
 // TODO: Doc formatting needs to be implemented!
 type RoadSignals struct {
 	OpenDriveElement
-	Signal          *RoadSignalsSignalRoad
-	SignalReference *RoadSignalsSpatialSignalReference
+	Signal          []*RoadSignalsSignalRoad
+	SignalReference []*RoadSignalsSpatialSignalReference
 }
 
 // TODO: Doc formatting needs to be implemented!
 type RoadSignalsBoard struct {
 	OpenDriveElement
-	Validity   *RoadObjectsObjectLaneValidity
-	Dependency *RoadSignalsSignalDependency
-	Reference  *RoadSignalsSignalReference
+	Validity   []*RoadObjectsObjectLaneValidity
+	Dependency []*RoadSignalsSignalDependency
+	Reference  []*RoadSignalsSignalReference
 }
 
 // TODO: Doc formatting needs to be implemented!
@@ -83,19 +83,19 @@ type RoadSignalsDisplayArea struct {
 // TODO: Doc formatting needs to be implemented!
 type RoadSignalsSignal struct {
 	OpenDriveElement
-	Validity        *RoadObjectsObjectLaneValidity
-	Dependency      *RoadSignalsSignalDependency
-	Reference       *RoadSignalsSignalReference
-	StaticBoard     *RoadSignalsStaticBoard
-	VmsBoard        *RoadSignalsVmsBoard
-	Semantics       *SignalsSemantics
+	Validity        []*RoadObjectsObjectLaneValidity
+	Dependency      []*RoadSignalsSignalDependency
+	Reference       []*RoadSignalsSignalReference
+	StaticBoard     []*RoadSignalsStaticBoard
+	VmsBoard        []*RoadSignalsVmsBoard
+	Semantics       []*SignalsSemantics
 	Country         ECountryCode
 	CountryRevision string
-	Dynamic         TYesNo
-	Height          TGrEqZero
+	Dynamic         YesNo
+	Height          GrEqZero
 	HOffset         float64
 	Id              string
-	Length          TGrEqZero
+	Length          GrEqZero
 	Name            string
 	Orientation     EOrientation
 	Pitch           float64
@@ -105,7 +105,7 @@ type RoadSignalsSignal struct {
 	Type            string
 	Unit            EUnit
 	Value           float64
-	Width           TGrEqZero
+	Width           GrEqZero
 }
 
 // TODO: Doc formatting needs to be implemented!
@@ -133,7 +133,7 @@ type RoadSignalsSignalPositionRoad struct {
 	Pitch   float64
 	RoadId  string
 	Roll    float64
-	S       TGrEqZero
+	S       GrEqZero
 	T       float64
 	ZOffset float64
 }
@@ -149,7 +149,7 @@ type RoadSignalsSignalReference struct {
 // TODO: Doc formatting needs to be implemented!
 type RoadSignalsSignalRoad struct {
 	RoadSignalsSignal
-	S       TGrEqZero
+	S       GrEqZero
 	T       float64
 	ZOffset float64
 }
@@ -157,23 +157,23 @@ type RoadSignalsSignalRoad struct {
 // TODO: Doc formatting needs to be implemented!
 type RoadSignalsSpatialSignalReference struct {
 	OpenDriveElement
-	Validity    *RoadObjectsObjectLaneValidity
+	Validity    []*RoadObjectsObjectLaneValidity
 	Id          string
 	Orientation EOrientation
-	S           TGrEqZero
+	S           GrEqZero
 	T           float64
 }
 
 // TODO: Doc formatting needs to be implemented!
 type RoadSignalsStaticBoard struct {
 	RoadSignalsBoard
-	Sign *RoadSignalsBoardSign
+	Sign []*RoadSignalsBoardSign
 }
 
 // TODO: Doc formatting needs to be implemented!
 type RoadSignalsVmsBoard struct {
 	RoadSignalsBoard
-	DisplayArea   *RoadSignalsDisplayArea
+	DisplayArea   []*RoadSignalsDisplayArea
 	DisplayHeight float64
 	DisplayType   ERoadSignalsDisplayType
 	DisplayWidth  float64
@@ -192,28 +192,28 @@ type SignalGroupVmsBoardReference struct {
 // TODO: Doc formatting needs to be implemented!
 type SignalGroupVmsGroup struct {
 	OpenDriveElement
-	VmsBoardReference *SignalGroupVmsBoardReference
+	VmsBoardReference []*SignalGroupVmsBoardReference
 	Id                string
 }
 
 // TODO: Doc formatting needs to be implemented!
 type SignalsSemantics struct {
 	OpenDriveElement
-	Speed                    *SignalsSemanticsSpeed
-	Lane                     *SignalsSemanticsLane
-	Priority                 *SignalsSemanticsPriority
-	Prohibited               *SignalsSemanticsProhibited
-	Warning                  *SignalsSemanticsWarning
-	Routing                  *SignalsSemanticsRouting
-	Streetname               *SignalsSemanticsStreetname
-	Parking                  *SignalsSemanticsParking
-	Tourist                  *SignalsSemanticsTourist
-	SupplementaryTime        *SignalsSemanticsSupplementaryTime
-	SupplementaryAllows      *SignalsSemanticsSupplementaryAllows
-	SupplementaryProhibits   *SignalsSemanticsSupplementaryProhibits
-	SupplementaryDistance    *SignalsSemanticsSupplementaryDistance
-	SupplementaryEnvironment *SignalsSemanticsSupplementaryEnvironment
-	SupplementaryExplanatory *SignalsSemanticsSupplementaryExplanatory
+	Speed                    []*SignalsSemanticsSpeed
+	Lane                     []*SignalsSemanticsLane
+	Priority                 []*SignalsSemanticsPriority
+	Prohibited               []*SignalsSemanticsProhibited
+	Warning                  []*SignalsSemanticsWarning
+	Routing                  []*SignalsSemanticsRouting
+	Streetname               []*SignalsSemanticsStreetname
+	Parking                  []*SignalsSemanticsParking
+	Tourist                  []*SignalsSemanticsTourist
+	SupplementaryTime        []*SignalsSemanticsSupplementaryTime
+	SupplementaryAllows      []*SignalsSemanticsSupplementaryAllows
+	SupplementaryProhibits   []*SignalsSemanticsSupplementaryProhibits
+	SupplementaryDistance    []*SignalsSemanticsSupplementaryDistance
+	SupplementaryEnvironment []*SignalsSemanticsSupplementaryEnvironment
+	SupplementaryExplanatory []*SignalsSemanticsSupplementaryExplanatory
 }
 
 // TODO: Doc formatting needs to be implemented!
@@ -246,9 +246,9 @@ type SignalsSemanticsRouting struct {
 // TODO: Doc formatting needs to be implemented!
 type SignalsSemanticsSpeed struct {
 	OpenDriveElement
-	Type  *EsignalsSemanticsSpeed
-	Unit  *EunitSpeed
-	Value *float64
+	Type  []*ESignalsSemanticsSpeed
+	Unit  []*EUnitSpeed
+	Value []*float64
 }
 
 // TODO: Doc formatting needs to be implemented!

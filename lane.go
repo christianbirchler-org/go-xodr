@@ -32,14 +32,14 @@ type ERoadMarkType struct {
 type ERoadMarkWeight struct {
 }
 
-type TBool struct {
+type Bool struct {
 }
 
 // TODO: Doc formatting needs to be implemented!
 type RoadLanes struct {
 	OpenDriveElement
-	LaneOffset  RoadLanesLaneOffset
-	LaneSection RoadLanesLaneSection
+	LaneOffset  []*RoadLanesLaneOffset
+	LaneSection []*RoadLanesLaneSection
 }
 
 // TODO: Doc formatting needs to be implemented!
@@ -50,21 +50,21 @@ type RoadLanesLaneOffset struct {
 // TODO: Doc formatting needs to be implemented!
 type RoadLanesLaneSection struct {
 	OpenDriveElement
-	Left   RoadLanesLaneSectionLeft
-	Center RoadLanesLaneSectionCenter
-	Right  RoadLanesLaneSectionRight
+	Left   []*RoadLanesLaneSectionLeft
+	Center []*RoadLanesLaneSectionCenter
+	Right  []*RoadLanesLaneSectionRight
 }
 
 // TODO: Doc formatting needs to be implemented!
 type RoadLanesLaneSectionCenter struct {
 	OpenDriveElement
-	Lane RoadLanesLaneSectionCenterLane
+	Lane []*RoadLanesLaneSectionCenterLane
 }
 
 // TODO: Doc formatting needs to be implemented!
 type RoadLanesLaneSectionCenterLane struct {
 	Id       int
-	Level    TBool
+	Level    Bool
 	Type     ELaneType
 	Link     RoadLanesLaneSectionLcrLaneLink
 	RoadMark RoadLanesLaneSectionLcrLaneRoadMark
@@ -73,8 +73,8 @@ type RoadLanesLaneSectionCenterLane struct {
 // TODO: Doc formatting needs to be implemented!
 type RoadLanesLaneSectionLcrLaneLink struct {
 	OpenDriveElement
-	Predecessor RoadLanesLaneSectionLcrLaneLinkPredecessorSuccessor
-	Successor   RoadLanesLaneSectionLcrLaneLinkPredecessorSuccessor
+	Predecessor []*RoadLanesLaneSectionLcrLaneLinkPredecessorSuccessor
+	Successor   []*RoadLanesLaneSectionLcrLaneLinkPredecessorSuccessor
 }
 
 // TODO: Doc formatting needs to be implemented!
@@ -85,15 +85,15 @@ type RoadLanesLaneSectionLcrLaneLinkPredecessorSuccessor struct {
 // TODO: Doc formatting needs to be implemented!
 type RoadLanesLaneSectionLcrLaneRoadMark struct {
 	OpenDriveElement
-	Sway     RoadLanesLaneSectionLcrLaneRoadMarkSway
-	Type     RoadLanesLaneSectionLcrLaneRoadMarkType
-	Explicit RoadLanesLaneSectionLcrLaneRoadMarkExplicit
+	Sway     []*RoadLanesLaneSectionLcrLaneRoadMarkSway
+	Type     []*RoadLanesLaneSectionLcrLaneRoadMarkType
+	Explicit []*RoadLanesLaneSectionLcrLaneRoadMarkExplicit
 }
 
 // TODO: Doc formatting needs to be implemented!
 type RoadLanesLaneSectionLcrLaneRoadMarkExplicit struct {
 	OpenDriveElement
-	Line RoadLanesLaneSectionLcrLaneRoadMarkExplicitLine
+	Line []*RoadLanesLaneSectionLcrLaneRoadMarkExplicitLine
 }
 
 // TODO: Doc formatting needs to be implemented!
@@ -109,7 +109,7 @@ type RoadLanesLaneSectionLcrLaneRoadMarkSway struct {
 // TODO: Doc formatting needs to be implemented!
 type RoadLanesLaneSectionLcrLaneRoadMarkType struct {
 	OpenDriveElement
-	Line RoadLanesLaneSectionLcrLaneRoadMarkTypeLine
+	Line []*RoadLanesLaneSectionLcrLaneRoadMarkTypeLine
 }
 
 // TODO: Doc formatting needs to be implemented!
@@ -120,7 +120,7 @@ type RoadLanesLaneSectionLcrLaneRoadMarkTypeLine struct {
 // TODO: Doc formatting needs to be implemented!
 type RoadLanesLaneSectionLeft struct {
 	OpenDriveElement
-	Lane RoadLanesLaneSectionLeftLane
+	Lane []*RoadLanesLaneSectionLeftLane
 }
 
 // TODO: Doc formatting needs to be implemented!
@@ -131,19 +131,19 @@ type RoadLanesLaneSectionLeftLane struct {
 // TODO: Doc formatting needs to be implemented!
 type RoadLanesLaneSectionLrLane struct {
 	OpenDriveElement
-	Link     RoadLanesLaneSectionLcrLaneLink
-	RoadMark RoadLanesLaneSectionLcrLaneRoadMark
-	Material RoadLanesLaneSectionLrLaneMaterial
-	Speed    RoadLanesLaneSectionLrLaneSpeed
-	Access   RoadLanesLaneSectionLrLaneAccess
-	Height   RoadLanesLaneSectionLrLaneHeight
-	Rule     RoadLanesLaneSectionLrLaneRule
+	Link     []*RoadLanesLaneSectionLcrLaneLink
+	RoadMark []*RoadLanesLaneSectionLcrLaneRoadMark
+	Material []*RoadLanesLaneSectionLrLaneMaterial
+	Speed    []*RoadLanesLaneSectionLrLaneSpeed
+	Access   []*RoadLanesLaneSectionLrLaneAccess
+	Height   []*RoadLanesLaneSectionLrLaneHeight
+	Rule     []*RoadLanesLaneSectionLrLaneRule
 }
 
 // TODO: Doc formatting needs to be implemented!
 type RoadLanesLaneSectionLrLaneAccess struct {
 	OpenDriveElement
-	Restriction RoadLanesLaneSectionLrLaneAccessRestriction
+	Restriction []*RoadLanesLaneSectionLrLaneAccessRestriction
 }
 
 // TODO: Doc formatting needs to be implemented!
@@ -184,7 +184,7 @@ type RoadLanesLaneSectionLrLaneWidth struct {
 // TODO: Doc formatting needs to be implemented!
 type RoadLanesLaneSectionRight struct {
 	OpenDriveElement
-	Lane RoadLanesLaneSectionRightLane
+	Lane []*RoadLanesLaneSectionRightLane
 }
 
 // TODO: Doc formatting needs to be implemented!

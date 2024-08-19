@@ -3,22 +3,22 @@
 package xodr
 
 {{range .SimpleType}}
-    type {{ toCamel .Name }} struct {
+    type {{ goType .Name }} struct {
     }
 {{end}}
 
 {{range .ComplexType}}
     // {{ formatStructDocumentation .Annotation.Documentation.Text }}
-    type {{ toCamel (removeTypePrefix .Name) }} struct {
+    type {{ goType .Name }} struct {
         {{$base := .ComplexContent.Extension.Base}}
-        {{toCamel (removeTypePrefix $base)}}
+        {{ goType $base }}
 
         {{- range .ComplexContent.Extension.Sequence.Element}}
-        {{toCamel .Name}} {{toCamel (removeTypePrefix .Type)}}
+        {{toCamel .Name}} []*{{ goType .Type }}
         {{- end}}
 
         {{- range .ComplexContent.Extension.Attribute}}
-        {{toCamel .Name}} {{mapPrimitives .Type}}
+        {{toCamel .Name}} *{{ goType .Type }}
         {{- end }}
 
     }

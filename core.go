@@ -23,19 +23,19 @@ type EUnitSlope struct {
 type EUnitSpeed struct {
 }
 
-type TGrEqZero struct {
+type GrEqZero struct {
 }
 
-type TGrEqZeroOrContactPoint struct {
+type GrEqZeroOrContactPoint struct {
 }
 
-type TGrZero struct {
+type GrZero struct {
 }
 
-type TYesNo struct {
+type YesNo struct {
 }
 
-type TZeroOne struct {
+type ZeroOne struct {
 }
 
 // TODO: Doc formatting needs to be implemented!
@@ -57,10 +57,10 @@ type DataQualityRawData struct {
 // TODO: Doc formatting needs to be implemented!
 type Header struct {
 	OpenDriveElement
-	GeoReference       HeaderGeoReference
-	Offset             HeaderOffset
-	License            License
-	DefaultRegulations HeaderDefaultRegulations
+	GeoReference       []*HeaderGeoReference
+	Offset             []*HeaderOffset
+	License            []*License
+	DefaultRegulations []*HeaderDefaultRegulations
 	Date               string
 	East               float64
 	Name               string
@@ -76,8 +76,8 @@ type Header struct {
 // TODO: Doc formatting needs to be implemented!
 type HeaderDefaultRegulations struct {
 	OpenDriveElement
-	RoadRegulations   HeaderRoadRegulation
-	SignalRegulations HeaderSignalRegulation
+	RoadRegulations   []*HeaderRoadRegulation
+	SignalRegulations []*HeaderSignalRegulation
 }
 
 // TODO: Doc formatting needs to be implemented!
@@ -96,14 +96,14 @@ type HeaderOffset struct {
 // TODO: Doc formatting needs to be implemented!
 type HeaderRoadRegulation struct {
 	OpenDriveElement
-	Semantics SignalsSemantics
+	Semantics []*SignalsSemantics
 	Type      ERoadType
 }
 
 // TODO: Doc formatting needs to be implemented!
 type HeaderSignalRegulation struct {
 	OpenDriveElement
-	Semantics SignalsSemantics
+	Semantics []*SignalsSemantics
 	Subtype   string
 	Type      string
 }
