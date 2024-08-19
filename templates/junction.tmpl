@@ -3,8 +3,15 @@
 package xodr
 
 {{range .SimpleType}}
-    type {{ goType .Name }} struct {
-    }
+{{if .List.ItemType}}
+type {{ goType .Name }} []{{goType .List.ItemType}}
+{{else}}
+
+    type {{ goType .Name }} {{if .Restriction.Base}} {{ goType .Restriction.Base }} {{else}} interface{}
+ {{end}}
+
+{{end}}
+
 {{end}}
 
 {{range .ComplexType}}

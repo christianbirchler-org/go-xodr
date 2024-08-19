@@ -3,8 +3,9 @@
 package xodr
 
 {{range .SimpleType}}
-    type {{ goType .Name }} struct {
-    }
+    type {{ goType .Name }} {{if .Restriction.Base}} {{ goType .Restriction.Base }} {{else}} interface{}
+    {{goUnion (goType .Name) .Union.MemberTypes}}
+ {{end}}
 {{end}}
 
 {{range .ComplexType}}

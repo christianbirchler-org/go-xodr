@@ -9,6 +9,7 @@ import (
 	"log"
 	"os"
 	"regexp"
+	"strings"
 	"text/template"
 	"unicode"
 
@@ -54,6 +55,7 @@ var (
 		"removeTypePrefix":                     removeTypePrefix,
 		"distinctSignalsReferenceToCamel":      distinctSignalsReference,
 		"goType":                               goType,
+		"goUnion":                              goUnion,
 	}
 )
 
@@ -68,6 +70,23 @@ func main() {
 		fmt.Printf("generate %v\n", name)
 		generate(schemaDetail[1], name)
 	}
+}
+
+func goUnion(unionTypeInterface string, rawXodrTypes string) string {
+	rawTypes := strings.Split(rawXodrTypes, " ")
+
+	out := "func " + unionTypeInterface + "String(u " + unionTypeInterface + ") string {\n"
+	out += "switch u.(type) {\n"
+
+	for _, rawType := range rawTypes {
+		gt := goType(rawType)
+		out += "case " + gt + ": return u.(string)\n"
+	}
+	out += `default: return ""
+}
+}`
+
+	return out
 }
 
 func goType(rawXodrType string) string {

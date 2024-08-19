@@ -2,32 +2,23 @@
 
 package xodr
 
-type EConnectionType struct {
-}
+type EConnectionType string
 
-type EContactPoint struct {
-}
+type EContactPoint string
 
-type EElementDir struct {
-}
+type EElementDir string
 
-type EJunctionSegmentType struct {
-}
+type EJunctionSegmentType string
 
-type EJunctionType struct {
-}
+type EJunctionType string
 
-type EJunctionGroupType struct {
-}
+type EJunctionGroupType string
 
-type ERoadSurfaceCrgMode struct {
-}
+type ERoadSurfaceCrgMode string
 
-type ERoadSurfaceCrgPurpose struct {
-}
+type ERoadSurfaceCrgPurpose string
 
-type JunctionGridPositionList struct {
-}
+type JunctionGridPositionList []float64
 
 // TODO: Doc formatting needs to be implemented!
 type Junction struct {

@@ -2,38 +2,27 @@
 
 package xodr
 
-type EAccessRestrictionType struct {
-}
+type EAccessRestrictionType string
 
-type ELaneDirection struct {
-}
+type ELaneDirection string
 
-type ELaneAdvisory struct {
-}
+type ELaneAdvisory string
 
-type ELaneType struct {
-}
+type ELaneType string
 
-type ERoadLanesLaneSectionLcrLaneRoadMarkLaneChange struct {
-}
+type ERoadLanesLaneSectionLcrLaneRoadMarkLaneChange string
 
-type ERoadLanesLaneSectionLrLaneAccessRule struct {
-}
+type ERoadLanesLaneSectionLrLaneAccessRule string
 
-type ERoadMarkColor struct {
-}
+type ERoadMarkColor string
 
-type ERoadMarkRule struct {
-}
+type ERoadMarkRule string
 
-type ERoadMarkType struct {
-}
+type ERoadMarkType string
 
-type ERoadMarkWeight struct {
-}
+type ERoadMarkWeight string
 
-type Bool struct {
-}
+type Bool string
 
 // TODO: Doc formatting needs to be implemented!
 type RoadLanes struct {

@@ -6,7 +6,22 @@ type EDataQualityRawDataPostProcessing string
 
 type EDataQualityRawDataSource string
 
-type EUnit any
+type EUnit interface{}
+
+func EUnitString(u EUnit) string {
+	switch u.(type) {
+	case EUnitDistance:
+		return u.(string)
+	case EUnitSpeed:
+		return u.(string)
+	case EUnitMass:
+		return u.(string)
+	case EUnitSlope:
+		return u.(string)
+	default:
+		return ""
+	}
+}
 
 type EUnitDistance string
 
@@ -18,7 +33,18 @@ type EUnitSpeed string
 
 type GrEqZero float64
 
-type GrEqZeroOrContactPoint any
+type GrEqZeroOrContactPoint interface{}
+
+func GrEqZeroOrContactPointString(u GrEqZeroOrContactPoint) string {
+	switch u.(type) {
+	case GrZero:
+		return u.(string)
+	case EContactPoint:
+		return u.(string)
+	default:
+		return ""
+	}
+}
 
 type GrZero float64
 

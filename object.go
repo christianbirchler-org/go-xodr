@@ -2,29 +2,21 @@
 
 package xodr
 
-type EBorderType struct {
-}
+type EBorderType string
 
-type EBridgeType struct {
-}
+type EBridgeType string
 
-type EObjectType struct {
-}
+type EObjectType string
 
-type EOrientation struct {
-}
+type EOrientation string
 
-type EOutlineFillType struct {
-}
+type EOutlineFillType string
 
-type ERoadObjectsObjectParkingSpaceAccess struct {
-}
+type ERoadObjectsObjectParkingSpaceAccess string
 
-type ESideType struct {
-}
+type ESideType string
 
-type ETunnelType struct {
-}
+type ETunnelType string
 
 // TODO: Doc formatting needs to be implemented!
 type RoadObjects struct {

@@ -2,14 +2,11 @@
 
 package xodr
 
-type ERoadRailroadSwitchPosition struct {
-}
+type ERoadRailroadSwitchPosition string
 
-type EStationPlatformSegmentSide struct {
-}
+type EStationPlatformSegmentSide string
 
-type EStationType struct {
-}
+type EStationType string
 
 // TODO: Doc formatting needs to be implemented!
 type RoadRailroad struct {

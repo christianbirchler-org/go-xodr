@@ -2,29 +2,21 @@
 
 package xodr
 
-type ERoadSignalsDisplayType struct {
-}
+type ERoadSignalsDisplayType string
 
-type ERoadSignalsSignalReferenceElementType struct {
-}
+type ERoadSignalsSignalReferenceElementType string
 
-type ESignalsSemanticsLane struct {
-}
+type ESignalsSemanticsLane string
 
-type ESignalsSemanticsPriority struct {
-}
+type ESignalsSemanticsPriority string
 
-type ESignalsSemanticsSpeed struct {
-}
+type ESignalsSemanticsSpeed string
 
-type ESignalsSemanticsSupplementaryDistance struct {
-}
+type ESignalsSemanticsSupplementaryDistance string
 
-type ESignalsSemanticsSupplementaryEnvironment struct {
-}
+type ESignalsSemanticsSupplementaryEnvironment string
 
-type ESignalsSemanticsSupplementaryTime struct {
-}
+type ESignalsSemanticsSupplementaryTime string
 
 type EsignalsSemanticsSpeed struct {
 }

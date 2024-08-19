@@ -2,40 +2,52 @@
 
 package xodr
 
-type ECountryCode struct {
+type ECountryCode interface{}
+
+func ECountryCodeString(u ECountryCode) string {
+	switch u.(type) {
+	case ECountryCodeIso3166Alpha2:
+		return u.(string)
+	case ECountryCodeIso3166Alpha3Deprecated:
+		return u.(string)
+	case ECountryCodeDeprecated:
+		return u.(string)
+	default:
+		return ""
+	}
 }
 
-type ECountryCodeDeprecated struct {
-}
+type ECountryCodeDeprecated string
 
-type ECountryCodeIso3166Alpha2 struct {
-}
+type ECountryCodeIso3166Alpha2 string
 
-type ECountryCodeIso3166Alpha3Deprecated struct {
-}
+type ECountryCodeIso3166Alpha3Deprecated string
 
-type EDirection struct {
-}
+type EDirection string
 
-type EMaxSpeedString struct {
-}
+type EMaxSpeedString string
 
-type EParamPoly3PRange struct {
-}
+type EParamPoly3PRange string
 
-type ERoadLinkElementType struct {
-}
+type ERoadLinkElementType string
 
-type ERoadType struct {
-}
+type ERoadType string
 
-type EStripMode struct {
-}
+type EStripMode string
 
-type ETrafficRule struct {
-}
+type ETrafficRule string
 
-type MaxSpeed struct {
+type MaxSpeed interface{}
+
+func MaxSpeedString(u MaxSpeed) string {
+	switch u.(type) {
+	case GrEqZero:
+		return u.(string)
+	case EMaxSpeedString:
+		return u.(string)
+	default:
+		return ""
+	}
 }
 
 // TODO: Doc formatting needs to be implemented!
