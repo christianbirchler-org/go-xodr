@@ -14,8 +14,11 @@ import (
 	"github.com/iancoleman/strcase"
 )
 
+var templPath *string
+
 func main() {
 	xsdPath := flag.String("xsd", ".", "path to xsd_schema directory")
+	templPath = flag.String("templ", ".", "path to templates directory")
 	flag.Parse()
 
 	coreFile, err := os.ReadFile(*xsdPath + "/OpenDRIVE_Core.xsd")
@@ -122,7 +125,6 @@ func removeTypePrefix(t string) string {
 		panic(err)
 	}
 	return string(re.ReplaceAll([]byte(t), []byte("")))
-
 }
 
 var funcCnt = 0
@@ -137,7 +139,7 @@ func canCreateTRoadSignalsSignalReference(camelCaseName string) bool {
 
 func generate(fnMap template.FuncMap, schema any, name string) {
 	tmpl := template.New(name + ".tmpl").Funcs(fnMap)
-	tmpl, err := tmpl.ParseFiles("/Users/christian/repositories/go-xodr/templates/" + name + ".tmpl")
+	tmpl, err := tmpl.ParseFiles(*templPath + name + ".tmpl")
 	if err != nil {
 		panic(err)
 	}
