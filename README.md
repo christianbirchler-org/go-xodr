@@ -1,4 +1,4 @@
-# xodr - 🛠️⏳ Work in Progress
+# go-xodr
 [![Go Reference](https://pkg.go.dev/badge/github.com/christianbirchler-org/go-xodr.svg)](https://pkg.go.dev/github.com/christianbirchler-org/go-xodr)
 
 This package provides APIs for road network specifications in the OpenDRIVE format.
