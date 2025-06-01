@@ -9,7 +9,7 @@ package xodr
 {{end}}
 
 {{range .ComplexType}}
-    // {{ formatStructDocumentation .Annotation.Documentation.Text }}
+    {{ formatStructDocumentation .Annotation.Documentation.Text }}
     type {{ goType .Name }} struct {
         {{$base := .ComplexContent.Extension.Base}}
         {{goType $base}}
