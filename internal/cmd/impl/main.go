@@ -56,6 +56,7 @@ var (
 		"distinctSignalsReferenceToCamel":      distinctSignalsReference,
 		"goType":                               goType,
 		"goUnion":                              goUnion,
+		"removeSpecialCharacters":              removeSpecialCharacters,
 	}
 )
 
@@ -171,9 +172,49 @@ func generate(schema any, name string) {
 		log.Fatal(err)
 	}
 }
+
+func removeSpecialCharacters(str string) string {
+	newStr := ""
+
+	for i := range len(str) {
+		chr := str[i]
+		if unicode.IsControl(rune(chr)) {
+			newStr += " "
+			continue
+		}
+		newStr += string(str[i])
+	}
+
+	return newStr
+}
+
+func getLastIndexOfLastEndingWord(doc string) int {
+	for i := len(doc) - 1; i > 0; i-- {
+		currentRune := rune(doc[i])
+		if unicode.IsControl(currentRune) || unicode.IsSpace(currentRune) {
+			continue
+		}
+		return i
+	}
+
+	return len(doc) - 1
+}
+
+func removeLeadingSpaces(str string) string {
+	return strings.TrimLeftFunc(str, func(r rune) bool {
+		return unicode.IsSpace(r)
+	})
+}
+
 func formatStructDocumentation(doc string) string {
-	// TODO
-	return "TODO: Doc formatting needs to be implemented!"
+	doc = removeLeadingSpaces(doc)
+	commentWidth := 75
+	lastIndexOfLastWord := getLastIndexOfLastEndingWord(doc)
+	if lastIndexOfLastWord < commentWidth {
+		return "// " + doc
+	}
+	lastRuneIndexOfLastWord := getLastIndexOfLastEndingWord(doc[:commentWidth])
+	return "// " + doc[:lastRuneIndexOfLastWord+1] + "\n" + formatStructDocumentation(doc[lastRuneIndexOfLastWord+1:])
 }
 
 func mapPrimitives(t string) string {
