@@ -50,7 +50,17 @@ func MaxSpeedString(u MaxSpeed) string {
 	}
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Roads are the core elements for any road network in ASAM OpenDRIVE. Each ro
+// ad runs along one road reference line. A road shall have at least the cente
+// r lane. Vehicles may drive in both directions of the road reference line. T
+// he standard driving direction is defined by the value which is assigned to
+// the @rule attribute (RHT=right-hand traffic, LHT=left-han traffic). ASAM Op
+// enDRIVE roads may be roads in the real road network or artificial road netw
+// ork created for application use. Each road is described by one or more <roa
+// d> elements. One <road> element may cover a long stretch of a road, shorter
+// stretches between junctions, or even several roads. A new <road> element sh
+// ould only start if the properties of the road cannot be described within th
+// e previous <road> element or if a junction is required.d
 type Road struct {
 	OpenDriveElement
 	Link             []*RoadLink
@@ -70,13 +80,16 @@ type Road struct {
 	Rule             ETrafficRule
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Road elevation specifies the elevation along the road reference line, that
+// is in s-direction.
 type RoadElevationProfile struct {
 	OpenDriveElement
 	Elevation []*RoadElevationProfileElevation
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Defines an elevation element at a given position on the road reference line
+// . Elements shall be defined in ascending order along the reference line. Th
+// e s length does not change with the elevation.
 type RoadElevationProfileElevation struct {
 	OpenDriveElement
 	A float64
@@ -86,7 +99,9 @@ type RoadElevationProfileElevation struct {
 	S GrEqZero
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Contains a series of lateral elevation elements that define the characteris
+// tics of the road surfaces banking along the road reference line. The latera
+// l profile is defined relative to the elevation of the road reference line.
 type RoadLateralProfile struct {
 	OpenDriveElement
 	Superelevation      []*RoadLateralProfileSuperelevation
@@ -94,14 +109,18 @@ type RoadLateralProfile struct {
 	CrossSectionSurface []*RoadLateralProfileCrossSectionSurface
 }
 
-// TODO: Doc formatting needs to be implemented!
+// A cross section surface defines the lateral profile by means of constant, l
+// inear, quadratic, and cubic polynomials in t-direction. A cross section sur
+// face is valid for the full length of the road.
 type RoadLateralProfileCrossSectionSurface struct {
 	OpenDriveElement
 	TOffset       []*RoadLateralProfileCrossSectionSurfaceTOffset
 	SurfaceStrips []*RoadLateralProfileCrossSectionSurfaceSurfaceStrip
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Defines the coefficients of a cubic polynomial in s-direction. The first <c
+// oefficients> element shall start at the beginning of the road reference lin
+// e with @s="0".
 type RoadLateralProfileCrossSectionSurfaceCoefficients struct {
 	OpenDriveElement
 	A float64
@@ -111,7 +130,7 @@ type RoadLateralProfileCrossSectionSurfaceCoefficients struct {
 	S GrEqZero
 }
 
-// TODO: Doc formatting needs to be implemented!
+// A strip defines the lateral profile in t- and s-direction.
 type RoadLateralProfileCrossSectionSurfaceStrip struct {
 	OpenDriveElement
 	Width     []*RoadLateralProfileCrossSectionSurfaceStripWidth
@@ -123,49 +142,52 @@ type RoadLateralProfileCrossSectionSurfaceStrip struct {
 	Mode      EStripMode
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Defines in t a constant height of the surface.
 type RoadLateralProfileCrossSectionSurfaceStripConstant struct {
 	OpenDriveElement
 	Coefficients []*RoadLateralProfileCrossSectionSurfaceCoefficients
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Defines in t a cubic height of the surface.
 type RoadLateralProfileCrossSectionSurfaceStripCubic struct {
 	OpenDriveElement
 	Coefficients []*RoadLateralProfileCrossSectionSurfaceCoefficients
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Defines in t a linear height of the surface.
 type RoadLateralProfileCrossSectionSurfaceStripLinear struct {
 	OpenDriveElement
 	Coefficients []*RoadLateralProfileCrossSectionSurfaceCoefficients
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Defines in t a quadratic height of the surface.
 type RoadLateralProfileCrossSectionSurfaceStripQuadratic struct {
 	OpenDriveElement
 	Coefficients []*RoadLateralProfileCrossSectionSurfaceCoefficients
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Defines the width of the inner strip.
 type RoadLateralProfileCrossSectionSurfaceStripWidth struct {
 	OpenDriveElement
 	Coefficients []*RoadLateralProfileCrossSectionSurfaceCoefficients
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Surface strips contains the strips.
 type RoadLateralProfileCrossSectionSurfaceSurfaceStrip struct {
 	OpenDriveElement
 	Strip []*RoadLateralProfileCrossSectionSurfaceStrip
 }
 
-// TODO: Doc formatting needs to be implemented!
+// A t offset shifts all strips relative to the road reference line in t-direc
+// tion.
 type RoadLateralProfileCrossSectionSurfaceTOffset struct {
 	OpenDriveElement
 	Coefficients []*RoadLateralProfileCrossSectionSurfaceCoefficients
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Defined as the road sectionâ  s surface relative to the reference plane. T
+// here may be several shape definitions at one s-position that have different
+// t-values, thereby describing the curvy shape of the road.
 type RoadLateralProfileShape struct {
 	OpenDriveElement
 	A float64
@@ -176,7 +198,12 @@ type RoadLateralProfileShape struct {
 	T float64
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Superelevation specifies the transverse slope along the road reference line
+// . Superelevation is constant in each cross section and can vary in road ref
+// erence line direction. Elements must be defined in ascending order along th
+// e reference line. The parameters of an element are valid until the next ele
+// ment starts or the road reference line ends. Per default, the superelevatio
+// n of a road is zero.
 type RoadLateralProfileSuperelevation struct {
 	OpenDriveElement
 	A float64
@@ -186,14 +213,16 @@ type RoadLateralProfileSuperelevation struct {
 	S GrEqZero
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Follows the road header if the road is linked to a successor or a predecess
+// or. Isolated roads may omit this element.
 type RoadLink struct {
 	OpenDriveElement
 	Predecessor []*RoadLinkPredecessorSuccessor
 	Successor   []*RoadLinkPredecessorSuccessor
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Successors and predecessors can be junctions or roads. For each, different
+// attribute sets shall be used.
 type RoadLinkPredecessorSuccessor struct {
 	OpenDriveElement
 	ContactPoint EContactPoint
@@ -203,13 +232,14 @@ type RoadLinkPredecessorSuccessor struct {
 	ElementType  ERoadLinkElementType
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Contains geometry elements that define the layout of the road reference lin
+// e in the x/y-plane (plan view).
 type RoadPlanView struct {
 	OpenDriveElement
 	Geometry []*RoadPlanViewGeometry
 }
 
-// TODO: Doc formatting needs to be implemented!
+//
 type RoadPlanViewGeometry struct {
 	OpenDriveElement
 	Hdg    float64
@@ -219,18 +249,19 @@ type RoadPlanViewGeometry struct {
 	Y      float64
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Arcs describe road reference lines with constant curvature.
 type RoadPlanViewGeometryArc struct {
 	OpenDriveElement
 	Curvature float64
 }
 
-// TODO: Doc formatting needs to be implemented!
+// A straight line is the simplest geometry element. It contains no further at
+// tributes.
 type RoadPlanViewGeometryLine struct {
 	OpenDriveElement
 }
 
-// TODO: Doc formatting needs to be implemented!
+// A parametric cubic curve describing the road reference line.
 type RoadPlanViewGeometryParamPoly3 struct {
 	OpenDriveElement
 	AU     float64
@@ -244,7 +275,7 @@ type RoadPlanViewGeometryParamPoly3 struct {
 	PRange EParamPoly3PRange
 }
 
-// TODO: Doc formatting needs to be implemented!
+// A cubic polynom describing the road reference line.
 type RoadPlanViewGeometryPoly3 struct {
 	OpenDriveElement
 	A float64
@@ -253,20 +284,21 @@ type RoadPlanViewGeometryPoly3 struct {
 	D float64
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Spirals or more specifically Euler spirals also known as clothoids. They de
+// scribe road reference lines with constantly changing curvatures.
 type RoadPlanViewGeometrySpiral struct {
 	OpenDriveElement
 	CurvEnd   float64
 	CurvStart float64
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Contains a series of elements describing a surface.
 type RoadSurface struct {
 	OpenDriveElement
 	Crg []*RoadSurfaceCrg
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Links road surface data defined according to ASAM OpenCRG format.
 type RoadSurfaceCrg struct {
 	OpenDriveElement
 	File        string
@@ -282,7 +314,8 @@ type RoadSurfaceCrg struct {
 	ZScale      float64
 }
 
-// TODO: Doc formatting needs to be implemented!
+// A road type element is valid for the entire cross section of a road. It is
+// valid until a new road type element is provided or until the road ends.
 type RoadType struct {
 	OpenDriveElement
 	Speed   []*RoadTypeSpeed
@@ -291,7 +324,8 @@ type RoadType struct {
 	Type    ERoadType
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Defines the default maximum speed allowed in conjunction with the specified
+// road type.
 type RoadTypeSpeed struct {
 	OpenDriveElement
 	Max  MaxSpeed

@@ -24,7 +24,10 @@ type EsignalsSemanticsSpeed struct {
 type EunitSpeed struct {
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Controllers provide a signal program for a traffic signal or a signal group
+// . The mapping of traffic signals to a signal group is done in t_controller.
+// Dynamic content like the signal program itself is specified outside of this
+// standard (i.e. in OpenSCENARIO).
 type Controller struct {
 	OpenDriveElement
 	Control  []*ControllerControl
@@ -33,21 +36,25 @@ type Controller struct {
 	Sequence int
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Provides information about a single signal within a signal group controlled
+// by the corresponding controller.
 type ControllerControl struct {
 	OpenDriveElement
 	SignalId string
 	Type     string
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Signals are traffic signs, traffic lights, and specific road markings for t
+// he control and regulation of road traffic. The <signals> element is the con
+// tainer for all signals along a road.
 type RoadSignals struct {
 	OpenDriveElement
 	Signal          []*RoadSignalsSignalRoad
 	SignalReference []*RoadSignalsSpatialSignalReference
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Signals are not always separate signs on a single sheet of metal. Several s
+// igns can be coupled on one board.
 type RoadSignalsBoard struct {
 	OpenDriveElement
 	Validity   []*RoadObjectsObjectLaneValidity
@@ -55,14 +62,21 @@ type RoadSignalsBoard struct {
 	Reference  []*RoadSignalsSignalReference
 }
 
-// TODO: Doc formatting needs to be implemented!
+// A <sign> element on a static board defined in the local coordinate system o
+// f the <signal> element. A <sign> element may have all attributes and child
+// elements of a signal.
 type RoadSignalsBoardSign struct {
 	RoadSignalsSignal
 	V float64
 	Z float64
 }
 
-// TODO: Doc formatting needs to be implemented!
+// A display area is the recommended position of the signal to be visualized i
+// n the simulation. A display area is specified in the `<displayArea>` elemen
+// t. A `<displayArea>` element is defined in the local coordinate system of t
+// he `<signal>` element. The @index attribute can be used in ASAM OpenSCENARI
+// O to reference the display area. In ASAM OpenSCENARIO a different local dis
+// play area position may be specified.
 type RoadSignalsDisplayArea struct {
 	OpenDriveElement
 	Height string
@@ -72,7 +86,7 @@ type RoadSignalsDisplayArea struct {
 	Z      float64
 }
 
-// TODO: Doc formatting needs to be implemented!
+// A signal along the road or on a static board.
 type RoadSignalsSignal struct {
 	OpenDriveElement
 	Validity        []*RoadObjectsObjectLaneValidity
@@ -100,14 +114,19 @@ type RoadSignalsSignal struct {
 	Width           GrEqZero
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Signal dependencies limit or extend the validity of one signal by an additi
+// onal signal. For example, a speed limit sign of 60 km/h that is only valid
+// for trucks, specified by a supplementary sign. One signal may have multiple
+// dependencies.
 type RoadSignalsSignalDependency struct {
 	OpenDriveElement
 	Id   string
 	Type string
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Describes the reference point of the physical position in inertial coordina
+// tes in cases where it deviates from the logical position. Defines the inert
+// ial position.
 type RoadSignalsSignalPositionInertial struct {
 	OpenDriveElement
 	Hdg   float64
@@ -118,7 +137,9 @@ type RoadSignalsSignalPositionInertial struct {
 	Z     float64
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Describes the reference point of the physical position road coordinates in
+// cases where it deviates from the logical position. Defines the position on
+// the road.
 type RoadSignalsSignalPositionRoad struct {
 	OpenDriveElement
 	HOffset float64
@@ -130,7 +151,10 @@ type RoadSignalsSignalPositionRoad struct {
 	ZOffset float64
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Signal references link a signal to another signal or object. One signal may
+// have multiple signal references. The signal reference term should not to be
+// confused with the `<signalReference>` element that is used to link a signal
+// to multiple roads.
 type RoadSignalsSignalReference struct {
 	OpenDriveElement
 	ElementId   string
@@ -138,7 +162,9 @@ type RoadSignalsSignalReference struct {
 	Type        string
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Used to provide information about signals along a road. Consists of a main
+// element and an optional lane validity element. The element for a signal is
+// <signal>.
 type RoadSignalsSignalRoad struct {
 	RoadSignalsSignal
 	S       GrEqZero
@@ -146,7 +172,9 @@ type RoadSignalsSignalRoad struct {
 	ZOffset float64
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Refers to the same, that is, identical signal from multiple roads. The refe
+// renced signals require a unique ID. The <signalReference> element consists
+// of a main element and an optional lane validity element.
 type RoadSignalsSpatialSignalReference struct {
 	OpenDriveElement
 	Validity    []*RoadObjectsObjectLaneValidity
@@ -156,13 +184,16 @@ type RoadSignalsSpatialSignalReference struct {
 	T           float64
 }
 
-// TODO: Doc formatting needs to be implemented!
+// A <signal> element that contains a <staticBoard> element. The signs that ar
+// e displayed on a static board are defined as separate <sign> elements.
 type RoadSignalsStaticBoard struct {
 	RoadSignalsBoard
 	Sign []*RoadSignalsBoardSign
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Variable message boards can change their values during the simulation in AS
+// AM OpenSCENARIO. Variable message boards are switched off if they are not s
+// pecified in ASAM OpenSCENARIO.
 type RoadSignalsVmsBoard struct {
 	RoadSignalsBoard
 	DisplayArea   []*RoadSignalsDisplayArea
@@ -173,7 +204,8 @@ type RoadSignalsVmsBoard struct {
 	Z             float64
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Variable message board references list all variable message boards that bel
+// ong to the same gantry.
 type SignalGroupVmsBoardReference struct {
 	OpenDriveElement
 	GroupIndex int
@@ -181,14 +213,20 @@ type SignalGroupVmsBoardReference struct {
 	VmsIndex   int
 }
 
-// TODO: Doc formatting needs to be implemented!
+// On a gantry there can be one large variable message board or several smalle
+// r variable message boards. ASAM OpenSCENARIO requires to treat a gantry tha
+// t has one large variable message board or several smaller variable message
+// boards the same way. Therefore variable message boards that are on the same
+// gantry shall be grouped and their indexes shall be redefined if not unique.
 type SignalGroupVmsGroup struct {
 	OpenDriveElement
 	VmsBoardReference []*SignalGroupVmsBoardReference
 	Id                string
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Semantics are limited to traffic behavior that is specified just by signals
+// in ASAM OpenDRIVE. Each traffic behavior is specified by a specific element
+// .
 type SignalsSemantics struct {
 	OpenDriveElement
 	Speed                    []*SignalsSemanticsSpeed
@@ -208,34 +246,37 @@ type SignalsSemantics struct {
 	SupplementaryExplanatory []*SignalsSemanticsSupplementaryExplanatory
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Specifies lane regulations.
 type SignalsSemanticsLane struct {
 	OpenDriveElement
 	Type ESignalsSemanticsLane
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Specifies parking regulations.
 type SignalsSemanticsParking struct {
 	OpenDriveElement
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Specifies priority regulations.
 type SignalsSemanticsPriority struct {
 	OpenDriveElement
 	Type ESignalsSemanticsPriority
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Specifies that certain types of traffic participants are not allowed to ent
+// er. Signal semantics for traffic participants in {THIS_STANDARD} are curren
+// tly not defined because traffic participants are not harmonized for all sta
+// ndards.
 type SignalsSemanticsProhibited struct {
 	OpenDriveElement
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Specifies routing information.
 type SignalsSemanticsRouting struct {
 	OpenDriveElement
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Specifies speed regulations.
 type SignalsSemanticsSpeed struct {
 	OpenDriveElement
 	Type  []*ESignalsSemanticsSpeed
@@ -243,17 +284,21 @@ type SignalsSemanticsSpeed struct {
 	Value []*float64
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Specifies the name of a street.
 type SignalsSemanticsStreetname struct {
 	OpenDriveElement
 }
 
-// TODO: Doc formatting needs to be implemented!
+// This signal semantic has no meaning on its own. It specifies the type of th
+// e traffic participant an exception is made for. Signal semantics for traffi
+// c participants in {THIS_STANDARD} are currently not specified because traff
+// ic participants are not harmonized for all standards.
 type SignalsSemanticsSupplementaryAllows struct {
 	OpenDriveElement
 }
 
-// TODO: Doc formatting needs to be implemented!
+// This signal semantic has no meaning on its own. It specifies the distance a
+// fter a sign becomes valid or the range in which the sign is valid.
 type SignalsSemanticsSupplementaryDistance struct {
 	OpenDriveElement
 	Type  ESignalsSemanticsSupplementaryDistance
@@ -261,35 +306,41 @@ type SignalsSemanticsSupplementaryDistance struct {
 	Value float64
 }
 
-// TODO: Doc formatting needs to be implemented!
+// This signal semantic has no meaning on its own. It specifies under which en
+// vironmental conditions a sign is valid.
 type SignalsSemanticsSupplementaryEnvironment struct {
 	OpenDriveElement
 	Type ESignalsSemanticsSupplementaryEnvironment
 }
 
-// TODO: Doc formatting needs to be implemented!
+// This signal semantic has no meaning on its own. It specifies explanations f
+// or a sign.
 type SignalsSemanticsSupplementaryExplanatory struct {
 	OpenDriveElement
 }
 
-// TODO: Doc formatting needs to be implemented!
+// This signal semantic has no meaning on its own. It specifies the type of th
+// e traffic participant a restriction is made for. Signal semantics for traff
+// ic participants in {THIS_STANDARD} are currently not specified because traf
+// fic participants are not harmonized for all standards.
 type SignalsSemanticsSupplementaryProhibits struct {
 	OpenDriveElement
 }
 
-// TODO: Doc formatting needs to be implemented!
+// This signal semantic has no meaning on its own. It specifies the time or da
+// te a sign is valid.
 type SignalsSemanticsSupplementaryTime struct {
 	OpenDriveElement
 	Type  ESignalsSemanticsSupplementaryTime
 	Value float64
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Specifies tourist information.
 type SignalsSemanticsTourist struct {
 	OpenDriveElement
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Specifies warnings for traffic participant.
 type SignalsSemanticsWarning struct {
 	OpenDriveElement
 }

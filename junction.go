@@ -20,33 +20,39 @@ type ERoadSurfaceCrgPurpose string
 
 type JunctionGridPositionList []float64
 
-// TODO: Doc formatting needs to be implemented!
+// Junctions model intersections between roads.
 type Junction struct {
 	OpenDriveElement
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Junction boundaries enclose the area intended for traffic. This also includ
+// es the sidewalks for pedestrians.
 type JunctionBoundary struct {
 	OpenDriveElement
 	Segment []*JunctionBoundarySegment
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Segments run counter clockwise around the junction and form a closed juncti
+// on boundary.
 type JunctionBoundarySegment struct {
 	OpenDriveElement
 }
 
-// TODO: Doc formatting needs to be implemented!
+// A segment element with @type="joint" is perpendicular to the start or end o
+// f the given road.
 type JunctionBoundarySegmentJoint struct {
 	JunctionBoundarySegment
 }
 
-// TODO: Doc formatting needs to be implemented!
+// A segment element with @type="lane" goes along @boundaryLane for the given
+// s range. It is the outmost edge of the lane  relative to the center of the
+// junction.
 type JunctionBoundarySegmentLane struct {
 	JunctionBoundarySegment
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Common junctions are the default type of junction in ASAM OpenDRIVE and spe
+// cify areas where drivable lanes may overlap and traffic may cross.
 type JunctionCommon struct {
 	Junction
 	Connection    []*JunctionConnectionCommon
@@ -60,45 +66,52 @@ type JunctionCommon struct {
 	ElevationGrid []*JunctionElevationGrid
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Provides information about a single connection within a junction.
 type JunctionConnection struct {
 	OpenDriveElement
 	LaneLink []*JunctionConnectionLaneLink
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Provides information about a single connection within a common junction.
 type JunctionConnectionCommon struct {
 	JunctionConnection
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Provides information about a single connection within a direct junction.
 type JunctionConnectionDirect struct {
 	JunctionConnection
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Provides information about the lanes that are linked between an incoming ro
+// ad and a connecting road. It is strongly recommended to provide this elemen
+// t. It is deprecated to omit the <laneLink> element.
 type JunctionConnectionLaneLink struct {
 	OpenDriveElement
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Virtual connections indicate possible connections between two roads or one
+// or more lanes of two roads. Virtual connections do not specify connecting r
+// oads.
 type JunctionConnectionVirtual struct {
 	JunctionConnection
 	Predecessor []*JunctionPredecessorSuccessor
 	Successor   []*JunctionPredecessorSuccessor
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Provides information about a single connection within a virtual junction.
 type JunctionConnectionVirtualDefault struct {
 	JunctionConnection
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Lists the controllers that should be grouped in a sychronization group (lim
+// ited to that particular junction).
 type JunctionController struct {
 	OpenDriveElement
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Crossings are junctions without connecting roads. They define sections wher
+// e crossing traffic can appear. Traffic does not change roads at crossings,
+// for example, at railway crossings.
 type JunctionCrossing struct {
 	Junction
 	RoadSection []*JunctionRoadSection
@@ -109,7 +122,10 @@ type JunctionCrossing struct {
 	Objects     []*RoadObjects
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Cross paths are intended for pedestrian crossings and are junctions element
+// s where traffic of a lane can cross other lanes and continue on a different
+// lane of the same or a different road. The cross path itself is a separate r
+// oad.
 type JunctionCrossPath struct {
 	CrossingRoad  string
 	Id            string
@@ -119,12 +135,14 @@ type JunctionCrossPath struct {
 	EndLaneLink   JunctionCrossPathLaneLink
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Define the links between the lanes of the <crossPath> to the lanes of other
+// roads.
 type JunctionCrossPathLaneLink struct {
 	OpenDriveElement
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Direct junctions are intended to model entries and exits where drivable lan
+// es may overlap to split or merge, but traffic does not cross.
 type JunctionDirect struct {
 	Junction
 	Connection []*JunctionConnectionDirect
@@ -135,33 +153,41 @@ type JunctionDirect struct {
 	Objects    []*RoadObjects
 }
 
-// TODO: Doc formatting needs to be implemented!
+// An elevation grid is a coarse square grid with z-values at evenly spaced po
+// ints. Elevation grids do not replace OpenCRG.
 type JunctionElevationGrid struct {
 	OpenDriveElement
 	Elevation []*JunctionElevationGridElevation
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Defines the z-values at the regular grid points along the junction referenc
+// e line.
 type JunctionElevationGridElevation struct {
 	OpenDriveElement
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Provides detailed information about the predecessor / successor road of a v
+// irtual connection. Currently, only the @elementType â  roadâ   is allowed
+// .
 type JunctionPredecessorSuccessor struct {
 	OpenDriveElement
 }
 
-// TODO: Doc formatting needs to be implemented!
+// The junction priority record provides information about the priority of one
+// road over another road that are part of this junction. It is only required
+// if priorities cannot be derived from signs or signals in a junction or on t
+// racks leading to a junction.
 type JunctionPriority struct {
 	OpenDriveElement
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Define the s range of the crossing roads with possible crossing traffic.
 type JunctionRoadSection struct {
 	OpenDriveElement
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Virtual junctions manage connections within an uninterrupted road, for exam
+// ple, entries and exits to parking lots, and pedestrian crossings.
 type JunctionVirtual struct {
 	Junction
 	Connection []*JunctionConnection
@@ -173,13 +199,16 @@ type JunctionVirtual struct {
 	Objects    []*RoadObjects
 }
 
-// TODO: Doc formatting needs to be implemented!
+// Junction groups indicate for routing that the grouped junctions belong to t
+// he same node and are commonly seen as one big junction, for example roundab
+// outs or highway interchanges. The <junctionGroup> element is split into a h
+// eader element and a series of member elements.
 type JunctionGroup struct {
 	OpenDriveElement
 	JunctionReference []*JunctionGroupJunctionReference
 }
 
-// TODO: Doc formatting needs to be implemented!
+// References to existing <junction> elements.
 type JunctionGroupJunctionReference struct {
 	OpenDriveElement
 }
