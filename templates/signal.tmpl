@@ -16,7 +16,7 @@ type EunitSpeed struct {
 }
 
 {{range .ComplexType}}
-    // {{ formatStructDocumentation .Annotation.Documentation }}
+    {{ formatStructDocumentation (removeSpecialCharacters .Annotation.Documentation) }}
     type {{ goType .Name }} struct {
         {{$base := .ComplexContent.Extension.Base}}
         {{ goType $base }}

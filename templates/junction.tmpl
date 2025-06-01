@@ -15,7 +15,7 @@ type {{ goType .Name }} []{{goType .List.ItemType}}
 {{end}}
 
 {{range .ComplexType}}
-    // {{ formatStructDocumentation .Annotation.Documentation.Text }}
+    {{ formatStructDocumentation (removeSpecialCharacters .Annotation.Documentation.Text) }}
     type {{ goType .Name }} struct {
         {{$base := .ComplexContent.Extension.Base}}
         {{ goType $base }}
