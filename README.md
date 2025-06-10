@@ -15,6 +15,7 @@ go generate
 ### Outlook
 - generate functions
 - generate XML tags on structs
+- test package with sample xodr files from ASAM
 
 ## License
 [MIT](./LICENSE)
