@@ -63,16 +63,16 @@ func MaxSpeedString(u MaxSpeed) string {
 // e previous <road> element or if a junction is required.d
 type Road struct {
 	OpenDriveElement
-	Link             []*RoadLink
+	Link             *RoadLink
 	Type             []*RoadType
-	PlanView         []*RoadPlanView
-	ElevationProfile []*RoadElevationProfile
-	LateralProfile   []*RoadLateralProfile
-	Lanes            []*RoadLanes
-	Objects          []*RoadObjects
-	Signals          []*RoadSignals
-	Surface          []*RoadSurface
-	Railroad         []*RoadRailroad
+	PlanView         *RoadPlanView
+	ElevationProfile *RoadElevationProfile
+	LateralProfile   *RoadLateralProfile
+	Lanes            *RoadLanes
+	Objects          *RoadObjects
+	Signals          *RoadSignals
+	Surface          *RoadSurface
+	Railroad         *RoadRailroad
 	Id               string
 	Junction         string
 	Length           GrZero
@@ -106,7 +106,7 @@ type RoadLateralProfile struct {
 	OpenDriveElement
 	Superelevation      []*RoadLateralProfileSuperelevation
 	Shape               []*RoadLateralProfileShape
-	CrossSectionSurface []*RoadLateralProfileCrossSectionSurface
+	CrossSectionSurface *RoadLateralProfileCrossSectionSurface
 }
 
 // A cross section surface defines the lateral profile by means of constant, l
@@ -114,8 +114,8 @@ type RoadLateralProfile struct {
 // face is valid for the full length of the road.
 type RoadLateralProfileCrossSectionSurface struct {
 	OpenDriveElement
-	TOffset       []*RoadLateralProfileCrossSectionSurfaceTOffset
-	SurfaceStrips []*RoadLateralProfileCrossSectionSurfaceSurfaceStrip
+	TOffset       *RoadLateralProfileCrossSectionSurfaceTOffset
+	SurfaceStrips *RoadLateralProfileCrossSectionSurfaceSurfaceStrip
 }
 
 // Defines the coefficients of a cubic polynomial in s-direction. The first <c
@@ -133,11 +133,11 @@ type RoadLateralProfileCrossSectionSurfaceCoefficients struct {
 // A strip defines the lateral profile in t- and s-direction.
 type RoadLateralProfileCrossSectionSurfaceStrip struct {
 	OpenDriveElement
-	Width     []*RoadLateralProfileCrossSectionSurfaceStripWidth
-	Constant  []*RoadLateralProfileCrossSectionSurfaceStripConstant
-	Linear    []*RoadLateralProfileCrossSectionSurfaceStripLinear
-	Quadratic []*RoadLateralProfileCrossSectionSurfaceStripQuadratic
-	Cubic     []*RoadLateralProfileCrossSectionSurfaceStripCubic
+	Width     *RoadLateralProfileCrossSectionSurfaceStripWidth
+	Constant  *RoadLateralProfileCrossSectionSurfaceStripConstant
+	Linear    *RoadLateralProfileCrossSectionSurfaceStripLinear
+	Quadratic *RoadLateralProfileCrossSectionSurfaceStripQuadratic
+	Cubic     *RoadLateralProfileCrossSectionSurfaceStripCubic
 	Id        int
 	Mode      EStripMode
 }
@@ -217,8 +217,8 @@ type RoadLateralProfileSuperelevation struct {
 // or. Isolated roads may omit this element.
 type RoadLink struct {
 	OpenDriveElement
-	Predecessor []*RoadLinkPredecessorSuccessor
-	Successor   []*RoadLinkPredecessorSuccessor
+	Predecessor *RoadLinkPredecessorSuccessor
+	Successor   *RoadLinkPredecessorSuccessor
 }
 
 // Successors and predecessors can be junctions or roads. For each, different
@@ -239,7 +239,6 @@ type RoadPlanView struct {
 	Geometry []*RoadPlanViewGeometry
 }
 
-//
 type RoadPlanViewGeometry struct {
 	OpenDriveElement
 	Hdg    float64
@@ -318,7 +317,7 @@ type RoadSurfaceCrg struct {
 // valid until a new road type element is provided or until the road ends.
 type RoadType struct {
 	OpenDriveElement
-	Speed   []*RoadTypeSpeed
+	Speed   *RoadTypeSpeed
 	Country ECountryCode
 	S       GrEqZero
 	Type    ERoadType

@@ -47,15 +47,15 @@ type RoadLanesLaneOffset struct {
 // d at least one <right> or <left> element.
 type RoadLanesLaneSection struct {
 	OpenDriveElement
-	Left   []*RoadLanesLaneSectionLeft
-	Center []*RoadLanesLaneSectionCenter
-	Right  []*RoadLanesLaneSectionRight
+	Left   *RoadLanesLaneSectionLeft
+	Center *RoadLanesLaneSectionCenter
+	Right  *RoadLanesLaneSectionRight
 }
 
 // Contains the center lane, which must be defined for all roads.
 type RoadLanesLaneSectionCenter struct {
 	OpenDriveElement
-	Lane []*RoadLanesLaneSectionCenterLane
+	Lane *RoadLanesLaneSectionCenterLane
 }
 
 // Center lane element with ID zero. Has no width attribute. Mainly used for r
@@ -81,7 +81,6 @@ type RoadLanesLaneSectionLcrLaneLink struct {
 	Successor   []*RoadLanesLaneSectionLcrLaneLinkPredecessorSuccessor
 }
 
-//
 type RoadLanesLaneSectionLcrLaneLinkPredecessorSuccessor struct {
 	OpenDriveElement
 }
@@ -92,8 +91,8 @@ type RoadLanesLaneSectionLcrLaneLinkPredecessorSuccessor struct {
 type RoadLanesLaneSectionLcrLaneRoadMark struct {
 	OpenDriveElement
 	Sway     []*RoadLanesLaneSectionLcrLaneRoadMarkSway
-	Type     []*RoadLanesLaneSectionLcrLaneRoadMarkType
-	Explicit []*RoadLanesLaneSectionLcrLaneRoadMarkExplicit
+	Type     *RoadLanesLaneSectionLcrLaneRoadMarkType
+	Explicit *RoadLanesLaneSectionLcrLaneRoadMarkExplicit
 }
 
 // Irregular road markings that cannot be described by repetitive line pattern
@@ -151,7 +150,7 @@ type RoadLanesLaneSectionLeftLane struct {
 // uld represent the lanes from left to right, that is, with descending ID.
 type RoadLanesLaneSectionLrLane struct {
 	OpenDriveElement
-	Link     []*RoadLanesLaneSectionLcrLaneLink
+	Link     *RoadLanesLaneSectionLcrLaneLink
 	RoadMark []*RoadLanesLaneSectionLcrLaneRoadMark
 	Material []*RoadLanesLaneSectionLrLaneMaterial
 	Speed    []*RoadLanesLaneSectionLrLaneSpeed

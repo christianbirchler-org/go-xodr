@@ -94,7 +94,7 @@ type RoadSignalsSignal struct {
 	Reference       []*RoadSignalsSignalReference
 	StaticBoard     []*RoadSignalsStaticBoard
 	VmsBoard        []*RoadSignalsVmsBoard
-	Semantics       []*SignalsSemantics
+	Semantics       *SignalsSemantics
 	Country         ECountryCode
 	CountryRevision string
 	Dynamic         YesNo
@@ -279,9 +279,9 @@ type SignalsSemanticsRouting struct {
 // Specifies speed regulations.
 type SignalsSemanticsSpeed struct {
 	OpenDriveElement
-	Type  []*ESignalsSemanticsSpeed
-	Unit  []*EUnitSpeed
-	Value []*float64
+	Type  *ESignalsSemanticsSpeed
+	Unit  *EUnitSpeed
+	Value *float64
 }
 
 // Specifies the name of a street.

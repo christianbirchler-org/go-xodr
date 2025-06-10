@@ -59,11 +59,11 @@ type JunctionCommon struct {
 	CrossPath     []*JunctionCrossPath
 	Priority      []*JunctionPriority
 	Controller    []*JunctionController
-	Surface       []*RoadSurface
-	PlanView      []*RoadPlanView
-	Objects       []*RoadObjects
-	Boundary      []*JunctionBoundary
-	ElevationGrid []*JunctionElevationGrid
+	Surface       *RoadSurface
+	PlanView      *RoadPlanView
+	Objects       *RoadObjects
+	Boundary      *JunctionBoundary
+	ElevationGrid *JunctionElevationGrid
 }
 
 // Provides information about a single connection within a junction.
@@ -94,8 +94,8 @@ type JunctionConnectionLaneLink struct {
 // oads.
 type JunctionConnectionVirtual struct {
 	JunctionConnection
-	Predecessor []*JunctionPredecessorSuccessor
-	Successor   []*JunctionPredecessorSuccessor
+	Predecessor *JunctionPredecessorSuccessor
+	Successor   *JunctionPredecessorSuccessor
 }
 
 // Provides information about a single connection within a virtual junction.
@@ -117,9 +117,9 @@ type JunctionCrossing struct {
 	RoadSection []*JunctionRoadSection
 	Priority    []*JunctionPriority
 	Controller  []*JunctionController
-	Surface     []*RoadSurface
-	PlanView    []*RoadPlanView
-	Objects     []*RoadObjects
+	Surface     *RoadSurface
+	PlanView    *RoadPlanView
+	Objects     *RoadObjects
 }
 
 // Cross paths are intended for pedestrian crossings and are junctions element
@@ -148,9 +148,9 @@ type JunctionDirect struct {
 	Connection []*JunctionConnectionDirect
 	Priority   []*JunctionPriority
 	Controller []*JunctionController
-	Surface    []*RoadSurface
-	PlanView   []*RoadPlanView
-	Objects    []*RoadObjects
+	Surface    *RoadSurface
+	PlanView   *RoadPlanView
+	Objects    *RoadObjects
 }
 
 // An elevation grid is a coarse square grid with z-values at evenly spaced po
@@ -194,9 +194,9 @@ type JunctionVirtual struct {
 	CrossPath  []*JunctionCrossPath
 	Priority   []*JunctionPriority
 	Controller []*JunctionController
-	Surface    []*RoadSurface
-	PlanView   []*RoadPlanView
-	Objects    []*RoadObjects
+	Surface    *RoadSurface
+	PlanView   *RoadPlanView
+	Objects    *RoadObjects
 }
 
 // Junction groups indicate for routing that the grouped junctions belong to t

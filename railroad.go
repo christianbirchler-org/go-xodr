@@ -23,9 +23,9 @@ type RoadRailroad struct {
 // cles into two directions only.
 type RoadRailroadSwitch struct {
 	OpenDriveElement
-	MainTrack []*RoadRailroadSwitchMainTrack
-	SideTrack []*RoadRailroadSwitchSideTrack
-	Partner   []*RoadRailroadSwitchPartner
+	MainTrack *RoadRailroadSwitchMainTrack
+	SideTrack *RoadRailroadSwitchSideTrack
+	Partner   *RoadRailroadSwitchPartner
 	Id        *string
 	Name      *string
 	Position  *ERoadRailroadSwitchPosition

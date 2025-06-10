@@ -52,7 +52,6 @@ type YesNo string
 
 type ZeroOne float64
 
-//
 type OpenDriveElement struct {
 }
 
@@ -73,10 +72,10 @@ type DataQualityRawData struct {
 // Contains general information about the ASAM OpenDRIVE file
 type Header struct {
 	OpenDriveElement
-	GeoReference       []*HeaderGeoReference
-	Offset             []*HeaderOffset
-	License            []*License
-	DefaultRegulations []*HeaderDefaultRegulations
+	GeoReference       *HeaderGeoReference
+	Offset             *HeaderOffset
+	License            *License
+	DefaultRegulations *HeaderDefaultRegulations
 	Date               string
 	East               float64
 	Name               string
@@ -130,7 +129,7 @@ type HeaderOffset struct {
 // Defines the default regulations for different road types.
 type HeaderRoadRegulation struct {
 	OpenDriveElement
-	Semantics []*SignalsSemantics
+	Semantics *SignalsSemantics
 	Type      ERoadType
 }
 
@@ -138,7 +137,7 @@ type HeaderRoadRegulation struct {
 // le, if it is allowed to turn right when a red traffic light appears.
 type HeaderSignalRegulation struct {
 	OpenDriveElement
-	Semantics []*SignalsSemantics
+	Semantics *SignalsSemantics
 	Subtype   string
 	Type      string
 }

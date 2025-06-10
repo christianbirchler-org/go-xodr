@@ -50,15 +50,15 @@ type RoadObjectsBridge struct {
 type RoadObjectsObject struct {
 	OpenDriveElement
 	Repeat       []*RoadObjectsObjectRepeat
-	Outline      []*RoadObjectsObjectOutlinesOutline
-	Outlines     []*RoadObjectsObjectOutlines
+	Outline      *RoadObjectsObjectOutlinesOutline
+	Outlines     *RoadObjectsObjectOutlines
 	Material     []*RoadObjectsObjectMaterial
 	Validity     []*RoadObjectsObjectLaneValidity
-	ParkingSpace []*RoadObjectsObjectParkingSpace
-	Markings     []*RoadObjectsObjectMarkings
-	Borders      []*RoadObjectsObjectBorders
-	Surface      []*RoadObjectsObjectSurface
-	Skeleton     []*RoadObjectsObjectSkeleton
+	ParkingSpace *RoadObjectsObjectParkingSpace
+	Markings     *RoadObjectsObjectMarkings
+	Borders      *RoadObjectsObjectBorders
+	Surface      *RoadObjectsObjectSurface
+	Skeleton     *RoadObjectsObjectSkeleton
 	Dynamic      YesNo
 	Hdg          float64
 	Height       GrEqZero
@@ -255,7 +255,7 @@ type RoadObjectsObjectSkeletonPolylineVertexRoad struct {
 // Used to describe the road surface elevation of an object.
 type RoadObjectsObjectSurface struct {
 	OpenDriveElement
-	Crg []*RoadObjectsObjectSurfaceCrg
+	Crg *RoadObjectsObjectSurfaceCrg
 }
 
 // Elevation data described in {GLO_VAR_STA_ASAM_OpenCRG} are represented by t

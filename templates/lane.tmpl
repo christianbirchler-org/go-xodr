@@ -15,7 +15,7 @@ package xodr
         {{ goType $base }}
 
         {{- range .ComplexContent.Extension.Sequence.Element}}
-        {{toCamel .Name}} []*{{ goType .Type }}
+        {{toCamel .Name}} {{- if ne .MaxOccurs "1"}} []*{{ goType .Type }} {{- end}} {{- if eq .MaxOccurs "1"}} *{{ goType .Type }} {{- end}}
         {{- end}}
 
         {{- range .Attribute}}
