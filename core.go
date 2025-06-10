@@ -2,6 +2,17 @@
 
 package xodr
 
+// Root element containing all information about the ASAM OpenDRIVE file
+type OpenDrive struct {
+	Header        *Header
+	Road          []*Road
+	Controller    []*Controller
+	Junction      []*Junction
+	JunctionGroup []*JunctionGroup
+	Station       []*Station
+	VmsGroup      []*SignalGroupVmsGroup
+}
+
 type EDataQualityRawDataPostProcessing string
 
 type EDataQualityRawDataSource string
