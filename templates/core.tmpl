@@ -2,6 +2,14 @@
 
 package xodr
 
+
+{{ formatStructDocumentation (removeSpecialCharacters .Element.ComplexType.Annotation.Documentation.Text) }}
+type {{ goType .Element.Name }} struct {
+    {{- range .Element.ComplexType.Sequence.Element}}
+    {{toCamel .Name}} {{- if eq .MaxOccurs "1"}} *{{goType .Type}} {{- end}} {{- if ne .MaxOccurs "1"}} []*{{goType .Type}} {{- end}}
+    {{- end}}
+}
+
 {{range .SimpleType}}
     type {{ goType .Name }} {{if .Restriction.Base}} {{ goType .Restriction.Base }} {{else}} interface{}
     {{goUnion (goType .Name) .Union.MemberTypes}}
