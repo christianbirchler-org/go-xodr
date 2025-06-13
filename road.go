@@ -239,7 +239,6 @@ type RoadPlanView struct {
 	Geometry []*RoadPlanViewGeometry `xml:"geometry"`
 }
 
-//
 type RoadPlanViewGeometry struct {
 	OpenDriveElement
 	Hdg    float64  `xml:"hdg,attr"`

@@ -81,7 +81,6 @@ type RoadLanesLaneSectionLcrLaneLink struct {
 	Successor   []*RoadLanesLaneSectionLcrLaneLinkPredecessorSuccessor `xml:"successor"`
 }
 
-//
 type RoadLanesLaneSectionLcrLaneLinkPredecessorSuccessor struct {
 	OpenDriveElement
 }
