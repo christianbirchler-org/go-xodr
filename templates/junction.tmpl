@@ -21,11 +21,11 @@ type {{ goType .Name }} []{{goType .List.ItemType}}
         {{ goType $base }}
 
         {{- range .ComplexContent.Extension.Sequence.Element}}
-        {{toCamel .Name}} {{- if ne .MaxOccurs "1"}} []*{{ goType .Type }} {{- end}} {{- if eq .MaxOccurs "1"}} *{{ goType .Type }} {{- end}}
+        {{toCamel .Name}} {{- if ne .MaxOccurs "1"}} []*{{ goType .Type }} {{- end}} {{- if eq .MaxOccurs "1"}} *{{ goType .Type }} {{- end}} `xml:"{{.Name}}"`
         {{- end}}
 
         {{- range .Attribute}}
-        {{toCamel .Name}} {{ goType .Type }}
+        {{toCamel .Name}} {{ goType .Type }} `xml:"{{.Name}},attr"`
         {{- end }}
 
         {{- range .Sequence.Element}}

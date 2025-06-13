@@ -4,13 +4,13 @@ package xodr
 
 // Root element containing all information about the ASAM OpenDRIVE file
 type OpenDrive struct {
-	Header        *Header
-	Road          []*Road
-	Controller    []*Controller
-	Junction      []*Junction
-	JunctionGroup []*JunctionGroup
-	Station       []*Station
-	VmsGroup      []*SignalGroupVmsGroup
+	Header        *Header                `xml:"header"`
+	Road          []*Road                `xml:"road"`
+	Controller    []*Controller          `xml:"controller"`
+	Junction      []*Junction            `xml:"junction"`
+	JunctionGroup []*JunctionGroup       `xml:"junctionGroup"`
+	Station       []*Station             `xml:"station"`
+	VmsGroup      []*SignalGroupVmsGroup `xml:"vmsGroup"`
 }
 
 type EDataQualityRawDataPostProcessing string
@@ -84,20 +84,20 @@ type DataQualityRawData struct {
 // Contains general information about the ASAM OpenDRIVE file
 type Header struct {
 	OpenDriveElement
-	GeoReference       *HeaderGeoReference
-	Offset             *HeaderOffset
-	License            *License
-	DefaultRegulations *HeaderDefaultRegulations
-	Date               string
-	East               float64
-	Name               string
-	North              float64
-	RevMajor           int
-	RevMinor           int
-	South              float64
-	Vendor             string
-	Version            string
-	West               float64
+	GeoReference       *HeaderGeoReference       `xml:"geoReference"`
+	Offset             *HeaderOffset             `xml:"offset"`
+	License            *License                  `xml:"license"`
+	DefaultRegulations *HeaderDefaultRegulations `xml:"defaultRegulations"`
+	Date               string                    `xml:"date,attr"`
+	East               float64                   `xml:"east,attr"`
+	Name               string                    `xml:"name,attr"`
+	North              float64                   `xml:"north,attr"`
+	RevMajor           int                       `xml:"revMajor,attr"`
+	RevMinor           int                       `xml:"revMinor,attr"`
+	South              float64                   `xml:"south,attr"`
+	Vendor             string                    `xml:"vendor,attr"`
+	Version            string                    `xml:"version,attr"`
+	West               float64                   `xml:"west,attr"`
 }
 
 // Defines the default regulations. In each country there are different speed
@@ -110,8 +110,8 @@ type Header struct {
 // ions.
 type HeaderDefaultRegulations struct {
 	OpenDriveElement
-	RoadRegulations   []*HeaderRoadRegulation
-	SignalRegulations []*HeaderSignalRegulation
+	RoadRegulations   []*HeaderRoadRegulation   `xml:"roadRegulations"`
+	SignalRegulations []*HeaderSignalRegulation `xml:"signalRegulations"`
 }
 
 // Spatial reference systems are standardized by the European Petroleum Survey
@@ -132,26 +132,26 @@ type HeaderGeoReference struct {
 // should be avoided.
 type HeaderOffset struct {
 	OpenDriveElement
-	Hdg float64
-	X   float64
-	Y   float64
-	Z   float64
+	Hdg float64 `xml:"hdg,attr"`
+	X   float64 `xml:"x,attr"`
+	Y   float64 `xml:"y,attr"`
+	Z   float64 `xml:"z,attr"`
 }
 
 // Defines the default regulations for different road types.
 type HeaderRoadRegulation struct {
 	OpenDriveElement
-	Semantics *SignalsSemantics
-	Type      ERoadType
+	Semantics *SignalsSemantics `xml:"semantics"`
+	Type      ERoadType         `xml:"type,attr"`
 }
 
 // Defines the default regulations for signs in different countries, for examp
 // le, if it is allowed to turn right when a red traffic light appears.
 type HeaderSignalRegulation struct {
 	OpenDriveElement
-	Semantics *SignalsSemantics
-	Subtype   string
-	Type      string
+	Semantics *SignalsSemantics `xml:"semantics"`
+	Subtype   string            `xml:"subtype,attr"`
+	Type      string            `xml:"type,attr"`
 }
 
 // Provides information about additional files that should be included while p
@@ -162,10 +162,10 @@ type Include struct {
 // Licensing information about the OpenDRIVE file.
 type License struct {
 	OpenDriveElement
-	Name     string
-	Resource string
-	Spdxid   string
-	Text     string
+	Name     string `xml:"name,attr"`
+	Resource string `xml:"resource,attr"`
+	Spdxid   string `xml:"spdxid,attr"`
+	Text     string `xml:"text,attr"`
 }
 
 // Describes any additional information or data that is needed by an applicati

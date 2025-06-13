@@ -21,10 +21,10 @@ type ETunnelType string
 // Container for all objects along a road.
 type RoadObjects struct {
 	OpenDriveElement
-	Object          []*RoadObjectsObject
-	ObjectReference []*RoadObjectsObjectReference
-	Tunnel          []*RoadObjectsTunnel
-	Bridge          []*RoadObjectsBridge
+	Object          []*RoadObjectsObject          `xml:"object"`
+	ObjectReference []*RoadObjectsObjectReference `xml:"objectReference"`
+	Tunnel          []*RoadObjectsTunnel          `xml:"tunnel"`
+	Bridge          []*RoadObjectsBridge          `xml:"bridge"`
 }
 
 // Bridges are modeled as objects in ASAM OpenDRIVE. The road with the bridge
@@ -33,12 +33,12 @@ type RoadObjects struct {
 // ed as child element.
 type RoadObjectsBridge struct {
 	OpenDriveElement
-	Validity []*RoadObjectsObjectLaneValidity
-	Id       string
-	Length   GrEqZero
-	Name     string
-	S        GrEqZero
-	Type     EBridgeType
+	Validity []*RoadObjectsObjectLaneValidity `xml:"validity"`
+	Id       string                           `xml:"id,attr"`
+	Length   GrEqZero                         `xml:"length,attr"`
+	Name     string                           `xml:"name,attr"`
+	S        GrEqZero                         `xml:"s,attr"`
+	Type     EBridgeType                      `xml:"type,attr"`
 }
 
 // Objects influence a road by expanding, delimiting, or supplementing its cou
@@ -49,80 +49,80 @@ type RoadObjectsBridge struct {
 // and height.  - For a circular object: definition of the radius and height.
 type RoadObjectsObject struct {
 	OpenDriveElement
-	Repeat       []*RoadObjectsObjectRepeat
-	Outline      *RoadObjectsObjectOutlinesOutline
-	Outlines     *RoadObjectsObjectOutlines
-	Material     []*RoadObjectsObjectMaterial
-	Validity     []*RoadObjectsObjectLaneValidity
-	ParkingSpace *RoadObjectsObjectParkingSpace
-	Markings     *RoadObjectsObjectMarkings
-	Borders      *RoadObjectsObjectBorders
-	Surface      *RoadObjectsObjectSurface
-	Skeleton     *RoadObjectsObjectSkeleton
-	Dynamic      YesNo
-	Hdg          float64
-	Height       GrEqZero
-	Id           string
-	Length       GrZero
-	Name         string
-	Orientation  EOrientation
-	PerpToRoad   Bool
-	Pitch        float64
-	Radius       GrZero
-	Roll         float64
-	S            GrEqZero
-	Subtype      string
-	T            float64
-	Type         EObjectType
-	ValidLength  GrEqZero
-	Width        float64
-	ZOffset      float64
+	Repeat       []*RoadObjectsObjectRepeat        `xml:"repeat"`
+	Outline      *RoadObjectsObjectOutlinesOutline `xml:"outline"`
+	Outlines     *RoadObjectsObjectOutlines        `xml:"outlines"`
+	Material     []*RoadObjectsObjectMaterial      `xml:"material"`
+	Validity     []*RoadObjectsObjectLaneValidity  `xml:"validity"`
+	ParkingSpace *RoadObjectsObjectParkingSpace    `xml:"parkingSpace"`
+	Markings     *RoadObjectsObjectMarkings        `xml:"markings"`
+	Borders      *RoadObjectsObjectBorders         `xml:"borders"`
+	Surface      *RoadObjectsObjectSurface         `xml:"surface"`
+	Skeleton     *RoadObjectsObjectSkeleton        `xml:"skeleton"`
+	Dynamic      YesNo                             `xml:"dynamic,attr"`
+	Hdg          float64                           `xml:"hdg,attr"`
+	Height       GrEqZero                          `xml:"height,attr"`
+	Id           string                            `xml:"id,attr"`
+	Length       GrZero                            `xml:"length,attr"`
+	Name         string                            `xml:"name,attr"`
+	Orientation  EOrientation                      `xml:"orientation,attr"`
+	PerpToRoad   Bool                              `xml:"perpToRoad,attr"`
+	Pitch        float64                           `xml:"pitch,attr"`
+	Radius       GrZero                            `xml:"radius,attr"`
+	Roll         float64                           `xml:"roll,attr"`
+	S            GrEqZero                          `xml:"s,attr"`
+	Subtype      string                            `xml:"subtype,attr"`
+	T            float64                           `xml:"t,attr"`
+	Type         EObjectType                       `xml:"type,attr"`
+	ValidLength  GrEqZero                          `xml:"validLength,attr"`
+	Width        float64                           `xml:"width,attr"`
+	ZOffset      float64                           `xml:"zOffset,attr"`
 }
 
 // Object borders are frames with a defined width, for example, to describe tr
 // affic islands. Different border types are available.
 type RoadObjectsObjectBorders struct {
 	OpenDriveElement
-	Border []*RoadObjectsObjectBordersBorder
+	Border []*RoadObjectsObjectBordersBorder `xml:"border"`
 }
 
 // Specifies a border along certain outline points.
 type RoadObjectsObjectBordersBorder struct {
 	OpenDriveElement
-	CornerReference    []*RoadObjectsObjectMarkingsMarkingCornerReference
-	OutlineId          int
-	Type               EBorderType
-	UseCompleteOutline Bool
-	Width              GrEqZero
+	CornerReference    []*RoadObjectsObjectMarkingsMarkingCornerReference `xml:"cornerReference"`
+	OutlineId          int                                                `xml:"outlineId,attr"`
+	Type               EBorderType                                        `xml:"type,attr"`
+	UseCompleteOutline Bool                                               `xml:"useCompleteOutline,attr"`
+	Width              GrEqZero                                           `xml:"width,attr"`
 }
 
 // Object markings are road markings of any objects, for example, crosswalks,
 // stopping-lines, and parking spaces.
 type RoadObjectsObjectMarkings struct {
 	OpenDriveElement
-	Marking []*RoadObjectsObjectMarkingsMarking
+	Marking []*RoadObjectsObjectMarkingsMarking `xml:"marking"`
 }
 
 // Specifies a marking that is either attached to one side of the object bound
 // ing box or referencing outline points.
 type RoadObjectsObjectMarkingsMarking struct {
 	OpenDriveElement
-	CornerReference []*RoadObjectsObjectMarkingsMarkingCornerReference
-	Color           ERoadMarkColor
-	LineLength      GrZero
-	Side            ESideType
-	SpaceLength     GrEqZero
-	StartOffset     float64
-	StopOffset      float64
-	Weight          ERoadMarkWeight
-	Width           GrZero
-	ZOffset         GrEqZero
+	CornerReference []*RoadObjectsObjectMarkingsMarkingCornerReference `xml:"cornerReference"`
+	Color           ERoadMarkColor                                     `xml:"color,attr"`
+	LineLength      GrZero                                             `xml:"lineLength,attr"`
+	Side            ESideType                                          `xml:"side,attr"`
+	SpaceLength     GrEqZero                                           `xml:"spaceLength,attr"`
+	StartOffset     float64                                            `xml:"startOffset,attr"`
+	StopOffset      float64                                            `xml:"stopOffset,attr"`
+	Weight          ERoadMarkWeight                                    `xml:"weight,attr"`
+	Width           GrZero                                             `xml:"width,attr"`
+	ZOffset         GrEqZero                                           `xml:"zOffset,attr"`
 }
 
 // Specifies a point by referencing an existing outline point.
 type RoadObjectsObjectMarkingsMarkingCornerReference struct {
 	OpenDriveElement
-	Id int
+	Id int `xml:"id,attr"`
 }
 
 // Describes the material properties of objects, for example, patches that are
@@ -131,10 +131,10 @@ type RoadObjectsObjectMarkingsMarkingCornerReference struct {
 // ly within the outline of the parent road object.
 type RoadObjectsObjectMaterial struct {
 	OpenDriveElement
-	Friction      GrEqZero
-	RoadMarkColor ERoadMarkColor
-	Roughness     GrEqZero
-	Surface       string
+	Friction      GrEqZero       `xml:"friction,attr"`
+	RoadMarkColor ERoadMarkColor `xml:"roadMarkColor,attr"`
+	Roughness     GrEqZero       `xml:"roughness,attr"`
+	Surface       string         `xml:"surface,attr"`
 }
 
 // Wrapper for the different outline entries of an object, that can contain mu
@@ -142,7 +142,7 @@ type RoadObjectsObjectMaterial struct {
 // nly a single <outline> entry.
 type RoadObjectsObjectOutlines struct {
 	OpenDriveElement
-	Outline []*RoadObjectsObjectOutlinesOutline
+	Outline []*RoadObjectsObjectOutlinesOutline `xml:"outline"`
 }
 
 // Defines a series of corner points, including the height of the object relat
@@ -154,11 +154,11 @@ type RoadObjectsObjectOutlines struct {
 // t <outlines> parent element) shall still be supported.
 type RoadObjectsObjectOutlinesOutline struct {
 	OpenDriveElement
-	Closed   Bool
-	FillType EOutlineFillType
-	Id       int
-	LaneType ELaneType
-	Outer    Bool
+	Closed   Bool             `xml:"closed,attr"`
+	FillType EOutlineFillType `xml:"fillType,attr"`
+	Id       int              `xml:"id,attr"`
+	LaneType ELaneType        `xml:"laneType,attr"`
+	Outer    Bool             `xml:"outer,attr"`
 }
 
 // Used to describe complex forms of objects. Defines a corner point on the ob
@@ -167,28 +167,28 @@ type RoadObjectsObjectOutlinesOutline struct {
 // t, @zOffset and @hdg attributes of the  element.
 type RoadObjectsObjectOutlinesOutlineCornerLocal struct {
 	OpenDriveElement
-	Height GrEqZero
-	Id     int
-	U      float64
-	V      float64
-	Z      float64
+	Height GrEqZero `xml:"height,attr"`
+	Id     int      `xml:"id,attr"`
+	U      float64  `xml:"u,attr"`
+	V      float64  `xml:"v,attr"`
+	Z      float64  `xml:"z,attr"`
 }
 
 // Defines a corner point on the objectâ  s outline in road coordinates.
 type RoadObjectsObjectOutlinesOutlineCornerRoad struct {
 	OpenDriveElement
-	Dz     float64
-	Height GrEqZero
-	Id     int
-	S      GrEqZero
-	T      float64
+	Dz     float64  `xml:"dz,attr"`
+	Height GrEqZero `xml:"height,attr"`
+	Id     int      `xml:"id,attr"`
+	S      GrEqZero `xml:"s,attr"`
+	T      float64  `xml:"t,attr"`
 }
 
 // Details for a parking space may be added to the <object> element.
 type RoadObjectsObjectParkingSpace struct {
 	OpenDriveElement
-	Access       ERoadObjectsObjectParkingSpaceAccess
-	Restrictions string
+	Access       ERoadObjectsObjectParkingSpaceAccess `xml:"access,attr"`
+	Restrictions string                               `xml:"restrictions,attr"`
 }
 
 // To avoid lengthy XML code, objects of the same type may be repeated. Attrib
@@ -197,22 +197,22 @@ type RoadObjectsObjectParkingSpace struct {
 // rom the original object apply.
 type RoadObjectsObjectRepeat struct {
 	OpenDriveElement
-	DetachFromReferenceLine Bool
-	Distance                GrEqZero
-	HeightEnd               GrEqZero
-	HeightStart             GrEqZero
-	Length                  GrEqZero
-	LengthEnd               GrEqZero
-	LengthStart             GrEqZero
-	RadiusEnd               GrEqZero
-	RadiusStart             GrEqZero
-	S                       GrEqZero
-	TEnd                    float64
-	TStart                  float64
-	WidthEnd                GrEqZero
-	WidthStart              GrEqZero
-	ZOffsetEnd              float64
-	ZOffsetStart            float64
+	DetachFromReferenceLine Bool     `xml:"detachFromReferenceLine,attr"`
+	Distance                GrEqZero `xml:"distance,attr"`
+	HeightEnd               GrEqZero `xml:"heightEnd,attr"`
+	HeightStart             GrEqZero `xml:"heightStart,attr"`
+	Length                  GrEqZero `xml:"length,attr"`
+	LengthEnd               GrEqZero `xml:"lengthEnd,attr"`
+	LengthStart             GrEqZero `xml:"lengthStart,attr"`
+	RadiusEnd               GrEqZero `xml:"radiusEnd,attr"`
+	RadiusStart             GrEqZero `xml:"radiusStart,attr"`
+	S                       GrEqZero `xml:"s,attr"`
+	TEnd                    float64  `xml:"tEnd,attr"`
+	TStart                  float64  `xml:"tStart,attr"`
+	WidthEnd                GrEqZero `xml:"widthEnd,attr"`
+	WidthStart              GrEqZero `xml:"widthStart,attr"`
+	ZOffsetEnd              float64  `xml:"zOffsetEnd,attr"`
+	ZOffsetStart            float64  `xml:"zOffsetStart,attr"`
 }
 
 // Wrapper for the object polylines, that can be used to describe the actual s
@@ -255,16 +255,16 @@ type RoadObjectsObjectSkeletonPolylineVertexRoad struct {
 // Used to describe the road surface elevation of an object.
 type RoadObjectsObjectSurface struct {
 	OpenDriveElement
-	Crg *RoadObjectsObjectSurfaceCrg
+	Crg *RoadObjectsObjectSurfaceCrg `xml:"CRG"`
 }
 
 // Elevation data described in {GLO_VAR_STA_ASAM_OpenCRG} are represented by t
 // he <CRG> element within the <surface> element.
 type RoadObjectsObjectSurfaceCrg struct {
 	OpenDriveElement
-	File               string
-	HideRoadSurfaceCrg Bool
-	ZScale             float64
+	File               string  `xml:"file,attr"`
+	HideRoadSurfaceCrg Bool    `xml:"hideRoadSurfaceCRG,attr"`
+	ZScale             float64 `xml:"zScale,attr"`
 }
 
 // An object reference refers to one identical object from multiple roads. The
@@ -272,13 +272,13 @@ type RoadObjectsObjectSurfaceCrg struct {
 // sts of a main element and an optional lane validity element.
 type RoadObjectsObjectReference struct {
 	OpenDriveElement
-	Validity    []*RoadObjectsObjectLaneValidity
-	Id          string
-	Orientation EOrientation
-	S           GrEqZero
-	T           float64
-	ValidLength GrEqZero
-	ZOffset     float64
+	Validity    []*RoadObjectsObjectLaneValidity `xml:"validity"`
+	Id          string                           `xml:"id,attr"`
+	Orientation EOrientation                     `xml:"orientation,attr"`
+	S           GrEqZero                         `xml:"s,attr"`
+	T           float64                          `xml:"t,attr"`
+	ValidLength GrEqZero                         `xml:"validLength,attr"`
+	ZOffset     float64                          `xml:"zOffset,attr"`
 }
 
 // Tunnels are modeled as objects in ASAM OpenDRIVE. The road with the tunnel
@@ -287,12 +287,12 @@ type RoadObjectsObjectReference struct {
 // dity element with further restrictions is provided as child element
 type RoadObjectsTunnel struct {
 	OpenDriveElement
-	Validity []*RoadObjectsObjectLaneValidity
-	Daylight ZeroOne
-	Id       string
-	Length   GrEqZero
-	Lighting ZeroOne
-	Name     string
-	S        GrEqZero
-	Type     ETunnelType
+	Validity []*RoadObjectsObjectLaneValidity `xml:"validity"`
+	Daylight ZeroOne                          `xml:"daylight,attr"`
+	Id       string                           `xml:"id,attr"`
+	Length   GrEqZero                         `xml:"length,attr"`
+	Lighting ZeroOne                          `xml:"lighting,attr"`
+	Name     string                           `xml:"name,attr"`
+	S        GrEqZero                         `xml:"s,attr"`
+	Type     ETunnelType                      `xml:"type,attr"`
 }

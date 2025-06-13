@@ -30,8 +30,8 @@ type Bool string
 // sections with respect to the lanes along the road reference line.
 type RoadLanes struct {
 	OpenDriveElement
-	LaneOffset  []*RoadLanesLaneOffset
-	LaneSection []*RoadLanesLaneSection
+	LaneOffset  []*RoadLanesLaneOffset  `xml:"laneOffset"`
+	LaneSection []*RoadLanesLaneSection `xml:"laneSection"`
 }
 
 // Lane offsets shift the center lane away from the road reference line.
@@ -47,23 +47,23 @@ type RoadLanesLaneOffset struct {
 // d at least one <right> or <left> element.
 type RoadLanesLaneSection struct {
 	OpenDriveElement
-	Left   *RoadLanesLaneSectionLeft
-	Center *RoadLanesLaneSectionCenter
-	Right  *RoadLanesLaneSectionRight
+	Left   *RoadLanesLaneSectionLeft   `xml:"left"`
+	Center *RoadLanesLaneSectionCenter `xml:"center"`
+	Right  *RoadLanesLaneSectionRight  `xml:"right"`
 }
 
 // Contains the center lane, which must be defined for all roads.
 type RoadLanesLaneSectionCenter struct {
 	OpenDriveElement
-	Lane *RoadLanesLaneSectionCenterLane
+	Lane *RoadLanesLaneSectionCenterLane `xml:"lane"`
 }
 
 // Center lane element with ID zero. Has no width attribute. Mainly used for r
 // oad marks.
 type RoadLanesLaneSectionCenterLane struct {
-	Id       int
-	Level    Bool
-	Type     ELaneType
+	Id       int       `xml:"id,attr"`
+	Level    Bool      `xml:"level,attr"`
+	Type     ELaneType `xml:"type,attr"`
 	Link     RoadLanesLaneSectionLcrLaneLink
 	RoadMark RoadLanesLaneSectionLcrLaneRoadMark
 }
@@ -77,8 +77,8 @@ type RoadLanesLaneSectionCenterLane struct {
 // ly be omitted, if lanes end at a junction or have no physical link.
 type RoadLanesLaneSectionLcrLaneLink struct {
 	OpenDriveElement
-	Predecessor []*RoadLanesLaneSectionLcrLaneLinkPredecessorSuccessor
-	Successor   []*RoadLanesLaneSectionLcrLaneLinkPredecessorSuccessor
+	Predecessor []*RoadLanesLaneSectionLcrLaneLinkPredecessorSuccessor `xml:"predecessor"`
+	Successor   []*RoadLanesLaneSectionLcrLaneLinkPredecessorSuccessor `xml:"successor"`
 }
 
 //
@@ -91,9 +91,9 @@ type RoadLanesLaneSectionLcrLaneLinkPredecessorSuccessor struct {
 // d mark element for the center lane.
 type RoadLanesLaneSectionLcrLaneRoadMark struct {
 	OpenDriveElement
-	Sway     []*RoadLanesLaneSectionLcrLaneRoadMarkSway
-	Type     *RoadLanesLaneSectionLcrLaneRoadMarkType
-	Explicit *RoadLanesLaneSectionLcrLaneRoadMarkExplicit
+	Sway     []*RoadLanesLaneSectionLcrLaneRoadMarkSway   `xml:"sway"`
+	Type     *RoadLanesLaneSectionLcrLaneRoadMarkType     `xml:"type"`
+	Explicit *RoadLanesLaneSectionLcrLaneRoadMarkExplicit `xml:"explicit"`
 }
 
 // Irregular road markings that cannot be described by repetitive line pattern
@@ -106,7 +106,7 @@ type RoadLanesLaneSectionLcrLaneRoadMark struct {
 // t should specifically be used for measurement data.
 type RoadLanesLaneSectionLcrLaneRoadMarkExplicit struct {
 	OpenDriveElement
-	Line []*RoadLanesLaneSectionLcrLaneRoadMarkExplicitLine
+	Line []*RoadLanesLaneSectionLcrLaneRoadMarkExplicitLine `xml:"line"`
 }
 
 // Specifies a single line in an explicit road mark definition.
@@ -125,7 +125,7 @@ type RoadLanesLaneSectionLcrLaneRoadMarkSway struct {
 // onal information about the lines that the road mark is composed of.
 type RoadLanesLaneSectionLcrLaneRoadMarkType struct {
 	OpenDriveElement
-	Line []*RoadLanesLaneSectionLcrLaneRoadMarkTypeLine
+	Line []*RoadLanesLaneSectionLcrLaneRoadMarkTypeLine `xml:"line"`
 }
 
 // A road mark may consist of one or more elements. Multiple elements are usua
@@ -138,7 +138,7 @@ type RoadLanesLaneSectionLcrLaneRoadMarkTypeLine struct {
 // Contains all lanes left to the center lane.
 type RoadLanesLaneSectionLeft struct {
 	OpenDriveElement
-	Lane []*RoadLanesLaneSectionLeftLane
+	Lane []*RoadLanesLaneSectionLeftLane `xml:"lane"`
 }
 
 // Left lanes numbered with positive IDs in ascending order from center lane t
@@ -151,13 +151,13 @@ type RoadLanesLaneSectionLeftLane struct {
 // uld represent the lanes from left to right, that is, with descending ID.
 type RoadLanesLaneSectionLrLane struct {
 	OpenDriveElement
-	Link     *RoadLanesLaneSectionLcrLaneLink
-	RoadMark []*RoadLanesLaneSectionLcrLaneRoadMark
-	Material []*RoadLanesLaneSectionLrLaneMaterial
-	Speed    []*RoadLanesLaneSectionLrLaneSpeed
-	Access   []*RoadLanesLaneSectionLrLaneAccess
-	Height   []*RoadLanesLaneSectionLrLaneHeight
-	Rule     []*RoadLanesLaneSectionLrLaneRule
+	Link     *RoadLanesLaneSectionLcrLaneLink       `xml:"link"`
+	RoadMark []*RoadLanesLaneSectionLcrLaneRoadMark `xml:"roadMark"`
+	Material []*RoadLanesLaneSectionLrLaneMaterial  `xml:"material"`
+	Speed    []*RoadLanesLaneSectionLrLaneSpeed     `xml:"speed"`
+	Access   []*RoadLanesLaneSectionLrLaneAccess    `xml:"access"`
+	Height   []*RoadLanesLaneSectionLrLaneHeight    `xml:"height"`
+	Rule     []*RoadLanesLaneSectionLrLaneRule      `xml:"rule"`
 }
 
 // Defines access restrictions for certain types of road users. Each element i
@@ -166,7 +166,7 @@ type RoadLanesLaneSectionLrLane struct {
 // g order.
 type RoadLanesLaneSectionLrLaneAccess struct {
 	OpenDriveElement
-	Restriction []*RoadLanesLaneSectionLrLaneAccessRestriction
+	Restriction []*RoadLanesLaneSectionLrLaneAccessRestriction `xml:"restriction"`
 }
 
 // Defines access restrictions for certain types of road users. Each restricti
@@ -230,7 +230,7 @@ type RoadLanesLaneSectionLrLaneWidth struct {
 // Contains all lanes right to the center lane.
 type RoadLanesLaneSectionRight struct {
 	OpenDriveElement
-	Lane []*RoadLanesLaneSectionRightLane
+	Lane []*RoadLanesLaneSectionRightLane `xml:"lane"`
 }
 
 // Right lanes numbered with negative IDs in descending order from center lane

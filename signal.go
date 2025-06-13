@@ -30,18 +30,18 @@ type EunitSpeed struct {
 // standard (i.e. in OpenSCENARIO).
 type Controller struct {
 	OpenDriveElement
-	Control  []*ControllerControl
-	Id       string
-	Name     string
-	Sequence int
+	Control  []*ControllerControl `xml:"control"`
+	Id       string               `xml:"id,attr"`
+	Name     string               `xml:"name,attr"`
+	Sequence int                  `xml:"sequence,attr"`
 }
 
 // Provides information about a single signal within a signal group controlled
 // by the corresponding controller.
 type ControllerControl struct {
 	OpenDriveElement
-	SignalId string
-	Type     string
+	SignalId string `xml:"signalId,attr"`
+	Type     string `xml:"type,attr"`
 }
 
 // Signals are traffic signs, traffic lights, and specific road markings for t
@@ -49,17 +49,17 @@ type ControllerControl struct {
 // tainer for all signals along a road.
 type RoadSignals struct {
 	OpenDriveElement
-	Signal          []*RoadSignalsSignalRoad
-	SignalReference []*RoadSignalsSpatialSignalReference
+	Signal          []*RoadSignalsSignalRoad             `xml:"signal"`
+	SignalReference []*RoadSignalsSpatialSignalReference `xml:"signalReference"`
 }
 
 // Signals are not always separate signs on a single sheet of metal. Several s
 // igns can be coupled on one board.
 type RoadSignalsBoard struct {
 	OpenDriveElement
-	Validity   []*RoadObjectsObjectLaneValidity
-	Dependency []*RoadSignalsSignalDependency
-	Reference  []*RoadSignalsSignalReference
+	Validity   []*RoadObjectsObjectLaneValidity `xml:"validity"`
+	Dependency []*RoadSignalsSignalDependency   `xml:"dependency"`
+	Reference  []*RoadSignalsSignalReference    `xml:"reference"`
 }
 
 // A <sign> element on a static board defined in the local coordinate system o
@@ -67,8 +67,8 @@ type RoadSignalsBoard struct {
 // elements of a signal.
 type RoadSignalsBoardSign struct {
 	RoadSignalsSignal
-	V float64
-	Z float64
+	V float64 `xml:"v,attr"`
+	Z float64 `xml:"z,attr"`
 }
 
 // A display area is the recommended position of the signal to be visualized i
@@ -79,39 +79,39 @@ type RoadSignalsBoardSign struct {
 // play area position may be specified.
 type RoadSignalsDisplayArea struct {
 	OpenDriveElement
-	Height string
-	Index  int
-	V      float64
-	Width  string
-	Z      float64
+	Height string  `xml:"height,attr"`
+	Index  int     `xml:"index,attr"`
+	V      float64 `xml:"v,attr"`
+	Width  string  `xml:"width,attr"`
+	Z      float64 `xml:"z,attr"`
 }
 
 // A signal along the road or on a static board.
 type RoadSignalsSignal struct {
 	OpenDriveElement
-	Validity        []*RoadObjectsObjectLaneValidity
-	Dependency      []*RoadSignalsSignalDependency
-	Reference       []*RoadSignalsSignalReference
-	StaticBoard     []*RoadSignalsStaticBoard
-	VmsBoard        []*RoadSignalsVmsBoard
-	Semantics       *SignalsSemantics
-	Country         ECountryCode
-	CountryRevision string
-	Dynamic         YesNo
-	Height          GrEqZero
-	HOffset         float64
-	Id              string
-	Length          GrEqZero
-	Name            string
-	Orientation     EOrientation
-	Pitch           float64
-	Roll            float64
-	Subtype         string
-	Text            string
-	Type            string
-	Unit            EUnit
-	Value           float64
-	Width           GrEqZero
+	Validity        []*RoadObjectsObjectLaneValidity `xml:"validity"`
+	Dependency      []*RoadSignalsSignalDependency   `xml:"dependency"`
+	Reference       []*RoadSignalsSignalReference    `xml:"reference"`
+	StaticBoard     []*RoadSignalsStaticBoard        `xml:"staticBoard"`
+	VmsBoard        []*RoadSignalsVmsBoard           `xml:"vmsBoard"`
+	Semantics       *SignalsSemantics                `xml:"semantics"`
+	Country         ECountryCode                     `xml:"country,attr"`
+	CountryRevision string                           `xml:"countryRevision,attr"`
+	Dynamic         YesNo                            `xml:"dynamic,attr"`
+	Height          GrEqZero                         `xml:"height,attr"`
+	HOffset         float64                          `xml:"hOffset,attr"`
+	Id              string                           `xml:"id,attr"`
+	Length          GrEqZero                         `xml:"length,attr"`
+	Name            string                           `xml:"name,attr"`
+	Orientation     EOrientation                     `xml:"orientation,attr"`
+	Pitch           float64                          `xml:"pitch,attr"`
+	Roll            float64                          `xml:"roll,attr"`
+	Subtype         string                           `xml:"subtype,attr"`
+	Text            string                           `xml:"text,attr"`
+	Type            string                           `xml:"type,attr"`
+	Unit            EUnit                            `xml:"unit,attr"`
+	Value           float64                          `xml:"value,attr"`
+	Width           GrEqZero                         `xml:"width,attr"`
 }
 
 // Signal dependencies limit or extend the validity of one signal by an additi
@@ -120,8 +120,8 @@ type RoadSignalsSignal struct {
 // dependencies.
 type RoadSignalsSignalDependency struct {
 	OpenDriveElement
-	Id   string
-	Type string
+	Id   string `xml:"id,attr"`
+	Type string `xml:"type,attr"`
 }
 
 // Describes the reference point of the physical position in inertial coordina
@@ -129,12 +129,12 @@ type RoadSignalsSignalDependency struct {
 // ial position.
 type RoadSignalsSignalPositionInertial struct {
 	OpenDriveElement
-	Hdg   float64
-	Pitch float64
-	Roll  float64
-	X     float64
-	Y     float64
-	Z     float64
+	Hdg   float64 `xml:"hdg,attr"`
+	Pitch float64 `xml:"pitch,attr"`
+	Roll  float64 `xml:"roll,attr"`
+	X     float64 `xml:"x,attr"`
+	Y     float64 `xml:"y,attr"`
+	Z     float64 `xml:"z,attr"`
 }
 
 // Describes the reference point of the physical position road coordinates in
@@ -142,13 +142,13 @@ type RoadSignalsSignalPositionInertial struct {
 // the road.
 type RoadSignalsSignalPositionRoad struct {
 	OpenDriveElement
-	HOffset float64
-	Pitch   float64
-	RoadId  string
-	Roll    float64
-	S       GrEqZero
-	T       float64
-	ZOffset float64
+	HOffset float64  `xml:"hOffset,attr"`
+	Pitch   float64  `xml:"pitch,attr"`
+	RoadId  string   `xml:"roadId,attr"`
+	Roll    float64  `xml:"roll,attr"`
+	S       GrEqZero `xml:"s,attr"`
+	T       float64  `xml:"t,attr"`
+	ZOffset float64  `xml:"zOffset,attr"`
 }
 
 // Signal references link a signal to another signal or object. One signal may
@@ -157,9 +157,9 @@ type RoadSignalsSignalPositionRoad struct {
 // to multiple roads.
 type RoadSignalsSignalReference struct {
 	OpenDriveElement
-	ElementId   string
-	ElementType ERoadSignalsSignalReferenceElementType
-	Type        string
+	ElementId   string                                 `xml:"elementId,attr"`
+	ElementType ERoadSignalsSignalReferenceElementType `xml:"elementType,attr"`
+	Type        string                                 `xml:"type,attr"`
 }
 
 // Used to provide information about signals along a road. Consists of a main
@@ -167,9 +167,9 @@ type RoadSignalsSignalReference struct {
 // <signal>.
 type RoadSignalsSignalRoad struct {
 	RoadSignalsSignal
-	S       GrEqZero
-	T       float64
-	ZOffset float64
+	S       GrEqZero `xml:"s,attr"`
+	T       float64  `xml:"t,attr"`
+	ZOffset float64  `xml:"zOffset,attr"`
 }
 
 // Refers to the same, that is, identical signal from multiple roads. The refe
@@ -177,18 +177,18 @@ type RoadSignalsSignalRoad struct {
 // of a main element and an optional lane validity element.
 type RoadSignalsSpatialSignalReference struct {
 	OpenDriveElement
-	Validity    []*RoadObjectsObjectLaneValidity
-	Id          string
-	Orientation EOrientation
-	S           GrEqZero
-	T           float64
+	Validity    []*RoadObjectsObjectLaneValidity `xml:"validity"`
+	Id          string                           `xml:"id,attr"`
+	Orientation EOrientation                     `xml:"orientation,attr"`
+	S           GrEqZero                         `xml:"s,attr"`
+	T           float64                          `xml:"t,attr"`
 }
 
 // A <signal> element that contains a <staticBoard> element. The signs that ar
 // e displayed on a static board are defined as separate <sign> elements.
 type RoadSignalsStaticBoard struct {
 	RoadSignalsBoard
-	Sign []*RoadSignalsBoardSign
+	Sign []*RoadSignalsBoardSign `xml:"sign"`
 }
 
 // Variable message boards can change their values during the simulation in AS
@@ -196,21 +196,21 @@ type RoadSignalsStaticBoard struct {
 // pecified in ASAM OpenSCENARIO.
 type RoadSignalsVmsBoard struct {
 	RoadSignalsBoard
-	DisplayArea   []*RoadSignalsDisplayArea
-	DisplayHeight float64
-	DisplayType   ERoadSignalsDisplayType
-	DisplayWidth  float64
-	V             float64
-	Z             float64
+	DisplayArea   []*RoadSignalsDisplayArea `xml:"displayArea"`
+	DisplayHeight float64                   `xml:"displayHeight,attr"`
+	DisplayType   ERoadSignalsDisplayType   `xml:"displayType,attr"`
+	DisplayWidth  float64                   `xml:"displayWidth,attr"`
+	V             float64                   `xml:"v,attr"`
+	Z             float64                   `xml:"z,attr"`
 }
 
 // Variable message board references list all variable message boards that bel
 // ong to the same gantry.
 type SignalGroupVmsBoardReference struct {
 	OpenDriveElement
-	GroupIndex int
-	SignalId   string
-	VmsIndex   int
+	GroupIndex int    `xml:"groupIndex,attr"`
+	SignalId   string `xml:"signalId,attr"`
+	VmsIndex   int    `xml:"vmsIndex,attr"`
 }
 
 // On a gantry there can be one large variable message board or several smalle
@@ -220,8 +220,8 @@ type SignalGroupVmsBoardReference struct {
 // gantry shall be grouped and their indexes shall be redefined if not unique.
 type SignalGroupVmsGroup struct {
 	OpenDriveElement
-	VmsBoardReference []*SignalGroupVmsBoardReference
-	Id                string
+	VmsBoardReference []*SignalGroupVmsBoardReference `xml:"vmsBoardReference"`
+	Id                string                          `xml:"id,attr"`
 }
 
 // Semantics are limited to traffic behavior that is specified just by signals
@@ -229,27 +229,27 @@ type SignalGroupVmsGroup struct {
 // .
 type SignalsSemantics struct {
 	OpenDriveElement
-	Speed                    []*SignalsSemanticsSpeed
-	Lane                     []*SignalsSemanticsLane
-	Priority                 []*SignalsSemanticsPriority
-	Prohibited               []*SignalsSemanticsProhibited
-	Warning                  []*SignalsSemanticsWarning
-	Routing                  []*SignalsSemanticsRouting
-	Streetname               []*SignalsSemanticsStreetname
-	Parking                  []*SignalsSemanticsParking
-	Tourist                  []*SignalsSemanticsTourist
-	SupplementaryTime        []*SignalsSemanticsSupplementaryTime
-	SupplementaryAllows      []*SignalsSemanticsSupplementaryAllows
-	SupplementaryProhibits   []*SignalsSemanticsSupplementaryProhibits
-	SupplementaryDistance    []*SignalsSemanticsSupplementaryDistance
-	SupplementaryEnvironment []*SignalsSemanticsSupplementaryEnvironment
-	SupplementaryExplanatory []*SignalsSemanticsSupplementaryExplanatory
+	Speed                    []*SignalsSemanticsSpeed                    `xml:"speed"`
+	Lane                     []*SignalsSemanticsLane                     `xml:"lane"`
+	Priority                 []*SignalsSemanticsPriority                 `xml:"priority"`
+	Prohibited               []*SignalsSemanticsProhibited               `xml:"prohibited"`
+	Warning                  []*SignalsSemanticsWarning                  `xml:"warning"`
+	Routing                  []*SignalsSemanticsRouting                  `xml:"routing"`
+	Streetname               []*SignalsSemanticsStreetname               `xml:"streetname"`
+	Parking                  []*SignalsSemanticsParking                  `xml:"parking"`
+	Tourist                  []*SignalsSemanticsTourist                  `xml:"tourist"`
+	SupplementaryTime        []*SignalsSemanticsSupplementaryTime        `xml:"supplementaryTime"`
+	SupplementaryAllows      []*SignalsSemanticsSupplementaryAllows      `xml:"supplementaryAllows"`
+	SupplementaryProhibits   []*SignalsSemanticsSupplementaryProhibits   `xml:"supplementaryProhibits"`
+	SupplementaryDistance    []*SignalsSemanticsSupplementaryDistance    `xml:"supplementaryDistance"`
+	SupplementaryEnvironment []*SignalsSemanticsSupplementaryEnvironment `xml:"supplementaryEnvironment"`
+	SupplementaryExplanatory []*SignalsSemanticsSupplementaryExplanatory `xml:"supplementaryExplanatory"`
 }
 
 // Specifies lane regulations.
 type SignalsSemanticsLane struct {
 	OpenDriveElement
-	Type ESignalsSemanticsLane
+	Type ESignalsSemanticsLane `xml:"type,attr"`
 }
 
 // Specifies parking regulations.
@@ -260,7 +260,7 @@ type SignalsSemanticsParking struct {
 // Specifies priority regulations.
 type SignalsSemanticsPriority struct {
 	OpenDriveElement
-	Type ESignalsSemanticsPriority
+	Type ESignalsSemanticsPriority `xml:"type,attr"`
 }
 
 // Specifies that certain types of traffic participants are not allowed to ent
@@ -279,9 +279,9 @@ type SignalsSemanticsRouting struct {
 // Specifies speed regulations.
 type SignalsSemanticsSpeed struct {
 	OpenDriveElement
-	Type  *ESignalsSemanticsSpeed
-	Unit  *EUnitSpeed
-	Value *float64
+	Type  *ESignalsSemanticsSpeed `xml:"type"`
+	Unit  *EUnitSpeed             `xml:"unit"`
+	Value *float64                `xml:"value"`
 }
 
 // Specifies the name of a street.
@@ -301,16 +301,16 @@ type SignalsSemanticsSupplementaryAllows struct {
 // fter a sign becomes valid or the range in which the sign is valid.
 type SignalsSemanticsSupplementaryDistance struct {
 	OpenDriveElement
-	Type  ESignalsSemanticsSupplementaryDistance
-	Unit  EUnitDistance
-	Value float64
+	Type  ESignalsSemanticsSupplementaryDistance `xml:"type,attr"`
+	Unit  EUnitDistance                          `xml:"unit,attr"`
+	Value float64                                `xml:"value,attr"`
 }
 
 // This signal semantic has no meaning on its own. It specifies under which en
 // vironmental conditions a sign is valid.
 type SignalsSemanticsSupplementaryEnvironment struct {
 	OpenDriveElement
-	Type ESignalsSemanticsSupplementaryEnvironment
+	Type ESignalsSemanticsSupplementaryEnvironment `xml:"type,attr"`
 }
 
 // This signal semantic has no meaning on its own. It specifies explanations f
@@ -331,8 +331,8 @@ type SignalsSemanticsSupplementaryProhibits struct {
 // te a sign is valid.
 type SignalsSemanticsSupplementaryTime struct {
 	OpenDriveElement
-	Type  ESignalsSemanticsSupplementaryTime
-	Value float64
+	Type  ESignalsSemanticsSupplementaryTime `xml:"type,attr"`
+	Value float64                            `xml:"value,attr"`
 }
 
 // Specifies tourist information.

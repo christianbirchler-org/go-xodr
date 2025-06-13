@@ -16,42 +16,42 @@ type EStationType string
 // tcar applications.
 type RoadRailroad struct {
 	OpenDriveElement
-	Switch []*RoadRailroadSwitch
+	Switch []*RoadRailroadSwitch `xml:"switch"`
 }
 
 // Switches change the tracks for rail-bound vehicles. Switches guide the vehi
 // cles into two directions only.
 type RoadRailroadSwitch struct {
 	OpenDriveElement
-	MainTrack *RoadRailroadSwitchMainTrack
-	SideTrack *RoadRailroadSwitchSideTrack
-	Partner   *RoadRailroadSwitchPartner
-	Id        *string
-	Name      *string
-	Position  *ERoadRailroadSwitchPosition
+	MainTrack *RoadRailroadSwitchMainTrack `xml:"mainTrack"`
+	SideTrack *RoadRailroadSwitchSideTrack `xml:"sideTrack"`
+	Partner   *RoadRailroadSwitchPartner   `xml:"partner"`
+	Id        *string                      `xml:"id,attr"`
+	Name      *string                      `xml:"name,attr"`
+	Position  *ERoadRailroadSwitchPosition `xml:"position,attr"`
 }
 
 // Main tracks form the primary course for rail bound traffic.
 type RoadRailroadSwitchMainTrack struct {
 	OpenDriveElement
-	Dir *EElementDir
-	Id  *string
-	S   *GrEqZero
+	Dir *EElementDir `xml:"dir,attr"`
+	Id  *string      `xml:"id,attr"`
+	S   *GrEqZero    `xml:"s,attr"`
 }
 
 // Partner switches are two consistently set switches linked by a side track.
 type RoadRailroadSwitchPartner struct {
 	OpenDriveElement
-	Id   *string
-	Name *string
+	Id   *string `xml:"id,attr"`
+	Name *string `xml:"name,attr"`
 }
 
 // Side tracks connect two switches that are placed on main tracks.
 type RoadRailroadSwitchSideTrack struct {
 	OpenDriveElement
-	Dir *EElementDir
-	Id  *string
-	S   *GrEqZero
+	Dir *EElementDir `xml:"dir,attr"`
+	Id  *string      `xml:"id,attr"`
+	S   *GrEqZero    `xml:"s,attr"`
 }
 
 // Stations are places on the rail network where passengers enter and leave ra
@@ -59,27 +59,27 @@ type RoadRailroadSwitchSideTrack struct {
 // re defined on the same level as junctions.
 type Station struct {
 	OpenDriveElement
-	Platform []*StationPlatform
-	Id       *string
-	Name     *string
-	Type     *EStationType
+	Platform []*StationPlatform `xml:"platform"`
+	Id       *string            `xml:"id,attr"`
+	Name     *string            `xml:"name,attr"`
+	Type     *EStationType      `xml:"type,attr"`
 }
 
 // Platforms are essential parts of stations for passengers to enter and leave
 // rail-bound vehicles. One or more railroad tracks reference one platform.
 type StationPlatform struct {
 	OpenDriveElement
-	Segment []*StationPlatformSegment
-	Id      *string
-	Name    *string
+	Segment []*StationPlatformSegment `xml:"segment"`
+	Id      *string                   `xml:"id,attr"`
+	Name    *string                   `xml:"name,attr"`
 }
 
 // Segments are parts of platforms. Each <platform> element is valid on one or
 // more track segments. The <segment> element must be specified.
 type StationPlatformSegment struct {
 	OpenDriveElement
-	RoadId *string
-	SEnd   *GrEqZero
-	Side   *EStationPlatformSegmentSide
-	SStart *GrEqZero
+	RoadId *string                      `xml:"roadId,attr"`
+	SEnd   *GrEqZero                    `xml:"sEnd,attr"`
+	Side   *EStationPlatformSegmentSide `xml:"side,attr"`
+	SStart *GrEqZero                    `xml:"sStart,attr"`
 }

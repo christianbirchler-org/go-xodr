@@ -29,7 +29,7 @@ type Junction struct {
 // es the sidewalks for pedestrians.
 type JunctionBoundary struct {
 	OpenDriveElement
-	Segment []*JunctionBoundarySegment
+	Segment []*JunctionBoundarySegment `xml:"segment"`
 }
 
 // Segments run counter clockwise around the junction and form a closed juncti
@@ -55,21 +55,21 @@ type JunctionBoundarySegmentLane struct {
 // cify areas where drivable lanes may overlap and traffic may cross.
 type JunctionCommon struct {
 	Junction
-	Connection    []*JunctionConnectionCommon
-	CrossPath     []*JunctionCrossPath
-	Priority      []*JunctionPriority
-	Controller    []*JunctionController
-	Surface       *RoadSurface
-	PlanView      *RoadPlanView
-	Objects       *RoadObjects
-	Boundary      *JunctionBoundary
-	ElevationGrid *JunctionElevationGrid
+	Connection    []*JunctionConnectionCommon `xml:"connection"`
+	CrossPath     []*JunctionCrossPath        `xml:"crossPath"`
+	Priority      []*JunctionPriority         `xml:"priority"`
+	Controller    []*JunctionController       `xml:"controller"`
+	Surface       *RoadSurface                `xml:"surface"`
+	PlanView      *RoadPlanView               `xml:"planView"`
+	Objects       *RoadObjects                `xml:"objects"`
+	Boundary      *JunctionBoundary           `xml:"boundary"`
+	ElevationGrid *JunctionElevationGrid      `xml:"elevationGrid"`
 }
 
 // Provides information about a single connection within a junction.
 type JunctionConnection struct {
 	OpenDriveElement
-	LaneLink []*JunctionConnectionLaneLink
+	LaneLink []*JunctionConnectionLaneLink `xml:"laneLink"`
 }
 
 // Provides information about a single connection within a common junction.
@@ -94,8 +94,8 @@ type JunctionConnectionLaneLink struct {
 // oads.
 type JunctionConnectionVirtual struct {
 	JunctionConnection
-	Predecessor *JunctionPredecessorSuccessor
-	Successor   *JunctionPredecessorSuccessor
+	Predecessor *JunctionPredecessorSuccessor `xml:"predecessor"`
+	Successor   *JunctionPredecessorSuccessor `xml:"successor"`
 }
 
 // Provides information about a single connection within a virtual junction.
@@ -114,12 +114,12 @@ type JunctionController struct {
 // for example, at railway crossings.
 type JunctionCrossing struct {
 	Junction
-	RoadSection []*JunctionRoadSection
-	Priority    []*JunctionPriority
-	Controller  []*JunctionController
-	Surface     *RoadSurface
-	PlanView    *RoadPlanView
-	Objects     *RoadObjects
+	RoadSection []*JunctionRoadSection `xml:"roadSection"`
+	Priority    []*JunctionPriority    `xml:"priority"`
+	Controller  []*JunctionController  `xml:"controller"`
+	Surface     *RoadSurface           `xml:"surface"`
+	PlanView    *RoadPlanView          `xml:"planView"`
+	Objects     *RoadObjects           `xml:"objects"`
 }
 
 // Cross paths are intended for pedestrian crossings and are junctions element
@@ -127,10 +127,10 @@ type JunctionCrossing struct {
 // lane of the same or a different road. The cross path itself is a separate r
 // oad.
 type JunctionCrossPath struct {
-	CrossingRoad  string
-	Id            string
-	RoadAtEnd     string
-	RoadAtStart   string
+	CrossingRoad  string `xml:"crossingRoad,attr"`
+	Id            string `xml:"id,attr"`
+	RoadAtEnd     string `xml:"roadAtEnd,attr"`
+	RoadAtStart   string `xml:"roadAtStart,attr"`
 	StartLaneLink JunctionCrossPathLaneLink
 	EndLaneLink   JunctionCrossPathLaneLink
 }
@@ -145,19 +145,19 @@ type JunctionCrossPathLaneLink struct {
 // es may overlap to split or merge, but traffic does not cross.
 type JunctionDirect struct {
 	Junction
-	Connection []*JunctionConnectionDirect
-	Priority   []*JunctionPriority
-	Controller []*JunctionController
-	Surface    *RoadSurface
-	PlanView   *RoadPlanView
-	Objects    *RoadObjects
+	Connection []*JunctionConnectionDirect `xml:"connection"`
+	Priority   []*JunctionPriority         `xml:"priority"`
+	Controller []*JunctionController       `xml:"controller"`
+	Surface    *RoadSurface                `xml:"surface"`
+	PlanView   *RoadPlanView               `xml:"planView"`
+	Objects    *RoadObjects                `xml:"objects"`
 }
 
 // An elevation grid is a coarse square grid with z-values at evenly spaced po
 // ints. Elevation grids do not replace OpenCRG.
 type JunctionElevationGrid struct {
 	OpenDriveElement
-	Elevation []*JunctionElevationGridElevation
+	Elevation []*JunctionElevationGridElevation `xml:"elevation"`
 }
 
 // Defines the z-values at the regular grid points along the junction referenc
@@ -190,13 +190,13 @@ type JunctionRoadSection struct {
 // ple, entries and exits to parking lots, and pedestrian crossings.
 type JunctionVirtual struct {
 	Junction
-	Connection []*JunctionConnection
-	CrossPath  []*JunctionCrossPath
-	Priority   []*JunctionPriority
-	Controller []*JunctionController
-	Surface    *RoadSurface
-	PlanView   *RoadPlanView
-	Objects    *RoadObjects
+	Connection []*JunctionConnection `xml:"connection"`
+	CrossPath  []*JunctionCrossPath  `xml:"crossPath"`
+	Priority   []*JunctionPriority   `xml:"priority"`
+	Controller []*JunctionController `xml:"controller"`
+	Surface    *RoadSurface          `xml:"surface"`
+	PlanView   *RoadPlanView         `xml:"planView"`
+	Objects    *RoadObjects          `xml:"objects"`
 }
 
 // Junction groups indicate for routing that the grouped junctions belong to t
@@ -205,7 +205,7 @@ type JunctionVirtual struct {
 // eader element and a series of member elements.
 type JunctionGroup struct {
 	OpenDriveElement
-	JunctionReference []*JunctionGroupJunctionReference
+	JunctionReference []*JunctionGroupJunctionReference `xml:"junctionReference"`
 }
 
 // References to existing <junction> elements.

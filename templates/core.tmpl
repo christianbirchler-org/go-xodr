@@ -6,7 +6,7 @@ package xodr
 {{ formatStructDocumentation (removeSpecialCharacters .Element.ComplexType.Annotation.Documentation.Text) }}
 type {{ goType .Element.Name }} struct {
     {{- range .Element.ComplexType.Sequence.Element}}
-    {{toCamel .Name}} {{- if eq .MaxOccurs "1"}} *{{goType .Type}} {{- end}} {{- if ne .MaxOccurs "1"}} []*{{goType .Type}} {{- end}}
+    {{toCamel .Name}} {{- if eq .MaxOccurs "1"}} *{{goType .Type}} {{- end}} {{- if ne .MaxOccurs "1"}} []*{{goType .Type}} {{- end}} `xml:"{{.Name}}"`
     {{- end}}
 }
 
@@ -24,13 +24,13 @@ type {{ goType .Element.Name }} struct {
 
         {{- range .ComplexContent.Extension.Sequence.Element}}
         {{- if ne $base  .Type}}
-        {{toCamel .Name}} {{- if eq .MaxOccurs "1"}} *{{goType .Type}} {{- end}} {{- if ne .MaxOccurs "1"}} []*{{goType .Type}} {{- end}}
+        {{toCamel .Name}} {{- if eq .MaxOccurs "1"}} *{{goType .Type}} {{- end}} {{- if ne .MaxOccurs "1"}} []*{{goType .Type}} {{- end}} `xml:"{{.Name}}"`
         {{- end}}
         {{- end}}
 
         {{- range .ComplexContent.Extension.Attribute}}
         {{- if ne $base .Type}}
-        {{toCamel .Name}} {{goType .Type}}
+        {{toCamel .Name}} {{goType .Type}} `xml:"{{.Name}},attr"`
         {{- end }}
         {{- end }}
 
